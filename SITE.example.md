@@ -19,8 +19,11 @@ Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placehol
 ## Referensi Cepat
 
 - Detail desain lengkap: lihat `DESIGN.md`
+- Contoh DESIGN.md yang sudah terisi: lihat `DESIGN.example.md`
 - Aturan kerja AI agent: lihat `AGENTS.md`
-- Checklist instalasi WordPress: lihat `WORDPRESS-BASE-SETUP.md`
+- Panduan penggunaan starter kit: lihat `README.md`
+- Checklist instalasi WordPress: lihat `WORDPRESS-SETUP.md`
+- Template tracker progres proyek: lihat `PROGRESS.example.md`
 
 ## Catatan Tambahan
 
