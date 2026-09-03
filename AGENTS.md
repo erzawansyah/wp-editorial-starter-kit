@@ -32,11 +32,12 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
      - Agen **WAJIB** me-rename nama tema kustom di `package.json` dan `file-header.css` sesuai dengan nama situs di `SITE.md`. Jangan gunakan nama boilerplate `_tw`.
 
 2. **Fase Konten (@content):** 
-   - **GUARDRAIL KONTEN:** **DILARANG KERAS** membuat konten *dummy* hanya dalam bentuk file lokal/teks. Agen **WAJIB** menggunakan WPVibe MCP (REST API atau WP-CLI) untuk menginjeksi artikel SEO final, halaman statis (Tentang Kami, dll), dan struktur kategori **langlangsung** ke database server remote.
+   - **GUARDRAIL KONTEN:** **DILARANG KERAS** membuat konten *dummy* hanya dalam bentuk file lokal/teks. Agen **WAJIB** menggunakan WPVibe MCP (REST API atau WP-CLI) untuk menginjeksi artikel SEO final, halaman statis (Tentang Kami, dll), dan struktur kategori **langsung** ke database server remote.
    - **HARD GATE (VALIDASI KONTEN):** Setelah semua artikel, kategori, tag, halaman statis, dan navigasi menu selesai diunggah, minta Manusia (User) untuk meninjau website secara visual. Karena tema yang aktif adalah GeneratePress, Manusia bisa dengan mudah memastikan seluruh struktur data (konten) sudah benar-benar siap dan masuk ke database. Pengembangan tema kustom **DILARANG** dimulai sebelum ada persetujuan "Konten Siap" dari Manusia.
 
 3. **Fase Tema (@architect -> @engineer):** Hanya boleh dimulai **SETELAH** fase konten selesai dan divalidasi.
    - **GUARDRAIL TEMA (DINAMIS):** **DILARANG** melakukan *hardcode* HTML statis untuk navigasi, menu, tag, atau pencarian. Semua elemen dinamis wajib langsung disambungkan dengan native WordPress functions (`wp_nav_menu()`, `get_tags()`, `has_custom_logo()`) sejak baris kode pertama. File `functions.php` **wajib** mendeklarasikan `add_theme_support('custom-logo')`.
+   - **GUARDRAIL SCREENSHOT:** Apabila tema yang dikembangkan sudah *final*, agen atau manusia **WAJIB** membuat sebuah *screenshot* berukuran 1200x900px dari tampilan website (misal: Homepage) dan menyimpannya sebagai `screenshot.png` (atau `.jpg`) di direktori *root* dari *source code* tema. Ini bertujuan agar tema tersebut terlihat profesional di halaman *dashboard* WordPress (Appearance -> Themes).
    - **GUARDRAIL BUNDLING:** Ketika menjalankan `npm run bundle`, pastikan script zip dikonfigurasi agar meletakkan output `.zip` di luar struktur source tema (di root `.workspaces/`), **jangan campurkan file zip dengan file source tema**.
    - **GUARDRAIL HANDOVER:** Setelah tema selesai dan di-bundle, agen **WAJIB** meng-generate file `.workspaces/THEME_SPECS.md` yang berisi spesifikasi arsitektur teknis dari tema yang baru dibangun (hierarki kontainer Tailwind, logic custom JS, dll) sebagai dokumen referensi mutlak untuk sesi AI di masa depan.
 
@@ -53,10 +54,9 @@ Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, o
 
 ## Conventions
 
-Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti .agents/skills/. Jangan improvisasi struktur baru tanpa mencatat alasannya di DESIGN.md. Bahasa konten default: Indonesia, gaya editorial.
+Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti `.agents/skills/`. Jangan improvisasi struktur baru tanpa mencatat alasannya di `DESIGN.md`. Bahasa konten default: Indonesia, gaya editorial.
 
-**Aturan Pembuatan Skill Baru:** Jika agen atau manusia membuat custom skill spesifik untuk ekosistem *Starter Kit* ini, nama folder dan 
-ame: di YAML *wajib* menggunakan awalan wpsk- (WordPress Starter Kit). Contoh: wpsk-editorial-brainstorm, wpsk-theme-convention.
+**Aturan Pembuatan Skill Baru:** Jika agen atau manusia membuat custom skill spesifik untuk ekosistem *Starter Kit* ini, nama folder dan `name:` di YAML *wajib* menggunakan awalan `wpsk-` (WordPress Starter Kit). Contoh: `wpsk-editorial-brainstorm`, `wpsk-theme-convention`.
 
 ## WPVibe MCP
 
@@ -75,7 +75,7 @@ WPVibe MCP bisa terhubung ke banyak situs WordPress sekaligus. Untuk mencegah ke
 
 ## Definition of Done
 
-Kategori & halaman statis terisi (via DB), draft tema disetujui (dinamis & responsif), Lighthouse >=80, permalink beres, file zip terpisah, THEME_SPECS.md ter-generate, backup pra-publish terverifikasi.
+Kategori & halaman statis terisi (via DB), draft tema disetujui (dinamis & responsif), Lighthouse >=80, permalink beres, file zip terpisah, THEME_SPECS.md ter-generate, screenshot.png tersedia, backup pra-publish terverifikasi.
 
 ## Changelog
 
@@ -84,4 +84,3 @@ Catat setiap pekerjaan yang selesai di repo ini. Entri terbaru di atas.
 ### `01. 2026-09-03`
 
 - Integrasi aturan Real-time Progress Tracking, Workspace Assets, Strict Dynamic Element, Auto-rename Theme, Hard-Gate Content Validation (GeneratePress), dan THEME_SPECS.md Handover Document.
-

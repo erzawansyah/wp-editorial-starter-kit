@@ -65,6 +65,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Sidebar & Pagination diimplementasikan
 
 ### Handover
+- [ ] `screenshot.png` ditambahkan ke root direktori tema (1200x900px disarankan)
 - [ ] Tema di-bundle (`npm run bundle`)
 - [ ] File `.zip` dihasilkan dan terpisah dari *source folder*
 - [ ] File `.workspaces/THEME_SPECS.md` digenerate sebagai dokumentasi teknis
@@ -92,4 +93,3 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 ## Catatan Proyek
 
 `{{ Catat hambatan, keputusan desain, atau perubahan dari rencana awal di sini }}`
-
