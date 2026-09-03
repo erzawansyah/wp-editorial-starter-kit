@@ -1,4 +1,4 @@
-# WORDPRESS-SETUP.md — Checklist Setup WordPress
+# WORDPRESS-SETUP.md - Checklist Setup WordPress
 
 Lakukan semua langkah ini **sebelum** meminta AI memulai Fase Konten atau Fase Tema. WordPress harus sudah bersih, terkonfigurasi, dan terhubung ke WPVibe sebelum AI dilibatkan.
 
@@ -8,9 +8,8 @@ Lakukan semua langkah ini **sebelum** meminta AI memulai Fase Konten atau Fase T
 
 - [ ] Install WordPress (PHP 8.2+, MySQL 8+ atau MariaDB 10.6+)
 - [ ] Atur nama situs, tagline, email admin
-- [ ] Set permalink ke **Post name** (`/sample-post/`)
+- [ ] Set permalink ke **Post name** (`/%postname%/`)
 - [ ] Hapus post, page, dan komentar default bawaan WordPress
-- [ ] Hapus tema bawaan (Twenty Twenty-*) kecuali satu yang aktif sementara
 - [ ] Hapus plugin bawaan yang tidak dipakai (Hello Dolly, Akismet jika tidak digunakan)
 
 ---
@@ -36,7 +35,7 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 | Plugin | Kapan Dipakai |
 |---|---|
 | **TablePress** | Jika niche butuh tabel perbandingan (review produk, dsb.) |
-| **WP Recipe Maker** | Niche kuliner — format resep terstruktur |
+| **WP Recipe Maker** | Niche kuliner - format resep terstruktur |
 | **WP-Optimize** | Pembersihan database rutin |
 | **UpdraftPlus** | Backup otomatis ke cloud (wajib sebelum deploy ke produksi) |
 
@@ -45,7 +44,7 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 ## 4. Setup WPVibe
 
 - [ ] Install plugin WPVibe dari [wpvibe.ai](https://wpvibe.ai)
-- [ ] Aktifkan plugin di wp-admin → Plugins
+- [ ] Aktifkan plugin di wp-admin -> Plugins
 - [ ] Ikuti proses koneksi di dashboard WPVibe (generate & paste API key)
 - [ ] Catat URL situs dan masukkan ke `SITE.md` field **URL**
 - [ ] Verifikasi koneksi: AI agent harus bisa merespons query WPVibe ke URL tersebut
@@ -69,59 +68,42 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 - [ ] Atau aktifkan moderasi komentar jika ingin komentar
 
 ### Media
-- [ ] Thumbnail: 150×150
-- [ ] Medium: 300×300
-- [ ] Large: 1024×1024
+- [ ] Thumbnail: 150x150
+- [ ] Medium: 300x300
+- [ ] Large: 1024x1024
 
 ---
 
-## 6. Instalasi Tema _tw
+## 6. Base Theme & Starter Code
 
-`_tw` adalah base theme yang wajib terinstall di WordPress sebelum AI bisa memulai Fase Tema. AI akan memeriksa keberadaannya via WPVibe — jika belum ada, AI akan memandu proses instalasi.
+Karena workflow menggunakan metode "Content Hard-Gate", instalasi awal sangat spesifik:
 
-### Cara Install _tw
+### A. Tema Aktif (WordPress Server)
+- [ ] Pastikan **GeneratePress** (atau tema netral lain) adalah tema yang saat ini **AKTIF** di WordPress server.
+- [ ] Ini penting agar Manusia bisa memvalidasi kesiapan konten sebelum AI membangun tema kustom.
 
-**Opsi A — Web Generator (paling mudah):**
-1. Buka https://underscoretw.com/
-2. Isi nama tema (gunakan slug website, misal `berita-foodies`)
-3. Download zip hasil generate
-4. Upload ke WordPress: **wp-admin → Appearance → Themes → Add New Theme → Upload Theme**
-5. Aktifkan tema tersebut
-
-**Opsi B — WP-CLI (jika tersedia di server):**
-```bash
-wp package install gregsullivan/wp-cli-tw
-wp tw generate --name="Nama Tema" --slug="nama-tema"
-wp theme activate nama-tema
-```
-
-### Setup Lokal untuk Build Step
-
-Setelah tema terinstall di server, siapkan source _tw di lokal untuk proses build CSS/JS:
+### B. Source Code Tema Lokal (_tw)
+Siapkan _source code_ `_tw` murni di direktori `.workspaces/` agar AI memiliki bahan baku untuk di-*build* pada Fase Tema nanti.
+Pastikan Anda membuat folder sesuai **slug** proyek Anda (misal `croco`).
 
 ```bash
-# Di dalam .workspaces/{nama-proyek}/
+# Di root repo starter kit:
+mkdir .workspaces/nama-proyek
+cd .workspaces/nama-proyek
 npx degit gregsullivan/_tw theme-src
 cd theme-src
 npm install
 ```
 
-> **Catatan:** Folder `.workspaces/` sudah ada di repo ini dan di-gitignore. Ini tempat yang benar untuk menyimpan source _tw per proyek.
-
-### Verifikasi
-
-- [ ] Tema _tw terinstall di WordPress
-- [ ] Tema aktif (Appearance → Themes)
-- [ ] Source _tw ada di `.workspaces/{proyek}/theme-src/`
-- [ ] `npm install` sudah dijalankan di folder theme-src
+> **Catatan:** AI akan secara otomatis me-rename identitas tema dari `_tw` menjadi nama situs Anda pada saat Fase Tema dimulai.
 
 ---
 
 ## 7. Verifikasi Akhir Sebelum Panggil AI
 
 - [ ] WordPress berjalan normal di URL target
-- [ ] Permalink sudah di-flush (Settings → Permalinks → Save Changes)
 - [ ] WPVibe terkoneksi dan merespons
-- [ ] `SITE.md` sudah terisi (URL, nama, niche)
-- [ ] `DESIGN.md` sudah terisi (warna, tipografi, layout)
-- [ ] Tidak ada error di wp-admin (cek Site Health)
+- [ ] Tema **GeneratePress** sudah aktif
+- [ ] Folder `.workspaces/nama-proyek/theme-src/` sudah berisi instalasi npm murni
+- [ ] Folder `.workspaces/assets/` sudah dibuat
+- [ ] `SITE.md` dan `DESIGN.md` sudah terisi (atau panggil `/editorial-brainstorm` di chat AI jika butuh ide)

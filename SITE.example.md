@@ -1,30 +1,24 @@
-# SITE.md — Identitas Dasar Situs
+# SITE.md - Identitas Dasar Situs
 
-File ini diisi paling pertama, sebelum `DESIGN.md`, saat leader meminta situs baru. Isinya ringkas — hanya identitas inti yang jadi acuan cepat untuk AI agent maupun manusia tanpa perlu buka seluruh `DESIGN.md`.
+File ini diisi paling pertama, sebelum `DESIGN.md`, saat leader meminta situs baru. Isinya ringkas - hanya identitas inti yang jadi acuan cepat untuk AI agent maupun manusia tanpa perlu buka seluruh `DESIGN.md`.
 
-## Guard Condition — Wajib Dicek Sebelum Mengerjakan Apa Pun
+## Guard Condition - Wajib Dicek Sebelum Mengerjakan Apa Pun
 
-Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placeholder `{{ }}` (belum diisi nilai sebenarnya), AI agent **dilarang** melanjutkan instruksi apa pun — baik itu membaca DESIGN.md, generate konten, membangun tema, maupun aksi lain di repo ini. Berhenti dan tanyakan langsung ke user nilai yang belum terisi sebelum melanjutkan.
+Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placeholder `{{ }}` (belum diisi nilai sebenarnya), AI agent **dilarang** melanjutkan instruksi apa pun - baik itu membaca DESIGN.md, generate konten, membangun tema, maupun aksi lain di repo ini. Berhenti dan tanyakan langsung ke user nilai yang belum terisi sebelum melanjutkan, atau jalankan skill `/editorial-brainstorm` jika butuh ide.
 
 ## Identitas
 
-- **Nama Website**: `{{ }}`
-- **URL**: `{{ }}`
-- **Niche**: `{{ }}`
-- **Deskripsi Singkat**: `{{ }}`
-- **Status**: `{{ }}`
-- **Tanggal Mulai**: `{{ }}`
-- **Diminta Oleh**: `{{ }}`
+**Nama Situs:**
+`{{ Contoh: Croco Editorial }}`
 
-## Referensi Cepat
+**URL Target (Production/Staging):**
+`{{ Contoh: https://croco.likrea.biz.id }}`
 
-- Detail desain lengkap: lihat `DESIGN.md`
-- Contoh DESIGN.md yang sudah terisi: lihat `DESIGN.example.md`
-- Aturan kerja AI agent: lihat `AGENTS.md`
-- Panduan penggunaan starter kit: lihat `README.md`
-- Checklist instalasi WordPress: lihat `WORDPRESS-SETUP.md`
-- Template tracker progres proyek: lihat `PROGRESS.example.md`
+**Niche Utama (Topik & Konteks Singkat):**
+`{{ Contoh: Blog niche editorial dan gaya hidup, berfokus pada ulasan desain, arsitektur, dan tipografi }}`
 
-## Catatan Tambahan
+**Target Audience (Demografi & Gaya Bahasa):**
+`{{ Contoh: Pria/wanita usia 25-45, profesional kreatif, menggunakan bahasa Indonesia semi-formal yang lugas tanpa basa-basi }}`
 
-`{{ }}`
+**Call to Action (CTA) / Konversi Utama:**
+`{{ Contoh: Mengumpulkan subscribers newsletter dan pageviews untuk programmatic ads }}`
