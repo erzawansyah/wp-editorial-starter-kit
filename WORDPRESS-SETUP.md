@@ -24,12 +24,6 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 |---|---|
 | **Rank Math** | Meta title, description, sitemap XML, breadcrumb |
 
-### Performa
-| Plugin | Keterangan |
-|---|---|
-| **WP Rocket** atau **LiteSpeed Cache** | Caching, minifikasi CSS/JS |
-| **Smush** atau **ShortPixel** | Kompresi gambar otomatis |
-
 ### Integrasi AI
 | Plugin | Keterangan |
 |---|---|
