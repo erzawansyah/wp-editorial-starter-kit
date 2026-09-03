@@ -172,5 +172,5 @@ Setiap website yang dibangun menggunakan starter kit ini mengikuti pola editoria
 |---|---|
 | `SITE.md` | Identitas website (niche, URL, nama) — diisi per proyek |
 | `DESIGN.md` | Sistem desain (warna, tipografi, layout, komponen) — diisi per proyek |
-| `AGENT.md` | Aturan, SOP, dan batasan kerja AI agent |
+| `AGENTS.md` | Aturan, SOP, dan batasan kerja AI agent |
 | `SITE.example.md` | Template kosong `SITE.md` untuk proyek baru |
