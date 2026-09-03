@@ -1,0 +1,314 @@
+- generic [ref=e2]:
+  - link "Skip to content" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link [ref=e8] [cursor=pointer]:
+        - /url: https://croco.likrea.biz.id/
+        - img "Croco Site" [ref=e9]
+      - generic [ref=e10]:
+        - navigation [ref=e11]:
+          - list [ref=e12]:
+            - listitem [ref=e13]:
+              - link "Tipografi" [ref=e14] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/category/tipografi/
+            - listitem [ref=e15]:
+              - link "Sistem Grid" [ref=e16] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/category/sistem-grid/
+            - listitem [ref=e17]:
+              - link "Desain UI-UX" [ref=e18] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/category/desain-ui-ux/
+            - listitem [ref=e19]:
+              - link "Engineering" [ref=e20] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/category/engineering/
+            - listitem [ref=e21]:
+              - link "Referensi" [ref=e22] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/category/referensi/
+        - button "Toggle Search" [ref=e24] [cursor=pointer]
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: EDISI UTAMA
+        - generic [ref=e33]:
+          - generic [ref=e34]: Referensi
+          - heading [level=2] [ref=e35]:
+            - link "Apa Itu Museum Desain Digital? Panduan Lengkap [2026]" [ref=e36]:
+              - /url: https://croco.likrea.biz.id/museum-desain-digital/
+          - generic [ref=e37]: Apa Itu Museum Desain Digital? Definisi, Contoh, dan Cara Kerjanya [2026] Anda masuk ke galeri pameran tanpa tiket, tanpa antrean,...
+      - generic [ref=e38]:
+        - generic [ref=e39] [cursor=pointer]:
+          - generic [ref=e40]: Referensi
+          - heading [level=3] [ref=e41]:
+            - 'link "Buku Wajib Desainer Grafis: Panduan Lengkap [2026]" [ref=e42]':
+              - /url: https://croco.likrea.biz.id/buku-wajib-desainer-grafis/
+        - generic [ref=e44] [cursor=pointer]:
+          - generic [ref=e45]: Referensi
+          - heading [level=3] [ref=e46]:
+            - link "Apa Itu Koleksi Poster Klasik Swiss? Panduan Lengkap [2026]" [ref=e47]:
+              - /url: https://croco.likrea.biz.id/koleksi-poster-klasik-swiss/
+    - separator [ref=e49]
+    - generic [ref=e50]:
+      - generic [ref=e52]:
+        - heading "Tipografi" [level=2] [ref=e54]
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - article [ref=e57] [cursor=pointer]:
+              - generic [ref=e59]:
+                - heading [level=3] [ref=e60]:
+                  - link "Apa Itu Hierarki Teks Asimetris? Panduan Lengkap [2026]" [ref=e61]:
+                    - /url: https://croco.likrea.biz.id/hierarki-teks-asimetris/
+                - generic [ref=e62]: Saya ingat pertama kali melihat majalah desain dari Swiss era 90-an. Semua aturan yang saya...
+                - generic [ref=e63]: 01 — Objektivitas
+            - article [ref=e64] [cursor=pointer]:
+              - generic [ref=e66]:
+                - heading [level=3] [ref=e67]:
+                  - link "Apa Itu Harmoni Visual Tipografi? Panduan Lengkap [2026]" [ref=e68]:
+                    - /url: https://croco.likrea.biz.id/harmoni-visual-tipografi/
+                - generic [ref=e69]: Sebuah teks bukan sekadar huruf yang berbaris di layar. Saat mata pembaca menyerah pada paragraf...
+                - generic [ref=e70]: 02 — Objektivitas
+            - article [ref=e71] [cursor=pointer]:
+              - generic [ref=e73]:
+                - heading [level=3] [ref=e74]:
+                  - link "Apa Itu Prinsip Fundamental Tipografi? Panduan Lengkap [2026]" [ref=e75]:
+                    - /url: https://croco.likrea.biz.id/prinsip-fundamental-tipografi/
+                - generic [ref=e76]: Saya pernah menghabiskan tiga minggu berturut-turut untuk mendesain ulang sebuah halaman profil perusahaan. Warnanya sempurna....
+                - generic [ref=e77]: 03 — Objektivitas
+          - link "Lihat Semua Tipografi →" [ref=e79] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/category/tipografi/
+      - generic [ref=e81]:
+        - heading "Sistem Grid" [level=2] [ref=e83]
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - article [ref=e86] [cursor=pointer]:
+              - generic [ref=e88]:
+                - heading [level=3] [ref=e89]:
+                  - link "Apa Itu Kolom Editorial? Panduan Lengkap [2026]" [ref=e90]:
+                    - /url: https://croco.likrea.biz.id/memahami-kolom-editorial/
+                - generic [ref=e91]: Apa Itu Kolom Editorial? Definisi, Contoh, dan Cara Kerjanya [2026] Bayangkan Anda sedang duduk di...
+                - generic [ref=e92]: 01 — Objektivitas
+            - article [ref=e93] [cursor=pointer]:
+              - generic [ref=e95]:
+                - heading [level=3] [ref=e96]:
+                  - link "Apa Itu Grid Pecah? Panduan Lengkap Desain Web [2026]" [ref=e97]:
+                    - /url: https://croco.likrea.biz.id/grid-pecah-estetika-atau-kekacauan/
+                - generic [ref=e98]: Saya pernah melihat seorang desainer menangis karena klien meminta desainnya dirapikan. Padahal, ia sengaja memecah...
+                - generic [ref=e99]: 02 — Objektivitas
+            - article [ref=e100] [cursor=pointer]:
+              - generic [ref=e102]:
+                - heading [level=3] [ref=e103]:
+                  - link "Apa Itu Sistem Grid? Definisi, Contoh, dan Cara Kerjanya [2026]" [ref=e104]:
+                    - /url: https://croco.likrea.biz.id/prinsip-fundamental-sistem-grid/
+                - generic [ref=e105]: Sebuah sistem grid adalah kerangka struktural yang menyusun elemen visual dalam kolom dan baris untuk...
+                - generic [ref=e106]: 03 — Objektivitas
+          - link "Lihat Semua Sistem Grid →" [ref=e108] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/category/sistem-grid/
+      - generic [ref=e110]:
+        - heading "Desain UI-UX" [level=2] [ref=e112]
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - article [ref=e115] [cursor=pointer]:
+              - generic [ref=e117]:
+                - heading [level=3] [ref=e118]:
+                  - link "Apa Itu Mental Model Pengguna Modern? Panduan Lengkap [2026]" [ref=e119]:
+                    - /url: https://croco.likrea.biz.id/mental-model-pengguna-modern/
+                - generic [ref=e120]: Saya masih ingat saat melihat pengguna pertama kali mencoba aplikasi yang kami bangun selama enam...
+                - generic [ref=e121]: 01 — Objektivitas
+            - article [ref=e122] [cursor=pointer]:
+              - generic [ref=e124]:
+                - heading [level=3] [ref=e125]:
+                  - link "Apa Itu Navigasi Berbasis Tipografi? Panduan Lengkap [2026]" [ref=e126]:
+                    - /url: https://croco.likrea.biz.id/navigasi-berbasis-tipografi/
+                - generic [ref=e127]: Saya pernah melihat desain web yang dipenuhi ikon usang. Semua berteriak minta diklik. Namun tren...
+                - generic [ref=e128]: 02 — Objektivitas
+            - article [ref=e129] [cursor=pointer]:
+              - generic [ref=e131]:
+                - heading [level=3] [ref=e132]:
+                  - link "Apa Itu Prinsip Fundamental Desain UI-UX? Panduan Lengkap [2026]" [ref=e133]:
+                    - /url: https://croco.likrea.biz.id/prinsip-fundamental-desain-ui-ux/
+                - generic [ref=e134]: Saya pernah melihat aplikasi dengan fitur secanggih pesawat luar angkasa, tapi penggunanya bingung setengah mati....
+                - generic [ref=e135]: 03 — Objektivitas
+          - link "Lihat Semua Desain UI-UX →" [ref=e137] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/category/desain-ui-ux/
+      - generic [ref=e139]:
+        - heading "Engineering" [level=2] [ref=e141]
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - article [ref=e144] [cursor=pointer]:
+              - generic [ref=e146]:
+                - heading [level=3] [ref=e147]:
+                  - link "Apa Itu Implementasi Grid CSS Kompleks? Panduan Lengkap [2026]" [ref=e148]:
+                    - /url: https://croco.likrea.biz.id/implementasi-grid-css-kompleks/
+                - generic [ref=e149]: Saya ingat pertama kali mencoba mengatur layout majalah digital di web. Semuanya berantakan. Implementasi Grid...
+                - generic [ref=e150]: 01 — Objektivitas
+            - article [ref=e151] [cursor=pointer]:
+              - generic [ref=e153]:
+                - heading [level=3] [ref=e154]:
+                  - link "Apa Itu Optimasi Performa Frontend? Panduan Lengkap [2026]" [ref=e155]:
+                    - /url: https://croco.likrea.biz.id/optimasi-performa-frontend/
+                - generic [ref=e156]: Saya ingat ketika kami meluncurkan proyek e-commerce pertama dengan animasi memukau dan gambar resolusi tinggi....
+                - generic [ref=e157]: 02 — Objektivitas
+            - article [ref=e158] [cursor=pointer]:
+              - generic [ref=e160]:
+                - heading [level=3] [ref=e161]:
+                  - link "Apa Itu Arsitektur CSS Modular? Panduan Lengkap [2026]" [ref=e162]:
+                    - /url: https://croco.likrea.biz.id/arsitektur-css-modular/
+                - generic [ref=e163]: Pernahkah Anda membuka file CSS lama dan merasa takut untuk mengubah satu baris pun? Ketakutan...
+                - generic [ref=e164]: 03 — Objektivitas
+          - link "Lihat Semua Engineering →" [ref=e166] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/category/engineering/
+      - generic [ref=e168]:
+        - heading "Referensi" [level=2] [ref=e170]
+        - generic [ref=e171]:
+          - generic [ref=e172]:
+            - article [ref=e173] [cursor=pointer]:
+              - generic [ref=e175]:
+                - heading [level=3] [ref=e176]:
+                  - link "Apa Itu Museum Desain Digital? Panduan Lengkap [2026]" [ref=e177]:
+                    - /url: https://croco.likrea.biz.id/museum-desain-digital/
+                - generic [ref=e178]: Apa Itu Museum Desain Digital? Definisi, Contoh, dan Cara Kerjanya [2026] Anda masuk ke galeri...
+                - generic [ref=e179]: 01 — Objektivitas
+            - article [ref=e180] [cursor=pointer]:
+              - generic [ref=e182]:
+                - heading [level=3] [ref=e183]:
+                  - 'link "Buku Wajib Desainer Grafis: Panduan Lengkap [2026]" [ref=e184]':
+                    - /url: https://croco.likrea.biz.id/buku-wajib-desainer-grafis/
+                - generic [ref=e185]: Buku wajib desainer grafis adalah literatur esensial yang merumuskan prinsip dasar visual, tipografi, dan komposisi...
+                - generic [ref=e186]: 02 — Objektivitas
+            - article [ref=e187] [cursor=pointer]:
+              - generic [ref=e189]:
+                - heading [level=3] [ref=e190]:
+                  - link "Apa Itu Koleksi Poster Klasik Swiss? Panduan Lengkap [2026]" [ref=e191]:
+                    - /url: https://croco.likrea.biz.id/koleksi-poster-klasik-swiss/
+                - generic [ref=e192]: Saya masih ingat pertama kali melihat poster pameran Basel dari tahun 1950-an. Kertasnya sudah menguning....
+                - generic [ref=e193]: 03 — Objektivitas
+          - link "Lihat Semua Referensi →" [ref=e195] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/category/referensi/
+    - generic [ref=e196]:
+      - generic [ref=e197]:
+        - heading "Artikel Terbaru" [level=2] [ref=e198]
+        - article [ref=e199] [cursor=pointer]:
+          - generic [ref=e201]:
+            - generic [ref=e202]: Referensi — 03 Sep 2026
+            - heading [level=3] [ref=e203]:
+              - link "Apa Itu Museum Desain Digital? Panduan Lengkap [2026]" [ref=e204]:
+                - /url: https://croco.likrea.biz.id/museum-desain-digital/
+            - generic [ref=e205]: Apa Itu Museum Desain Digital? Definisi, Contoh, dan Cara Kerjanya [2026] Anda masuk ke galeri pameran tanpa tiket, tanpa antrean,…
+        - article [ref=e206] [cursor=pointer]:
+          - generic [ref=e208]:
+            - generic [ref=e209]: Referensi — 03 Sep 2026
+            - heading [level=3] [ref=e210]:
+              - 'link "Buku Wajib Desainer Grafis: Panduan Lengkap [2026]" [ref=e211]':
+                - /url: https://croco.likrea.biz.id/buku-wajib-desainer-grafis/
+            - generic [ref=e212]: Buku wajib desainer grafis adalah literatur esensial yang merumuskan prinsip dasar visual, tipografi, dan komposisi untuk membangun fondasi desain yang…
+        - article [ref=e213] [cursor=pointer]:
+          - generic [ref=e215]:
+            - generic [ref=e216]: Referensi — 03 Sep 2026
+            - heading [level=3] [ref=e217]:
+              - link "Apa Itu Koleksi Poster Klasik Swiss? Panduan Lengkap [2026]" [ref=e218]:
+                - /url: https://croco.likrea.biz.id/koleksi-poster-klasik-swiss/
+            - generic [ref=e219]: Saya masih ingat pertama kali melihat poster pameran Basel dari tahun 1950-an. Kertasnya sudah menguning. Tapi presisi gridnya seolah menampar…
+        - article [ref=e220] [cursor=pointer]:
+          - generic [ref=e222]:
+            - generic [ref=e223]: Engineering — 03 Sep 2026
+            - heading [level=3] [ref=e224]:
+              - link "Apa Itu Implementasi Grid CSS Kompleks? Panduan Lengkap [2026]" [ref=e225]:
+                - /url: https://croco.likrea.biz.id/implementasi-grid-css-kompleks/
+            - generic [ref=e226]: Saya ingat pertama kali mencoba mengatur layout majalah digital di web. Semuanya berantakan. Implementasi Grid CSS kompleks adalah teknik desain…
+        - article [ref=e227] [cursor=pointer]:
+          - generic [ref=e229]:
+            - generic [ref=e230]: Engineering — 03 Sep 2026
+            - heading [level=3] [ref=e231]:
+              - link "Apa Itu Optimasi Performa Frontend? Panduan Lengkap [2026]" [ref=e232]:
+                - /url: https://croco.likrea.biz.id/optimasi-performa-frontend/
+            - generic [ref=e233]: Saya ingat ketika kami meluncurkan proyek e-commerce pertama dengan animasi memukau dan gambar resolusi tinggi. Tiga detik pertama, rasanya bangga.…
+        - article [ref=e234] [cursor=pointer]:
+          - generic [ref=e236]:
+            - generic [ref=e237]: Engineering — 03 Sep 2026
+            - heading [level=3] [ref=e238]:
+              - link "Apa Itu Arsitektur CSS Modular? Panduan Lengkap [2026]" [ref=e239]:
+                - /url: https://croco.likrea.biz.id/arsitektur-css-modular/
+            - generic [ref=e240]: Pernahkah Anda membuka file CSS lama dan merasa takut untuk mengubah satu baris pun? Ketakutan ini sangat nyata. Satu perubahan…
+        - article [ref=e241] [cursor=pointer]:
+          - generic [ref=e243]:
+            - generic [ref=e244]: Desain UI-UX — 03 Sep 2026
+            - heading [level=3] [ref=e245]:
+              - link "Apa Itu Mental Model Pengguna Modern? Panduan Lengkap [2026]" [ref=e246]:
+                - /url: https://croco.likrea.biz.id/mental-model-pengguna-modern/
+            - generic [ref=e247]: Saya masih ingat saat melihat pengguna pertama kali mencoba aplikasi yang kami bangun selama enam bulan. Mereka menekan tombol yang…
+        - article [ref=e248] [cursor=pointer]:
+          - generic [ref=e250]:
+            - generic [ref=e251]: Desain UI-UX — 03 Sep 2026
+            - heading [level=3] [ref=e252]:
+              - link "Apa Itu Navigasi Berbasis Tipografi? Panduan Lengkap [2026]" [ref=e253]:
+                - /url: https://croco.likrea.biz.id/navigasi-berbasis-tipografi/
+            - generic [ref=e254]: Saya pernah melihat desain web yang dipenuhi ikon usang. Semua berteriak minta diklik. Namun tren kini bergeser drastis. Navigasi Berbasis…
+        - article [ref=e255] [cursor=pointer]:
+          - generic [ref=e257]:
+            - generic [ref=e258]: Sistem Grid — 03 Sep 2026
+            - heading [level=3] [ref=e259]:
+              - link "Apa Itu Kolom Editorial? Panduan Lengkap [2026]" [ref=e260]:
+                - /url: https://croco.likrea.biz.id/memahami-kolom-editorial/
+            - generic [ref=e261]: Apa Itu Kolom Editorial? Definisi, Contoh, dan Cara Kerjanya [2026] Bayangkan Anda sedang duduk di meja redaksi, tepat 15 menit…
+        - article [ref=e262] [cursor=pointer]:
+          - generic [ref=e264]:
+            - generic [ref=e265]: Sistem Grid — 03 Sep 2026
+            - heading [level=3] [ref=e266]:
+              - link "Apa Itu Grid Pecah? Panduan Lengkap Desain Web [2026]" [ref=e267]:
+                - /url: https://croco.likrea.biz.id/grid-pecah-estetika-atau-kekacauan/
+            - generic [ref=e268]: Saya pernah melihat seorang desainer menangis karena klien meminta desainnya dirapikan. Padahal, ia sengaja memecah grid tersebut. Grid pecah adalah…
+        - generic [ref=e270]:
+          - generic [ref=e271]: "1"
+          - link "2" [ref=e272] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/page/2/
+          - link "Selanjutnya →" [ref=e273] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/page/2/
+      - complementary [ref=e274]:
+        - generic [ref=e275]:
+          - heading "Indeks Topik" [level=3] [ref=e276]
+          - generic [ref=e277]:
+            - link "Desain Grafis" [ref=e278] [cursor=pointer]:
+              - /url: https://croco.likrea.biz.id/tag/desain-grafis/
+            - link "Grid System" [ref=e279] [cursor=pointer]:
+              - /url: https://croco.likrea.biz.id/tag/grid-system/
+            - link "Minimalisme" [ref=e280] [cursor=pointer]:
+              - /url: https://croco.likrea.biz.id/tag/minimalisme/
+            - link "Tipografi" [ref=e281] [cursor=pointer]:
+              - /url: https://croco.likrea.biz.id/tag/tipografi/
+            - link "UX Research" [ref=e282] [cursor=pointer]:
+              - /url: https://croco.likrea.biz.id/tag/ux-research/
+        - generic [ref=e283]:
+          - heading "Misi Kami" [level=3] [ref=e284]
+          - paragraph [ref=e285]: Kami menolak dekorasi yang berlebihan. Kami percaya bahwa struktur, tata letak asimetris, dan hierarki tipografi adalah kunci dari komunikasi visual yang jelas.
+          - link "Pelajari Lebih Lanjut →" [ref=e286] [cursor=pointer]:
+            - /url: https://croco.likrea.biz.id/tentang-kami
+  - contentinfo [ref=e287]:
+    - generic [ref=e288]:
+      - generic [ref=e289]:
+        - heading "Croco Site" [level=2] [ref=e290]
+        - paragraph
+      - generic [ref=e291]:
+        - heading "Navigasi" [level=3] [ref=e292]
+        - navigation [ref=e293]:
+          - list [ref=e294]:
+            - listitem [ref=e295]:
+              - link "Tentang Kami" [ref=e296] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/tentang-kami/
+            - listitem [ref=e297]:
+              - link "Kontak" [ref=e298] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/kontak/
+      - generic [ref=e299]:
+        - heading "Legal" [level=3] [ref=e300]
+        - navigation [ref=e301]:
+          - list [ref=e302]:
+            - listitem [ref=e303]:
+              - link "Kebijakan Privasi" [ref=e304] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/kebijakan-privasi/
+            - listitem [ref=e305]:
+              - link "Syarat & Ketentuan" [ref=e306] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/syarat-ketentuan/
+            - listitem [ref=e307]:
+              - link "Tim Redaksi" [ref=e308] [cursor=pointer]:
+                - /url: https://croco.likrea.biz.id/tim-redaksi/
+    - generic [ref=e309]:
+      - paragraph [ref=e310]: © 2026 Croco Site.
+      - paragraph [ref=e311]: Built with _tw & WPVibe
