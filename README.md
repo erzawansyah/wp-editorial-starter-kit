@@ -1,10 +1,10 @@
-# Croco — Starter Kit Website Niche Editorial
+# Croco - Starter Kit Website Niche Editorial
 
 Starter kit untuk produksi massal website niche blog/editorial berbasis WordPress, dioperasikan oleh AI agent (Antigravity) yang terhubung ke WordPress di server remote melalui WPVibe MCP.
 
 ## Cara Kerja
 
-Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ada permintaan pembuatan website baru. Setelah di-clone, operator mengisi identitas dan sistem desain, lalu AI mengeksekusi pembuatan konten dan tema berdasarkan spesifikasi tersebut.
+Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ada permintaan pembuatan website baru. Setelah di-clone, operator mengisi identitas dan sistem desain, lalu AI mengeksekusi pembuatan konten dan tema berdasarkan spesifikasi tersebut secara sistematis.
 
 ## Struktur Repo
 
@@ -27,16 +27,17 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 │       ├── antislop*/          # Skill kualitas kode, UI, copy, dan aksesibilitas
 │       └── wp-*/               # Skill WordPress (REST API, blocks, performa, dsb.)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
-    └── .gitkeep
+    ├── assets/           # Direktori wajib aset (Logo, Gambar)
+    └── PROGRESS.md       # Catatan live progres berjalan
 ```
 
 ## Prasyarat
 
 - **Antigravity** sebagai AI client
 - **WPVibe MCP** sudah terkonfigurasi dan terkoneksi ke situs WordPress target
-- **Node.js + npm** terinstall di mesin lokal (untuk build Tailwind CSS via _tw)
+- **Node.js + npm** terinstall di mesin lokal (untuk build Tailwind CSS)
 - WordPress sudah terinstall di server dengan plugin dasar yang diperlukan
-- **Tema _tw** sudah terinstall dan aktif di WordPress target (AI akan memandu jika belum ada)
+- **Tema GeneratePress** wajib diinstall di awal untuk memvalidasi kesiapan konten sebelum membangun tema kustom.
 
 ## Memulai Proyek Baru
 
@@ -52,15 +53,16 @@ cd nama-proyek
 ```bash
 cp SITE.example.md SITE.md
 cp PROGRESS.example.md .workspaces/PROGRESS.md
+mkdir .workspaces/assets
 ```
 
 ### 3. Isi `SITE.md`
 
-Buka `SITE.md`, isi semua field identitas website (nama, URL, niche, deskripsi, dsb.). Field yang masih berisi placeholder `{{ }}` akan memblokir AI dari mengerjakan apa pun — ini disengaja sebagai guard condition.
+Buka `SITE.md`, isi semua field identitas website (nama, URL, niche, deskripsi, dsb.). Field yang masih berisi placeholder `{{ }}` akan memblokir AI dari mengerjakan apa pun - ini disengaja sebagai guard condition.
 
 ### 4. Setup WordPress di server
 
-Ikuti checklist di [`WORDPRESS-SETUP.md`](WORDPRESS-SETUP.md) secara berurutan. Pastikan semua item centang sebelum lanjut — terutama koneksi WPVibe.
+Ikuti checklist di [`WORDPRESS-SETUP.md`](WORDPRESS-SETUP.md) secara berurutan. Pastikan semua item centang sebelum lanjut - terutama koneksi WPVibe.
 
 ### 5. Isi `DESIGN.md`
 
@@ -68,80 +70,69 @@ Definisikan sistem desain: warna, tipografi, spacing, rounded corner, dan kompon
 
 ### 6. Jalankan AI workflow
 
-Buka Antigravity di direktori proyek. AI akan membaca `SITE.md` → `DESIGN.md` → lalu mengikuti SOP yang tercantum di `AGENTS.md`:
+Buka Antigravity di direktori proyek. AI akan membaca `SITE.md` + `DESIGN.md` lalu mengikuti SOP ketat yang tercantum di `AGENTS.md`:
 
-1. **Fase Konten** — kategori, halaman statis, logo, favicon, draft artikel
-2. **Fase Tema** — wireframe, lalu build tema classic + Tailwind CSS
-3. **Fase QA** — audit Lighthouse, broken link, responsivitas
+1. **Fase Setup** - Rename template, hapus index.php permalink, install GeneratePress, siapkan assets.
+2. **Fase Konten** - generate kategori, halaman statis, logo, favicon, artikel SEO (Injeksi langsung ke DB). **Hard-Gate:** Tunggu persetujuan visual manusia.
+3. **Fase Tema** - bangun tema classic kustom + Tailwind CSS dengan elemen fully dynamic (tanpa hardcode). Output berupa file `.zip` di dalam `.workspaces/`.
+4. **Fase QA** - audit Lighthouse, broken link, responsivitas.
 
-Update `.workspaces/PROGRESS.md` setiap kali satu fase selesai.
+Update `.workspaces/PROGRESS.md` secara *real-time* setiap fase selesai.
 
 ### 7. Deploy
 
-Setelah lolos QA dan mendapat approval, website siap dipromosikan ke environment produksi.
+Setelah lolos QA dan mendapat approval, file tema zip siap diunggah oleh Manusia ke environment produksi.
 
 ## Alur Kerja (Workflow)
 
-```
+```text
 Leader minta website baru
         │
         ▼
-┌───────────────┐
-│  Clone repo   │  ← manusia
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  Isi SITE.md  │  ← manusia
-│  Isi DESIGN.md│
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  Install WP   │  ← manusia (server)
-│  di server    │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  @content     │  ← AI via WPVibe MCP
-│  Konten & aset│
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  @architect   │  ← AI
-│  Wireframe    │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  @engineer    │  ← AI via WPVibe MCP
-│  Build tema   │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  @qa          │  ← AI
-│  Audit & test │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  Deploy       │  ← manusia
-│  ke produksi  │
-└───────────────┘
+┌───────────────────────────────┐
+│ Clone repo & isi SITE/DESIGN  │ ◄── Manusia
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ @setup                        │ ◄── AI via WPVibe
+│ Rename Tema, Permalinks,      │
+│ Install GeneratePress         │
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ @content                      │ ◄── AI via WPVibe
+│ Injeksi Konten, Kategori, Page│
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ [HARD GATE] Validasi Konten   │ ◄── Manusia & AI
+│ Review visual di GeneratePress│
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ @engineer                     │ ◄── AI
+│ Build Tema Kustom (Dinamis)   │
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ @qa                           │ ◄── AI
+│ Audit Lighthouse & Responsif  │
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ Deploy (Manual Upload ZIP)    │ ◄── Manusia
+└───────────────────────────────┘
 ```
 
 ## Struktur Website yang Dihasilkan
 
 Setiap website yang dibangun menggunakan starter kit ini mengikuti pola editorial standar:
 
-- **Header:** Menu navigasi berisi kategori posting
+- **Header:** Menu navigasi dinamis + Pencarian + Logo custom
 - **Homepage:** Hero/headline grid + block artikel per kategori + trending
-- **Sidebar:** Opsional
+- **Sidebar:** Tersedia opsi Pagination/Widget
 - **Footer:** Latest article + link halaman statis
-- **Halaman statis:** Tim Redaksi, Tentang Kami, Kebijakan Privasi, dsb.
+- **Halaman statis:** Tim Redaksi, Tentang Kami, Kebijakan Privasi, Syarat & Ketentuan, Kontak.
 - **Template:** Single post, single page, archive kategori, search, 404
 
 ## Tech Stack
@@ -149,28 +140,16 @@ Setiap website yang dibangun menggunakan starter kit ini mengikuti pola editoria
 | Komponen | Teknologi |
 |---|---|
 | CMS | WordPress (PHP 8.2+) |
-| Base Theme | [_tw](https://underscoretw.com/) — classic starter theme + Tailwind CSS |
+| Base Theme | [_tw](https://underscoretw.com/) (Disesuaikan otomatis nama temanya) |
 | CSS Framework | Tailwind CSS (via PostCSS build, **bukan CDN**) |
-| JS Bundler | esbuild (sudah include di _tw) |
-| Koneksi AI ↔ WP | WPVibe MCP |
+| JS Bundler | esbuild |
+| Koneksi AI - WP | WPVibe MCP |
 | AI Client | Antigravity |
-| Skills | WordPress agent-skills, antislop |
-| Build Environment | Node.js + npm (lokal, Windows 11)
 
 ## Konvensi Penting
 
 - **Bahasa konten:** Indonesia, gaya editorial
-- **File kerja AI** disimpan di `.workspaces/`, bukan di root
-- **`SITE.md` di-gitignore** karena berisi data spesifik per proyek. Yang di-commit adalah `SITE.example.md` sebagai template
-- **Guard condition:** AI dilarang bekerja jika `SITE.md` atau front matter `DESIGN.md` masih berisi placeholder `{{ }}`
-- **Tema dibangun via draft/sandbox**, bukan langsung di tema aktif
-- **Semua interaksi ke WordPress** dilakukan melalui WPVibe MCP, bukan command lokal
-
-## File Referensi
-
-| File | Fungsi |
-|---|---|
-| `SITE.md` | Identitas website (niche, URL, nama) — diisi per proyek |
-| `DESIGN.md` | Sistem desain (warna, tipografi, layout, komponen) — diisi per proyek |
-| `AGENTS.md` | Aturan, SOP, dan batasan kerja AI agent |
-| `SITE.example.md` | Template kosong `SITE.md` untuk proyek baru |
+- **File kerja AI & ZIP rilis** wajib disimpan di `.workspaces/`, dilarang mengotori root repo atau direktori tema sumber.
+- **`SITE.md` di-gitignore** karena berisi data spesifik per proyek.
+- **Anti-Dummy Rule:** AI dilarang membuat dummy lokal. Konten wajib diinjeksi via MCP.
+- **Semua interaksi ke WordPress** dilakukan melalui WPVibe MCP, bukan command lokal.
