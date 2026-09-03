@@ -22,25 +22,13 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 ### SEO
 | Plugin | Keterangan |
 |---|---|
-| **Yoast SEO** atau **Rank Math** | Meta title, description, sitemap XML, breadcrumb |
+| **Rank Math** | Meta title, description, sitemap XML, breadcrumb |
 
 ### Performa
 | Plugin | Keterangan |
 |---|---|
 | **WP Rocket** atau **LiteSpeed Cache** | Caching, minifikasi CSS/JS |
 | **Smush** atau **ShortPixel** | Kompresi gambar otomatis |
-
-### Keamanan
-| Plugin | Keterangan |
-|---|---|
-| **Wordfence** atau **Solid Security** | Firewall, login protection |
-
-### Konten & Editorial
-| Plugin | Keterangan |
-|---|---|
-| **Classic Editor** | Hindari Gutenberg untuk posting editorial standar |
-| **Advanced Custom Fields (ACF) Free** | Custom field untuk metadata artikel (penulis, sumber, dsb.) |
-| **WPForms Lite** | Form kontak halaman statis |
 
 ### Integrasi AI
 | Plugin | Keterangan |
