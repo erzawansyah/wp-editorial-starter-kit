@@ -28,6 +28,7 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 │       └── wp-*/               # Skill WordPress (REST API, blocks, performa, dsb.)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
     ├── assets/           # Direktori wajib aset (Logo, Gambar)
+    ├── THEME_SPECS.md    # Dokumen handover teknis (digenerate oleh AI)
     └── PROGRESS.md       # Catatan live progres berjalan
 ```
 
@@ -74,7 +75,7 @@ Buka Antigravity di direktori proyek. AI akan membaca `SITE.md` + `DESIGN.md` la
 
 1. **Fase Setup** - Rename template, hapus index.php permalink, install GeneratePress, siapkan assets.
 2. **Fase Konten** - generate kategori, halaman statis, logo, favicon, artikel SEO (Injeksi langsung ke DB). **Hard-Gate:** Tunggu persetujuan visual manusia.
-3. **Fase Tema** - bangun tema classic kustom + Tailwind CSS dengan elemen fully dynamic (tanpa hardcode). Output berupa file `.zip` di dalam `.workspaces/`.
+3. **Fase Tema** - bangun tema classic kustom + Tailwind CSS dengan elemen fully dynamic (tanpa hardcode). Output file `.zip` dan file `.workspaces/THEME_SPECS.md` sebagai dokumentasi teknis akhir.
 4. **Fase QA** - audit Lighthouse, broken link, responsivitas.
 
 Update `.workspaces/PROGRESS.md` secara *real-time* setiap fase selesai.
@@ -112,6 +113,7 @@ Leader minta website baru
 ┌───────────────────────────────┐
 │ @engineer                     │ ◄── AI
 │ Build Tema Kustom (Dinamis)   │
+│ Generate THEME_SPECS.md       │
 └──────────────┬────────────────┘
                ▼
 ┌───────────────────────────────┐

@@ -38,6 +38,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 3. **Fase Tema (@architect -> @engineer):** Hanya boleh dimulai **SETELAH** fase konten selesai dan divalidasi.
    - **GUARDRAIL TEMA (DINAMIS):** **DILARANG** melakukan *hardcode* HTML statis untuk navigasi, menu, tag, atau pencarian. Semua elemen dinamis wajib langsung disambungkan dengan native WordPress functions (`wp_nav_menu()`, `get_tags()`, `has_custom_logo()`) sejak baris kode pertama. File `functions.php` **wajib** mendeklarasikan `add_theme_support('custom-logo')`.
    - **GUARDRAIL BUNDLING:** Ketika menjalankan `npm run bundle`, pastikan script zip dikonfigurasi agar meletakkan output `.zip` di luar struktur source tema (di root `.workspaces/`), **jangan campurkan file zip dengan file source tema**.
+   - **GUARDRAIL HANDOVER:** Setelah tema selesai dan di-bundle, agen **WAJIB** meng-generate file `.workspaces/THEME_SPECS.md` yang berisi spesifikasi arsitektur teknis dari tema yang baru dibangun (hierarki kontainer Tailwind, logic custom JS, dll) sebagai dokumen referensi mutlak untuk sesi AI di masa depan.
 
 4. **Fase QA (@qa):** Audit Lighthouse >=80 (performa & SEO), broken link check, uji responsivitas.
 
@@ -47,6 +48,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 
 Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, output proses) **wajib disimpan di dalam folder `.workspaces/`** di root repo.
 - **`.workspaces/assets/`**: Direktori wajib untuk logo, ilustrasi, dummy thumbnail, dan aset visual lainnya.
+- **`.workspaces/THEME_SPECS.md`**: Dokumen handover teknis tema saat ini.
 - Jangan membuat file baru di luar `.workspaces/` kecuali file tersebut dimaksudkan untuk update repo inti.
 
 ## Conventions
@@ -70,7 +72,7 @@ WPVibe MCP bisa terhubung ke banyak situs WordPress sekaligus. Untuk mencegah ke
 
 ## Definition of Done
 
-Kategori & halaman statis terisi (via DB), draft tema disetujui (dinamis & responsif), Lighthouse >=80, permalink beres, file zip terpisah, backup pra-publish terverifikasi.
+Kategori & halaman statis terisi (via DB), draft tema disetujui (dinamis & responsif), Lighthouse >=80, permalink beres, file zip terpisah, THEME_SPECS.md ter-generate, backup pra-publish terverifikasi.
 
 ## Changelog
 
@@ -78,4 +80,4 @@ Catat setiap pekerjaan yang selesai di repo ini. Entri terbaru di atas.
 
 ### `01. 2026-09-03`
 
-- Integrasi aturan Real-time Progress Tracking, Workspace Assets, Strict Dynamic Element, Auto-rename Theme, dan Hard-Gate Content Validation menggunakan tema GeneratePress.
+- Integrasi aturan Real-time Progress Tracking, Workspace Assets, Strict Dynamic Element, Auto-rename Theme, Hard-Gate Content Validation (GeneratePress), dan THEME_SPECS.md Handover Document.
