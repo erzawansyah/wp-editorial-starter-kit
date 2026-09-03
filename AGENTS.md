@@ -24,7 +24,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase.
 1. **Setup (Manusia):** Clone repo ini, install WordPress di server, setup plugin dan tema dasar.
 2. **Briefing (Manusia):** Isi `SITE.md` (identitas website) dan `DESIGN.md` (sistem desain).
 3. **Fase Konten (@content):** Generate kategori, halaman statis (Tim Redaksi, Tentang Kami, Kebijakan Privasi, dll.), logo, favicon, dan draft artikel awal.
-4. **Fase Tema (@architect → @engineer):** Architect menyusun wireframe berdasarkan DESIGN.md, lalu engineer membangun tema (layout editorial, header, footer, template standar).
+4. **Fase Tema (@architect → @engineer):** Architect menyusun wireframe berdasarkan DESIGN.md. Engineer **wajib cek instalasi tema _tw via WPVibe terlebih dahulu** — jika belum ada, pandu user menginstallnya sebelum melanjutkan. Setelah terinstall: edit file PHP template via WPVibe, edit Tailwind (CSS/JS) di lokal lalu build dengan npm, upload hasil build ke server via WPVibe.
 5. **Fase QA (@qa):** Audit Lighthouse ≥80 (performa & SEO), broken link check, uji responsivitas.
 6. **Deployment (Manusia):** Promosi ke environment produksi setelah approval.
 

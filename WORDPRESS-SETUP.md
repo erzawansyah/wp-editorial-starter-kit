@@ -93,9 +93,45 @@ Install dan aktifkan semua plugin berikut sebelum memulai:
 
 ---
 
-## 6. Tema Sementara
+## 6. Instalasi Tema _tw
 
-Gunakan tema default WordPress yang paling ringan (misal Twenty Twenty-Four) sebagai placeholder selama fase konten. Tema aktual akan dibangun oleh AI pada Fase Tema dan diaktifkan setelah disetujui.
+`_tw` adalah base theme yang wajib terinstall di WordPress sebelum AI bisa memulai Fase Tema. AI akan memeriksa keberadaannya via WPVibe — jika belum ada, AI akan memandu proses instalasi.
+
+### Cara Install _tw
+
+**Opsi A — Web Generator (paling mudah):**
+1. Buka https://underscoretw.com/
+2. Isi nama tema (gunakan slug website, misal `berita-foodies`)
+3. Download zip hasil generate
+4. Upload ke WordPress: **wp-admin → Appearance → Themes → Add New Theme → Upload Theme**
+5. Aktifkan tema tersebut
+
+**Opsi B — WP-CLI (jika tersedia di server):**
+```bash
+wp package install gregsullivan/wp-cli-tw
+wp tw generate --name="Nama Tema" --slug="nama-tema"
+wp theme activate nama-tema
+```
+
+### Setup Lokal untuk Build Step
+
+Setelah tema terinstall di server, siapkan source _tw di lokal untuk proses build CSS/JS:
+
+```bash
+# Di dalam .workspaces/{nama-proyek}/
+npx degit gregsullivan/_tw theme-src
+cd theme-src
+npm install
+```
+
+> **Catatan:** Folder `.workspaces/` sudah ada di repo ini dan di-gitignore. Ini tempat yang benar untuk menyimpan source _tw per proyek.
+
+### Verifikasi
+
+- [ ] Tema _tw terinstall di WordPress
+- [ ] Tema aktif (Appearance → Themes)
+- [ ] Source _tw ada di `.workspaces/{proyek}/theme-src/`
+- [ ] `npm install` sudah dijalankan di folder theme-src
 
 ---
 

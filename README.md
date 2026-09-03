@@ -34,7 +34,9 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 
 - **Antigravity** sebagai AI client
 - **WPVibe MCP** sudah terkonfigurasi dan terkoneksi ke situs WordPress target
+- **Node.js + npm** terinstall di mesin lokal (untuk build Tailwind CSS via _tw)
 - WordPress sudah terinstall di server dengan plugin dasar yang diperlukan
+- **Tema _tw** sudah terinstall dan aktif di WordPress target (AI akan memandu jika belum ada)
 
 ## Memulai Proyek Baru
 
@@ -147,10 +149,13 @@ Setiap website yang dibangun menggunakan starter kit ini mengikuti pola editoria
 | Komponen | Teknologi |
 |---|---|
 | CMS | WordPress (PHP 8.2+) |
-| Tema | Classic theme + Tailwind CSS |
+| Base Theme | [_tw](https://underscoretw.com/) — classic starter theme + Tailwind CSS |
+| CSS Framework | Tailwind CSS (via PostCSS build, **bukan CDN**) |
+| JS Bundler | esbuild (sudah include di _tw) |
 | Koneksi AI ↔ WP | WPVibe MCP |
 | AI Client | Antigravity |
 | Skills | WordPress agent-skills, antislop |
+| Build Environment | Node.js + npm (lokal, Windows 11)
 
 ## Konvensi Penting
 
