@@ -23,9 +23,10 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 ├── .agents/
 │   ├── mcp_config.json   # Konfigurasi koneksi WPVibe MCP
 │   └── skills/           # Skill AI agent
-│       ├── theme-convention/   # Konvensi struktur tema classic + Tailwind
-│       ├── antislop*/          # Skill kualitas kode, UI, copy, dan aksesibilitas
-│       └── wp-*/               # Skill WordPress (REST API, blocks, performa, dsb.)
+│       ├── editorial-brainstorm/ # Skill interaktif untuk memandu pembuatan konsep website
+│       ├── theme-convention/     # Konvensi struktur tema classic + Tailwind
+│       ├── antislop*/            # Skill kualitas kode, UI, copy, dan aksesibilitas
+│       └── wp-*/                 # Skill WordPress (REST API, blocks, performa, dsb.)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
     ├── assets/           # Direktori wajib aset (Logo, Gambar)
     ├── THEME_SPECS.md    # Dokumen handover teknis (digenerate oleh AI)
@@ -57,21 +58,20 @@ cp PROGRESS.example.md .workspaces/PROGRESS.md
 mkdir .workspaces/assets
 ```
 
-### 3. Isi `SITE.md`
+### 3. Setup Konsep (Opsional: Gunakan Bantuan AI)
 
-Buka `SITE.md`, isi semua field identitas website (nama, URL, niche, deskripsi, dsb.). Field yang masih berisi placeholder `{{ }}` akan memblokir AI dari mengerjakan apa pun - ini disengaja sebagai guard condition.
+Jika Anda sudah memiliki visi yang jelas, langsung buka dan isi file `SITE.md` dan `DESIGN.md`. Namun, jika Anda **hanya memiliki nama domain** dan kebingungan menentukan *niche*, warna, atau menu navigasi:
+👉 **Panggil skill AI:** Ketik `/editorial-brainstorm` di chat Antigravity. Agen akan meng-interview Anda, merumuskan ide, dan mengisikan `SITE.md` serta `DESIGN.md` secara otomatis untuk Anda!
+
+*(Catatan: Field `{{ }}` yang masih kosong akan memblokir AI dari mengeksekusi alur utama)*.
 
 ### 4. Setup WordPress di server
 
 Ikuti checklist di [`WORDPRESS-SETUP.md`](WORDPRESS-SETUP.md) secara berurutan. Pastikan semua item centang sebelum lanjut - terutama koneksi WPVibe.
 
-### 5. Isi `DESIGN.md`
+### 5. Jalankan AI workflow Utama
 
-Definisikan sistem desain: warna, tipografi, spacing, rounded corner, dan komponen. Gunakan [`DESIGN.example.md`](DESIGN.example.md) sebagai referensi nyata. YAML front matter di bagian atas harus terisi penuh.
-
-### 6. Jalankan AI workflow
-
-Buka Antigravity di direktori proyek. AI akan membaca `SITE.md` + `DESIGN.md` lalu mengikuti SOP ketat yang tercantum di `AGENTS.md`:
+Buka Antigravity di direktori proyek. AI akan membaca spesifikasi Anda lalu mengikuti SOP ketat yang tercantum di `AGENTS.md`:
 
 1. **Fase Setup** - Rename template, hapus index.php permalink, install GeneratePress, siapkan assets.
 2. **Fase Konten** - generate kategori, halaman statis, logo, favicon, artikel SEO (Injeksi langsung ke DB). **Hard-Gate:** Tunggu persetujuan visual manusia.
@@ -80,7 +80,7 @@ Buka Antigravity di direktori proyek. AI akan membaca `SITE.md` + `DESIGN.md` la
 
 Update `.workspaces/PROGRESS.md` secara *real-time* setiap fase selesai.
 
-### 7. Deploy
+### 6. Deploy
 
 Setelah lolos QA dan mendapat approval, file tema zip siap diunggah oleh Manusia ke environment produksi.
 
@@ -91,7 +91,13 @@ Leader minta website baru
         │
         ▼
 ┌───────────────────────────────┐
-│ Clone repo & isi SITE/DESIGN  │ ◄── Manusia
+│ Clone repo & Persiapan        │ ◄── Manusia
+└──────────────┬────────────────┘
+               ▼
+┌───────────────────────────────┐
+│ [OPSIONAL] @brainstorm        │ ◄── AI (Jika butuh ide)
+│ Bantu perumusan konsep        │
+│ & Auto-fill SITE/DESIGN       │
 └──────────────┬────────────────┘
                ▼
 ┌───────────────────────────────┐

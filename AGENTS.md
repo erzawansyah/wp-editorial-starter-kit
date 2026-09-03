@@ -23,7 +23,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 
 **ATURAN UMUM PROGRESS:** Setiap kali satu tugas atau fase selesai, agen **WAJIB seketika itu juga (real-time)** mencatatnya ke dalam `.workspaces/PROGRESS.md`. Jangan menunggu sampai akhir proyek.
 
-1. **Setup (Manusia & Agen):** Clone repo ini, isi `SITE.md` & `DESIGN.md`. 
+1. **Setup (Manusia & Agen):** Clone repo ini, isi `SITE.md` & `DESIGN.md`. *(Catatan: Panggil skill `editorial-brainstorm` jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol).*
    - **GUARDRAIL SETUP:** 
      - Agen **WAJIB** membuat folder wajib `.workspaces/assets/` di awal inisialisasi sebagai tempat menyimpan gambar (logo), featured image, placeholder, dll yang akan diunggah ke website.
      - Segera inisialisasi file `.workspaces/PROGRESS.md`.
@@ -32,7 +32,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
      - Agen **WAJIB** me-rename nama tema kustom di `package.json` dan `file-header.css` sesuai dengan nama situs di `SITE.md`. Jangan gunakan nama boilerplate `_tw`.
 
 2. **Fase Konten (@content):** 
-   - **GUARDRAIL KONTEN:** **DILARANG KERAS** membuat konten *dummy* hanya dalam bentuk file lokal/teks. Agen **WAJIB** menggunakan WPVibe MCP (REST API atau WP-CLI) untuk menginjeksi artikel SEO final, halaman statis (Tentang Kami, dll), dan struktur kategori **langsung** ke database server remote.
+   - **GUARDRAIL KONTEN:** **DILARANG KERAS** membuat konten *dummy* hanya dalam bentuk file lokal/teks. Agen **WAJIB** menggunakan WPVibe MCP (REST API atau WP-CLI) untuk menginjeksi artikel SEO final, halaman statis (Tentang Kami, dll), dan struktur kategori **langlangsung** ke database server remote.
    - **HARD GATE (VALIDASI KONTEN):** Setelah semua artikel, kategori, tag, halaman statis, dan navigasi menu selesai diunggah, minta Manusia (User) untuk meninjau website secara visual. Karena tema yang aktif adalah GeneratePress, Manusia bisa dengan mudah memastikan seluruh struktur data (konten) sudah benar-benar siap dan masuk ke database. Pengembangan tema kustom **DILARANG** dimulai sebelum ada persetujuan "Konten Siap" dari Manusia.
 
 3. **Fase Tema (@architect -> @engineer):** Hanya boleh dimulai **SETELAH** fase konten selesai dan divalidasi.
