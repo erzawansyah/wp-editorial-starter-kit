@@ -1,3 +1,10 @@
 DESIGN.md
 SITE.md
-.workspaces/
+.workspaces/*
+!.workspaces/.gitkeep
+
+node_modules/
+.env
+.DS_Store
+Thumbs.db
+

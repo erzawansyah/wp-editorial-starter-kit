@@ -23,7 +23,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 
 **ATURAN UMUM PROGRESS:** Setiap kali satu tugas atau fase selesai, agen **WAJIB seketika itu juga (real-time)** mencatatnya ke dalam `.workspaces/PROGRESS.md`. Jangan menunggu sampai akhir proyek.
 
-1. **Setup (Manusia & Agen):** Clone repo ini, isi `SITE.md` & `DESIGN.md`. *(Catatan: Panggil skill `editorial-brainstorm` jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol).*
+1. **Setup (Manusia & Agen):** Clone repo ini, isi `SITE.md` & `DESIGN.md`. *(Catatan: Panggil skill `wpsk-editorial-brainstorm` jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol).*
    - **GUARDRAIL SETUP:** 
      - Agen **WAJIB** membuat folder wajib `.workspaces/assets/` di awal inisialisasi sebagai tempat menyimpan gambar (logo), featured image, placeholder, dll yang akan diunggah ke website.
      - Segera inisialisasi file `.workspaces/PROGRESS.md`.
@@ -53,7 +53,10 @@ Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, o
 
 ## Conventions
 
-Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti `.agents/skills/`. Jangan improvisasi struktur baru tanpa mencatat alasannya di `DESIGN.md`. Bahasa konten default: Indonesia, gaya editorial.
+Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti .agents/skills/. Jangan improvisasi struktur baru tanpa mencatat alasannya di DESIGN.md. Bahasa konten default: Indonesia, gaya editorial.
+
+**Aturan Pembuatan Skill Baru:** Jika agen atau manusia membuat custom skill spesifik untuk ekosistem *Starter Kit* ini, nama folder dan 
+ame: di YAML *wajib* menggunakan awalan wpsk- (WordPress Starter Kit). Contoh: wpsk-editorial-brainstorm, wpsk-theme-convention.
 
 ## WPVibe MCP
 
@@ -81,3 +84,4 @@ Catat setiap pekerjaan yang selesai di repo ini. Entri terbaru di atas.
 ### `01. 2026-09-03`
 
 - Integrasi aturan Real-time Progress Tracking, Workspace Assets, Strict Dynamic Element, Auto-rename Theme, Hard-Gate Content Validation (GeneratePress), dan THEME_SPECS.md Handover Document.
+

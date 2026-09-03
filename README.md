@@ -23,8 +23,8 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 ├── .agents/
 │   ├── mcp_config.json   # Konfigurasi koneksi WPVibe MCP
 │   └── skills/           # Skill AI agent
-│       ├── editorial-brainstorm/ # Skill interaktif untuk memandu pembuatan konsep website
-│       ├── theme-convention/     # Konvensi struktur tema classic + Tailwind
+│       ├── wpsk-editorial-brainstorm/ # Skill interaktif untuk memandu pembuatan konsep website
+│       ├── wpsk-theme-convention/     # Konvensi struktur tema classic + Tailwind
 │       ├── antislop*/            # Skill kualitas kode, UI, copy, dan aksesibilitas
 │       └── wp-*/                 # Skill WordPress (REST API, blocks, performa, dsb.)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
@@ -61,7 +61,7 @@ mkdir .workspaces/assets
 ### 3. Setup Konsep (Opsional: Gunakan Bantuan AI)
 
 Jika Anda sudah memiliki visi yang jelas, langsung buka dan isi file `SITE.md` dan `DESIGN.md`. Namun, jika Anda **hanya memiliki nama domain** dan kebingungan menentukan *niche*, warna, atau menu navigasi:
-👉 **Panggil skill AI:** Ketik `/editorial-brainstorm` di chat Antigravity. Agen akan meng-interview Anda, merumuskan ide, dan mengisikan `SITE.md` serta `DESIGN.md` secara otomatis untuk Anda!
+👉 **Panggil skill AI:** Ketik `/wpsk-editorial-brainstorm` di chat Antigravity. Agen akan meng-interview Anda, merumuskan ide, dan mengisikan `SITE.md` serta `DESIGN.md` secara otomatis untuk Anda!
 
 *(Catatan: Field `{{ }}` yang masih kosong akan memblokir AI dari mengeksekusi alur utama)*.
 
@@ -161,3 +161,4 @@ Setiap website yang dibangun menggunakan starter kit ini mengikuti pola editoria
 - **`SITE.md` di-gitignore** karena berisi data spesifik per proyek.
 - **Anti-Dummy Rule:** AI dilarang membuat dummy lokal. Konten wajib diinjeksi via MCP.
 - **Semua interaksi ke WordPress** dilakukan melalui WPVibe MCP, bukan command lokal.
+

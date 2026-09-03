@@ -4,7 +4,7 @@ File ini diisi paling pertama, sebelum `DESIGN.md`, saat leader meminta situs ba
 
 ## Guard Condition - Wajib Dicek Sebelum Mengerjakan Apa Pun
 
-Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placeholder `{{ }}` (belum diisi nilai sebenarnya), AI agent **dilarang** melanjutkan instruksi apa pun - baik itu membaca DESIGN.md, generate konten, membangun tema, maupun aksi lain di repo ini. Berhenti dan tanyakan langsung ke user nilai yang belum terisi sebelum melanjutkan, atau jalankan skill `/editorial-brainstorm` jika butuh ide.
+Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placeholder `{{ }}` (belum diisi nilai sebenarnya), AI agent **dilarang** melanjutkan instruksi apa pun - baik itu membaca DESIGN.md, generate konten, membangun tema, maupun aksi lain di repo ini. Berhenti dan tanyakan langsung ke user nilai yang belum terisi sebelum melanjutkan, atau jalankan skill `/wpsk-editorial-brainstorm` jika butuh ide.
 
 ## Identitas
 
@@ -22,3 +22,4 @@ Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placehol
 
 **Call to Action (CTA) / Konversi Utama:**
 `{{ Contoh: Mengumpulkan subscribers newsletter dan pageviews untuk programmatic ads }}`
+

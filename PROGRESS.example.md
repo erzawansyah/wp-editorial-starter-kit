@@ -15,7 +15,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 - [ ] Clone repo starter kit
 - [ ] Buat direktori `.workspaces/assets/`
-- [ ] Isi `SITE.md` dan `DESIGN.md` (atau jalankan `/editorial-brainstorm`)
+- [ ] Isi `SITE.md` dan `DESIGN.md` (atau jalankan `/wpsk-editorial-brainstorm`)
 - [ ] Selesaikan semua item di `WORDPRESS-SETUP.md`
 - [ ] WPVibe terkoneksi dan terverifikasi
 - [ ] Tema GeneratePress diinstall dan aktif di server target
@@ -92,3 +92,4 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 ## Catatan Proyek
 
 `{{ Catat hambatan, keputusan desain, atau perubahan dari rencana awal di sini }}`
+

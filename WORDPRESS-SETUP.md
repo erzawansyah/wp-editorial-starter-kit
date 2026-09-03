@@ -106,4 +106,5 @@ npm install
 - [ ] Tema **GeneratePress** sudah aktif
 - [ ] Folder `.workspaces/nama-proyek/theme-src/` sudah berisi instalasi npm murni
 - [ ] Folder `.workspaces/assets/` sudah dibuat
-- [ ] `SITE.md` dan `DESIGN.md` sudah terisi (atau panggil `/editorial-brainstorm` di chat AI jika butuh ide)
+- [ ] `SITE.md` dan `DESIGN.md` sudah terisi (atau panggil `/wpsk-editorial-brainstorm` di chat AI jika butuh ide)
+

@@ -1,6 +1,6 @@
 ---
 # Skill: Theme Convention
-name: theme-convention
+name: wpsk-theme-convention
 description: >
   Konvensi pengembangan tema berbasis _tw (underscore-tw) — WordPress starter
   theme dengan Tailwind CSS. Gunakan saat fase tema dimulai (@engineer).
@@ -230,3 +230,4 @@ Jalankan semua perintah ini dari folder `.workspaces/{proyek}/theme-src/`.
 - Jangan edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
 - Jangan gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS
 - Jangan edit tema aktif di live langsung — semua perubahan PHP via WPVibe draft, CSS via build lokal
+

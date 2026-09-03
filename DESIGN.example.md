@@ -18,7 +18,7 @@ layout:
 
 # DESIGN.md - Sistem Desain Website
 
-Isi dokumen ini secara komprehensif setelah `SITE.md` terisi, sebelum agen mulai membangun kerangka tema. Jika butuh bantuan mengisi dokumen ini, panggil skill `/editorial-brainstorm`.
+Isi dokumen ini secara komprehensif setelah `SITE.md` terisi, sebelum agen mulai membangun kerangka tema. Jika butuh bantuan mengisi dokumen ini, panggil skill `/wpsk-editorial-brainstorm`.
 
 ## 1. Prinsip Visual (Design Principles)
 - `{{ Deskripsi singkat tentang identitas visual, misalnya: Swiss Design, Clean Minimalist, Dark Mode Brutalist, dll }}`
@@ -44,3 +44,4 @@ Isi dokumen ini secara komprehensif setelah `SITE.md` terisi, sebelum agen mulai
 - **Button:** `{{ Gaya tombol, misal: Kotak tegas, tanpa sudut melengkung, hover invers warna }}`
 - **Card/Post Item:** `{{ Gaya list artikel, misal: Thumbnail grayscale yang berwarna saat di-hover, border tipis, dsb }}`
 - **Pagination:** `{{ Gaya pagination, misal: Bentuk kotak bernomor (Swiss Pagination) }}`
+

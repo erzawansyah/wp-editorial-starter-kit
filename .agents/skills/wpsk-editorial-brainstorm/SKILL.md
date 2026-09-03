@@ -1,5 +1,5 @@
 ---
-name: editorial-brainstorm
+name: wpsk-editorial-brainstorm
 description: Memandu user melakukan brainstorming (niche, struktur konten, branding, sistem desain) dari nol hanya bermodalkan nama domain, hingga akhirnya menyusun SITE.md dan DESIGN.md secara otomatis.
 ---
 
@@ -49,3 +49,4 @@ Jalankan langkah-langkah ini secara **berurutan**. Jangan menanyakan semua hal s
 - **Konsultatif & Proaktif:** Jangan berikan pertanyaan "kosong". Selalu berikan pilihan dan rekomendasi yang tajam!
 - **Tegas memandu:** Jangan biarkan user kewalahan. Pandu *step-by-step*.
 - Gunakan Markdown untuk mempresentasikan opsi agar terlihat profesional.
+
