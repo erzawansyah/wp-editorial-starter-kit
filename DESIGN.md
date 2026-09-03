@@ -1,45 +1,49 @@
 ---
-# Sistem desain untuk website ini. Isi sebelum memanggil AI untuk fase tema.
-# Lihat DESIGN.example.md untuk contoh yang sudah terisi penuh.
-version: alpha
-name: "{{ nama website }}"
-description: "{{ satu kalimat deskripsi niche dan karakter website }}"
+version: "alpha"
+name: "Croco"
+description: "Swiss graphic design landing page. Ideal for landing pages, saas. AI-ready template."
 colors:
-  primary: "{{ hex — warna utama, aksen & CTA }}"
-  secondary: "{{ hex — warna teks & heading }}"
-  tertiary: "{{ hex — aksen interaksi, hover state, badge trending }}"
-  neutral: "{{ hex — warna latar belakang utama }}"
+  primary: "#D82C2C"
+  secondary: "#1A1A1A"
+  tertiary: "#FFFFFF"
+  neutral: "#A9B2B1"
+  surface: "#0033A0"
+  accent: "#F2F2F2"
 typography:
   h1:
-    fontFamily: "{{ nama font, misal: Playfair Display }}"
-    fontSize: "{{ misal: 48px }}"
+    fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: "2.5rem"
+    fontWeight: "700"
   h2:
-    fontFamily: "{{ nama font }}"
-    fontSize: "{{ misal: 32px }}"
+    fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: "700"
   body-md:
-    fontFamily: "{{ nama font, misal: Inter }}"
-    fontSize: "{{ misal: 16px }}"
+    fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: "1rem"
+    fontWeight: "400"
   label-caps:
-    fontFamily: "{{ nama font }}"
-    fontSize: "{{ misal: 11px — untuk tag, metadata, byline }}"
+    fontFamily: "JetBrains Mono, monospace"
+    fontSize: "0.875rem"
+    fontWeight: "500"
 rounded:
-  sm: "{{ misal: 2px — untuk elemen tajam }}"
-  md: "{{ misal: 4px }}"
-  lg: "{{ misal: 8px — untuk modal atau card besar }}"
+  sm: "0px"
+  md: "8px"
+  lg: "12px"
 spacing:
-  sm: "{{ misal: 8px }}"
-  md: "{{ misal: 16px }}"
-  lg: "{{ misal: 32px }}"
+  sm: "20.0px"
+  md: "40.0px"
+  lg: "80.0px"
 components:
   button-primary:
-    backgroundColor: "{{ hex — gunakan primary atau variannya }}"
-    textColor: "{{ hex — pastikan kontras WCAG AA }}"
-    rounded: "{{ misal: 2px }}"
-    padding: "{{ misal: 10px 20px }}"
+    backgroundColor: "#D82C2C"
+    textColor: "#FFFFFF"
+    rounded: "8px"
+    padding: "12px 24px"
   card-article:
-    backgroundColor: "{{ hex — biasanya putih atau neutral }}"
-    rounded: "{{ misal: 4px }}"
-    padding: "{{ misal: 0px — jika gambar flush ke tepi card }}"
+    backgroundColor: "#FFFFFF"
+    rounded: "8px"
+    padding: "0px"
 ---
 
 ## Guard Condition
@@ -48,32 +52,92 @@ Cek `SITE.md` lebih dulu — jika field Identitas di sana masih placeholder koso
 
 ## Overview
 
-`{{ Deskripsikan mood, filosofi desain, dan atmosfer visual situs. Contoh: "Portal berita dengan karakter editorial yang tegas — seperti majalah cetak yang digitalisasi. Warna hangat, bukan informal." Isi setelah user memberi arahan, jangan diasumsikan. }}`
+Swiss graphic design landing page. Ideal for landing pages, saas. AI-ready template. Swiss Graphic Design didn't emerge from tech startups or UI kits. It came from Basel and Zürich in the 1950s — from letterpress workshops, lithographic posters, and a near-obsessive belief that typography could carry meaning without decoration. 
+
+Translating this to screens means understanding what survived and what didn't. The grid translated beautifully. The typographic hierarchy — large, confident, unapologetic — works even better at screen scale. What remains is the discipline: let the grid do the talking, let type breathe, and never add what you can't justify.
+
+- Density: 3/10 — Airy
+- Variance: 7/10 — Dynamic
+- Motion: 4/10 — Subtle
+
+- **Style:** Clean, Structured, Typographic
+- **Keywords:** swiss design, international style, clean, structured, typographic, grid, minimalist, objective, functional, asymmetrical
+- **Era:** Mid-20th Century, International Typographic Style
+- **Light/Dark:** ✓ Full / ✗ No
 
 ## Colors
 
-`{{ Jelaskan peran tiap warna: kapan primary dipakai, kapan secondary, kapan tertiary sebagai aksen interaksi, dan konteks neutral sebagai latar. Sertakan juga catatan kontras WCAG jika ada warna yang perlu diwaspadai. }}`
+- **Signal Red** (#D82C2C) — Error states, destructive actions, primary accent
+- **Black** (#1A1A1A) — Dark surface, primary background
+- **White** (#FFFFFF) — Light surface, card backgrounds
+- **Cool Grey** (#A9B2B1) — Secondary text, borders, muted elements
+- **Deep Blue** (#0033A0) — Secondary accent
+- **Light Grey** (#F2F2F2) — Secondary text, borders, muted elements
 
 ## Typography
 
-`{{ Jelaskan hierarki tipografi: font judul vs body, kapan label-caps dipakai, nada yang ingin dibentuk lewat pilihan font. Contoh: "Playfair Display untuk heading memberi kesan editorial; Inter untuk body menjamin keterbacaan di layar kecil." }}`
+- **Display / Hero:** Helvetica Neue — Weight 700, tight tracking, used for headline impact
+- **Body:** Helvetica Neue — Weight 400, 16px/1.6 line-height, max 72ch per line
+- **UI Labels / Captions:** Helvetica Neue — 0.875rem, weight 500, slight letter-spacing
+- **Monospace:** JetBrains Mono (atau Courier) — Used for code, metadata, and technical values
+
+Scale:
+- Hero: clamp(2.5rem, 5vw, 4rem)
+- H1: 2.25rem
+- H2: 1.5rem
+- Body: 1rem / 1.6
+- Small: 0.875rem
 
 ## Layout
 
-`{{ Jelaskan prinsip spacing dan grid: skala spacing yang dipakai, filosofi whitespace, struktur grid homepage (hero, section kategori, trending, sidebar). Sebutkan jumlah kolom dan breakpoint utama jika spesifik. }}`
+- **Grid:** CSS Grid primary. Max-width containment: 1280px centered with 1.5rem side padding.
+- **Spacing rhythm:** Balanced. Base unit: 0.5rem (8px).
+- **Section vertical gaps:** clamp(4rem, 8vw, 8rem).
+- **Hero layout:** Asymmetric composition.
+- **Feature sections:** Asymmetric grid with varied card sizes. No 3-equal-columns.
+- **Mobile collapse:** All multi-column layouts collapse below 768px. No horizontal overflow.
+- **z-index contract:** base (0) / sticky-nav (100) / overlay (200) / modal (300) / toast (500).
 
 ## Elevation & Depth
 
-`{{ Jelaskan sistem shadow/depth jika ada, hierarki surface. Kosongkan bagian ini dengan catatan "flat design, tidak ada shadow" jika memang tidak digunakan. }}`
+Strong grid system, sans-serif typography (Helvetica), asymmetrical layout, clean lines, focus on negative space, objective photography, no ornamentation, flush left rag right text.
+
+- **Physics:** Ease-out curves, 200-300ms duration. Smooth and predictable.
+- **Entry animations:** Fade + translate-Y (16px → 0) over 420ms ease-out. Staggered cascades for lists: 80ms between items.
+- **Hover states:** Subtle color shift + shadow adjustment over 200ms.
+- **Page transitions:** Fade only (200ms).
+- **Performance:** Only transform and opacity animated. No layout-triggering properties.
 
 ## Shapes
 
-`{{ Jelaskan filosofi rounded corner: tajam/kotak vs membulat, konsistensi radius di card, button, dan image. }}`
+Base corner radius: 8px. 
 
 ## Components
 
-`{{ Jelaskan detail komponen di luar token YAML: state hover/active tombol, gaya card artikel (gambar flush atau padding), gaya input search, dsb. }}`
+- **Primary Button:** Subtly rounded (0.5rem) shape. Accent color fill. Hover: 8% darken + subtle lift shadow. Active: -1px translate tactile press. Font weight 600. No outer glows.
+- **Secondary / Ghost Button:** Outline variant. 1.5px border in muted color. Text in primary color. Hover: subtle background fill.
+- **Cards:** Subtly rounded (0.5rem) corners. Surface background. Subtle shadow (0 2px 12px rgba(0,0,0,0.06)). 1px border stroke.
+- **Inputs:** Label above input. 1px border stroke. Focus ring: 2px accent color offset 2px. Error text below in semantic red. No floating labels.
+- **Navigation:** Primary surface background. Active item: accent color indicator. Font weight 500 when active.
+- **Skeletons:** Shimmer animation matching component dimensions. No circular spinners.
+- **Empty States:** Icon-based composition with descriptive text and action button.
 
 ## Do's and Don'ts
 
-`{{ Tulis guardrail desain yang spesifik: hal yang wajib dan dilarang. Contoh: "Wajib kontras WCAG AA di semua tombol. Jangan pakai lebih dari 2 aksen warna dalam satu halaman." }}`
+- No emojis in UI — use icon system only (Lucide, Heroicons)
+- No decorative gradients — flat color only
+- No shadows heavier than 0 2px 8px rgba(0,0,0,0.08)
+- No pure black (#000000) — use off-black or charcoal variants
+- No oversaturated accent colors (saturation cap: 80%)
+- No 3-column equal-width feature layouts — use zig-zag or asymmetric grid
+- No `h-screen` — use `min-h-[100dvh]`
+- No AI copywriting clichés: "Elevate", "Seamless", "Unleash", "Next-Gen"
+- No broken external image links — use picsum.photos or inline SVG
+- No generic lorem ipsum in demos
+
+- Do Strong grid system
+- Do Sans-serif typography
+- Do Asymmetrical layout
+- Do Clean lines
+- Do Focus on negative space
+- Do Objective photography
