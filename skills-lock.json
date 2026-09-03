@@ -37,6 +37,12 @@
       "skillPath": "skills/antislop-ui/SKILL.md",
       "computedHash": "4be12cb6977075f602c904e7beeaab1e419e578aace1ad42d6ebebfb1dd8cdb0"
     },
+    "seo-article": {
+      "source": "braxtonROSE4/seo-blog-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "6bcca098743b261ea57ed69892d198c8f06c27aaec00b8ba3f9c2d1c740ae0c8"
+    },
     "wordpress-router": {
       "source": "WordPress/agent-skills",
       "sourceType": "github",
