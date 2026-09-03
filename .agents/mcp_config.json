@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "wpvibe": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.wpvibe.ai/mcp"
+      ],
+      "description": "WPVibe WordPress MCP Server - https://wpvibe.ai"
+    }
+  }
+}
