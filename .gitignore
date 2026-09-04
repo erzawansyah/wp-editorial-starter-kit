@@ -1,4 +1,5 @@
 DESIGN.md
+.playwright-mcp/
 SITE.md
 .workspaces/*
 !.workspaces/.gitkeep
