@@ -14,7 +14,7 @@ WordPress (PHP 8.2+), classic theme + Tailwind CSS. Koneksi AI ke situs via WPVi
 
 - **@architect** - baca SITE.md & DESIGN.md, susun rencana struktur & wireframe. Tidak menulis kode.
 - **@content** - generate kategori, halaman statis, logo/favicon, draft artikel awal.
-- **@engineer** - bangun tema classic + Tailwind lewat draft-safe theme builder WPVibe.
+- **@engineer** - bangun tema classic + Tailwind secara lokal di dalam folder workspaces (tanpa WPVibe).
 - **@qa** - audit Lighthouse, broken link, responsivitas sebelum promosi ke produksi.
 
 ## Standard Operating Procedure (SOP)
@@ -36,6 +36,8 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
    - **HARD GATE (VALIDASI KONTEN):** Setelah semua artikel, kategori, tag, halaman statis, dan navigasi menu selesai diunggah, minta Manusia (User) untuk meninjau website secara visual. Karena tema yang aktif adalah GeneratePress, Manusia bisa dengan mudah memastikan seluruh struktur data (konten) sudah benar-benar siap dan masuk ke database. Pengembangan tema kustom **DILARANG** dimulai sebelum ada persetujuan "Konten Siap" dari Manusia.
 
 3. **Fase Tema (@architect -> @engineer):** Hanya boleh dimulai **SETELAH** fase konten selesai dan divalidasi.
+   - **GUARDRAIL SKILLS (UI/UX):** Saat mulai merancang atau membangun UI tema, agen **WAJIB** merujuk dan menerapkan instruksi dari skill desain yang ada di repo (seperti `antislop-ui`, `ui-ux-pro-max`, `baseline-ui`, atau `frontend-design`) untuk memastikan UI yang dihasilkan berkualitas tinggi dan tidak terkesan *slop*.
+   - **GUARDRAIL DESAIN (STRICT DESIGN.md):** `DESIGN.md` adalah **Sumber Kebenaran Mutlak (Single Source of Truth)**. Selama evaluasi desain maupun pembangunan tema, agen **DILARANG KERAS** mengubah isi dokumen `DESIGN.md` yang sudah ditentukan tanpa izin eksplisit dari *user*. Seluruh implementasi harus tunduk pada spesifikasi di dalam dokumen tersebut.
    - **GUARDRAIL TEMA (DINAMIS):** **DILARANG** melakukan *hardcode* HTML statis untuk navigasi, menu, tag, atau pencarian. Semua elemen dinamis wajib langsung disambungkan dengan native WordPress functions (`wp_nav_menu()`, `get_tags()`, `has_custom_logo()`) sejak baris kode pertama. File `functions.php` **wajib** mendeklarasikan `add_theme_support('custom-logo')`.
    - **GUARDRAIL SCREENSHOT:** Apabila tema yang dikembangkan sudah *final*, agen atau manusia **WAJIB** membuat sebuah *screenshot* berukuran 1200x900px dari tampilan website (misal: Homepage) dan menyimpannya sebagai `screenshot.png` (atau `.jpg`) di direktori *root* dari *source code* tema. Ini bertujuan agar tema tersebut terlihat profesional di halaman *dashboard* WordPress (Appearance -> Themes).
    - **GUARDRAIL BUNDLING:** Ketika menjalankan `npm run bundle`, pastikan script zip dikonfigurasi agar meletakkan output `.zip` di luar struktur source tema (di root `.workspaces/`), **jangan campurkan file zip dengan file source tema**.

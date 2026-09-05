@@ -57,9 +57,9 @@ _tw memisahkan **source (build tools)** dari **output (tema WordPress)**:
 ```
 
 > **Aturan penting:**
-> - File PHP di `theme/` → edit langsung via **WPVibe MCP** (atau lokal lalu upload)
-> - File CSS/JS di `theme/` → jangan pernah edit manual, selalu **generate ulang via npm**
-> - `tailwind.css` dan `javascript/` → edit lokal, lalu jalankan npm build
+> - Pengembangan tema dilakukan **SECARA LOKAL** (offline) di dalam folder `.workspaces/`.
+> - **TIDAK PERLU** menggunakan WPVibe untuk mengedit atau membuat file tema (PHP/CSS/JS). Semua proses *coding* dilakukan murni di sistem lokal Anda.
+> - File CSS/JS di `theme/` → jangan pernah edit manual, selalu **generate ulang via npm**.
 
 ---
 
@@ -109,33 +109,23 @@ wp tw generate --name="Nama Tema" --slug="nama-tema"
 
 ---
 
-## Workflow Pengembangan
+## Workflow Pengembangan (LOKAL)
 
-### Edit PHP Templates → via WPVibe (langsung di server)
+Pengembangan tema bersifat lokal. **Jangan gunakan WPVibe** untuk proses penulisan kode PHP atau CSS, kecuali jika Anda butuh melakukan kueri informasi spesifik dari WordPress (seperti struktur data kategori atau ID menu).
 
-File PHP di `theme/` bisa diedit langsung di server via WPVibe. Tidak perlu build step.
+### 1. Edit PHP Templates (Lokal)
 
-```
-Gunakan WPVibe: edit_file atau write_file pada path:
-wp-content/themes/{slug-tema}/header.php
-wp-content/themes/{slug-tema}/footer.php
-wp-content/themes/{slug-tema}/template-parts/...
-dst.
-```
+Buat dan edit seluruh file PHP (header, footer, template-parts, dll.) langsung di direktori lokal `.workspaces/{nama-proyek}/theme-src/theme/`.
 
-### Edit CSS (Tailwind) → lokal + npm build + upload
+### 2. Edit CSS (Tailwind) (Lokal)
 
-1. Edit `tailwind.css` di lokal (`.workspaces/{proyek}/theme-src/tailwind.css`)
+1. Edit `tailwind.css` di lokal (`.workspaces/{nama-proyek}/theme-src/tailwind.css`)
 2. Konfigurasi warna dan font di `tailwind/` sesuai `DESIGN.md`
 3. Build:
    ```bash
    npm run dev     # build sekali
    npm run watch   # watch + auto-rebuild saat development
    ```
-4. Upload hasil build ke server via WPVibe:
-   - `theme/style.css` → upload ke `wp-content/themes/{slug}/style.css`
-   - `theme/style-editor.css` → upload ke `wp-content/themes/{slug}/style-editor.css`
-   - `theme/js/` → upload ke `wp-content/themes/{slug}/js/`
 
 ### Deploy/Bundle ke Server
 
@@ -229,5 +219,5 @@ Jalankan semua perintah ini dari folder `.workspaces/{proyek}/theme-src/`.
 **Dilarang:**
 - Jangan edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
 - Jangan gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS
-- Jangan edit tema aktif di live langsung — semua perubahan PHP via WPVibe draft, CSS via build lokal
+- Jangan edit tema aktif di live langsung — seluruh proses penulisan kode dan pembangunan tema wajib dilakukan secara lokal.
 
