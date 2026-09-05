@@ -26,7 +26,7 @@ _tw memisahkan **source (build tools)** dari **output (tema WordPress)**:
 > Folder `.agents/skills/theme-convention/references/` berisi dokumentasi resmi _tw (Installation, Development, Custom Blocks, dll.) yang bisa Anda baca kapan saja jika butuh panduan mendalam. Menggunakan `view_file` pada file-file tersebut sangat disarankan jika Anda menemui kendala.
 
 ```
-.workspaces/{nama-proyek}/theme-src/   ← clone _tw, ada di lokal saja
+.workspaces/theme-src/   ← clone _tw, ada di lokal saja
 │
 ├── tailwind.css          ← SOURCE: tulis Tailwind custom di sini
 ├── tailwind/             ← konfigurasi Tailwind (config, plugins)
@@ -115,11 +115,11 @@ Pengembangan tema bersifat lokal. **Jangan gunakan WPVibe** untuk proses penulis
 
 ### 1. Edit PHP Templates (Lokal)
 
-Buat dan edit seluruh file PHP (header, footer, template-parts, dll.) langsung di direktori lokal `.workspaces/{nama-proyek}/theme-src/theme/`.
+Buat dan edit seluruh file PHP (header, footer, template-parts, dll.) langsung di direktori lokal `.workspaces/theme-src/theme/`.
 
 ### 2. Edit CSS (Tailwind) (Lokal)
 
-1. Edit `tailwind.css` di lokal (`.workspaces/{nama-proyek}/theme-src/tailwind.css`)
+1. Edit `tailwind.css` di lokal (`.workspaces/theme-src/tailwind.css`)
 2. Konfigurasi warna dan font di `tailwind/` sesuai `DESIGN.md`
 3. Build:
    ```bash
@@ -205,7 +205,7 @@ get_template_part( 'template-parts/post/post-meta', null, [
 | `npm run watch` | Build + watch perubahan otomatis |
 | `npm run bundle` | Build produksi + buat zip siap upload |
 
-Jalankan semua perintah ini dari folder `.workspaces/{proyek}/theme-src/`.
+Jalankan semua perintah ini dari folder `.workspaces/theme-src/`.
 
 ---
 

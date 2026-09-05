@@ -84,12 +84,10 @@ Karena workflow menggunakan metode "Content Hard-Gate", instalasi awal sangat sp
 
 ### B. Source Code Tema Lokal (_tw)
 Siapkan _source code_ `_tw` murni di direktori `.workspaces/` agar AI memiliki bahan baku untuk di-*build* pada Fase Tema nanti.
-Pastikan Anda membuat folder sesuai **slug** proyek Anda (misal `croco`).
 
 ```bash
 # Di root repo starter kit:
-mkdir .workspaces/nama-proyek
-cd .workspaces/nama-proyek
+cd .workspaces
 npx degit gregsullivan/_tw theme-src
 cd theme-src
 npm install
@@ -104,7 +102,7 @@ npm install
 - [ ] WordPress berjalan normal di URL target
 - [ ] WPVibe terkoneksi dan merespons
 - [ ] Tema **GeneratePress** sudah aktif
-- [ ] Folder `.workspaces/nama-proyek/theme-src/` sudah berisi instalasi npm murni
+- [ ] Folder `.workspaces/theme-src/` sudah berisi instalasi npm murni
 - [ ] Folder `.workspaces/assets/` sudah dibuat
 - [ ] `SITE.md` dan `DESIGN.md` sudah terisi (atau panggil `/wpsk-editorial-brainstorm` di chat AI jika butuh ide)
 
