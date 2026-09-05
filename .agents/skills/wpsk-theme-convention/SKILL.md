@@ -100,7 +100,7 @@ wp tw generate --name="Nama Tema" --slug="nama-tema"
 1. Verifikasi tema aktif via WPVibe
 2. Clone atau download source _tw ke lokal untuk build step:
    ```bash
-   # Di dalam .workspaces/{nama-proyek}/
+   # Di dalam direktori .workspaces/
    npx degit gregsullivan/_tw theme-src
    cd theme-src
    npm install

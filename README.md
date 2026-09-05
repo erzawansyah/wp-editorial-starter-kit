@@ -1,4 +1,4 @@
-# Croco - Starter Kit Website Niche Editorial
+# WP Editorial Starter Kit
 
 Starter kit untuk produksi massal website niche blog/editorial berbasis WordPress, dioperasikan oleh AI agent (Antigravity) yang terhubung ke WordPress di server remote melalui WPVibe MCP.
 

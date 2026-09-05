@@ -9,10 +9,10 @@ Jika salah satu field di bagian **Identitas** di bawah ini masih berupa placehol
 ## Identitas
 
 **Nama Situs:**
-`{{ Contoh: Croco Editorial }}`
+`{{ Contoh: Nama Website Anda }}`
 
 **URL Target (Production/Staging):**
-`{{ Contoh: https://croco.likrea.biz.id }}`
+`{{ Contoh: https://example.com }}`
 
 **Niche Utama (Topik & Konteks Singkat):**
 `{{ Contoh: Blog niche editorial dan gaya hidup, berfokus pada ulasan desain, arsitektur, dan tipografi }}`

@@ -32,7 +32,9 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
      - Agen **WAJIB** me-rename nama tema kustom di `package.json` dan `file-header.css` sesuai dengan nama situs di `SITE.md`. Jangan gunakan nama boilerplate `_tw`.
 
 2. **Fase Konten (@content):** 
+   - **GUARDRAIL PENULISAN (SEO):** Saat membuat draf artikel atau *copywriting* halaman statis, agen **WAJIB** merujuk pada instruksi dari skill `seo-article` untuk memastikan tulisan memiliki standar SEO yang tinggi, kaya akan data riset, dan tidak terdengar seperti konten AI generik (*slop*).
    - **GUARDRAIL KONTEN:** **DILARANG KERAS** membuat konten *dummy* hanya dalam bentuk file lokal/teks. Agen **WAJIB** menggunakan WPVibe MCP (REST API atau WP-CLI) untuk menginjeksi artikel SEO final, halaman statis (Tentang Kami, dll), dan struktur kategori **langsung** ke database server remote.
+   - **GUARDRAIL FORMAT (GUTENBERG & MEDIA):** Seluruh artikel dan halaman yang diunggah **WAJIB** diformat menggunakan struktur sintaks *Gutenberg Blocks* murni (agen dapat merujuk pada panduan sintaksis blok di dalam skill `wp-patterns`), **DILARANG KERAS** menggunakan HTML mentah (*classic block*). Selain itu, agen **WAJIB** meng-generate *Featured Image* dan menetapkannya (set *post thumbnail*) untuk setiap artikel yang dipublikasikan.
    - **HARD GATE (VALIDASI KONTEN):** Setelah semua artikel, kategori, tag, halaman statis, dan navigasi menu selesai diunggah, minta Manusia (User) untuk meninjau website secara visual. Karena tema yang aktif adalah GeneratePress, Manusia bisa dengan mudah memastikan seluruh struktur data (konten) sudah benar-benar siap dan masuk ke database. Pengembangan tema kustom **DILARANG** dimulai sebelum ada persetujuan "Konten Siap" dari Manusia.
 
 3. **Fase Tema (@architect -> @engineer):** Hanya boleh dimulai **SETELAH** fase konten selesai dan divalidasi.
@@ -49,10 +51,18 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 
 ## Workspace
 
-Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, output proses) **wajib disimpan di dalam folder `.workspaces/`** di root repo.
+Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, output proses) **wajib disimpan di dalam folder `.workspaces/`** di root repo dengan struktur yang rapi dan terorganisir:
+
 - **`.workspaces/assets/`**: Direktori wajib untuk logo, ilustrasi, dummy thumbnail, dan aset visual lainnya.
-- **`.workspaces/THEME_SPECS.md`**: Dokumen handover teknis tema saat ini.
-- Jangan membuat file baru di luar `.workspaces/` kecuali file tersebut dimaksudkan untuk update repo inti.
+- **`.workspaces/theme-src/`**: Direktori eksklusif untuk *source code* pengembangan tema (PHP, CSS, JS, `package.json`).
+- **`.workspaces/scripts/`**: Tempat menyimpan seluruh skrip eksekusi sementara atau *tools automation* (misal `.js`, `.py`, `.sh`) yang dibuat oleh agen untuk mempermudah pekerjaan.
+- **`.workspaces/temp/`**: Tempat menyimpan file temporer (*scratch file*, draf tulisan mentah, log *error*, atau *dump* JSON) yang tidak perlu dipertahankan di akhir proyek.
+- **`.workspaces/THEME_SPECS.md`**: Dokumen penting serah terima (*handover*) teknis tema.
+- **`.workspaces/PROGRESS.md`**: Dokumen penting pelacakan progres proyek.
+
+**Aturan Ketat Folder Workspace:**
+- **DILARANG KERAS** menumpuk file campuran (draf konten, log, skrip) langsung di *root* `.workspaces/`. Agen **WAJIB** mengelompokkannya ke dalam sub-folder yang sesuai (`/scripts`, `/temp`, `/assets`, atau `/theme-src`).
+- **DILARANG** membuat file baru di luar `.workspaces/` kecuali file tersebut secara spesifik dimaksudkan untuk meng-*update* aturan *core template* dari repositori *Starter Kit* ini (misalnya `AGENTS.md` atau `README.md`).
 
 ## Conventions
 
@@ -82,6 +92,13 @@ Kategori & halaman statis terisi (via DB), draft tema disetujui (dinamis & respo
 ## Changelog
 
 Catat setiap pekerjaan yang selesai di repo ini. Entri terbaru di atas.
+
+### `02. 2026-09-05`
+
+- **Generic Rebranding:** Menghapus seluruh referensi spesifik "Croco" untuk menjadikannya *starter kit* netral.
+- **Strict Local Theme:** Menegaskan pengembangan tema secara luring di folder `.workspaces/theme-src/` tanpa memodifikasi *live site* via WPVibe.
+- **Workspace Architecture:** Merapikan dan meratakan (*flatten*) struktur folder `.workspaces/` dengan sub-direktori spesifik (`/temp`, `/scripts`, `/assets`) untuk mencegah penumpukan file.
+- **Content Guardrails:** Mewajibkan penggunaan skill `seo-article` untuk standar SEO, serta `wp-patterns` untuk memastikan seluruh unggahan artikel menggunakan sintaks murni *Gutenberg Blocks* berikut *Featured Image*.
 
 ### `01. 2026-09-03`
 
