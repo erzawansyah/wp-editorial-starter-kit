@@ -1,47 +1,61 @@
 ---
-# Skill: Theme Convention
 name: wpsk-theme-convention
 description: >
-  Konvensi pengembangan tema berbasis _tw (underscore-tw) — WordPress starter
-  theme dengan Tailwind CSS. Gunakan saat fase tema dimulai (@engineer).
+  Konvensi pengembangan tema berbasis _tw (underscore-tw) — WordPress classic
+  starter theme dengan Tailwind CSS. Gunakan saat fase tema dimulai (@engineer).
   Semua keputusan struktur mengacu ke dokumen ini.
 ---
 
 # Theme Convention — Berbasis _tw
 
+> **BACA INI SEBELUM MENYENTUH SATU BARIS PUN KODE TEMA.**
+> Skill ini adalah satu-satunya referensi teknis untuk fase pengembangan tema. Prioritasnya di bawah `AGENTS.md` — jika ada konflik, `AGENTS.md` menang. Jika ada konflik antara skill ini dengan instruksi ad hoc dari percakapan, skill ini menang.
+
+---
+
+## Prasyarat Wajib Sebelum Memulai
+
+Sebelum menulis satu baris kode pun, verifikasi dua kondisi ini:
+
+**1. Hard-Gate Konten Sudah Dilewati:**
+Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: Konten disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Kembali ke fase konten.
+
+**2. DESIGN.md Sudah Terisi Penuh:**
+Buka `DESIGN.md`. Tidak boleh ada satu pun field yang masih berupa placeholder `{{ }}`. Jika masih ada, **BERHENTI** dan tanyakan ke user.
+
+---
+
 ## Stack
 
 - **Base Theme:** [_tw](https://underscoretw.com/) — WordPress classic starter theme + Tailwind CSS
-- **Build Tool:** PostCSS (Tailwind) + esbuild (JS), dijalankan lokal via npm
+- **Build Tool:** PostCSS (Tailwind v4) + esbuild (JS), dijalankan **LOKAL** via npm
 - **PHP:** 8.2+, Classic Theme (bukan Block Theme / FSE)
 - **Node.js & npm:** wajib ada di mesin lokal operator
 
 ---
 
-## Arsitektur _tw: Dua Lapisan
+## Arsitektur _tw: Source vs Output
 
-_tw memisahkan **source (build tools)** dari **output (tema WordPress)**:
-
-> **Dokumentasi Referensi:**
-> Folder `.agents/skills/theme-convention/references/` berisi dokumentasi resmi _tw (Installation, Development, Custom Blocks, dll.) yang bisa Anda baca kapan saja jika butuh panduan mendalam. Menggunakan `view_file` pada file-file tersebut sangat disarankan jika Anda menemui kendala.
+_tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang di-generate)**. Memahami perbedaan ini adalah aturan pertama:
 
 ```
-.workspaces/theme-src/   ← clone _tw, ada di lokal saja
+.workspaces/theme-src/          ← ROOT SOURCE (clone _tw, ada di lokal saja)
 │
-├── tailwind.css          ← SOURCE: tulis Tailwind custom di sini
-├── tailwind/             ← konfigurasi Tailwind (config, plugins)
+├── tailwind.css                ← EDIT DI SINI: custom Tailwind (warna, font dari DESIGN.md)
+├── tailwind/                   ← konfigurasi Tailwind (config, plugins)
 ├── javascript/
-│   ├── script.js         ← SOURCE: JS frontend
-│   └── block-editor.js   ← SOURCE: JS untuk WP editor
+│   ├── script.js               ← EDIT DI SINI: JS frontend
+│   └── block-editor.js         ← EDIT DI SINI: JS untuk WP editor
 ├── postcss.config.js
-├── package.json          ← npm scripts (dev, watch, bundle)
+├── package.json                ← npm scripts (dev, watch, bundle)
 │
-└── theme/                ← OUTPUT: folder tema yang masuk ke WordPress
-    ├── style.css         ← GENERATED — jangan edit manual
-    ├── style-editor.css  ← GENERATED
-    ├── functions.php     ← edit langsung via WPVibe atau lokal
+└── theme/                      ← OUTPUT TEMA (folder ini yang masuk ke WordPress)
+    ├── style.css               ← GENERATED — jangan pernah edit manual
+    ├── style-editor.css        ← GENERATED — jangan pernah edit manual
+    ├── functions.php           ← EDIT LANGSUNG (deklarasi support, enqueue, dll.)
     ├── header.php
     ├── footer.php
+    ├── front-page.php          ← template homepage (buat jika belum ada)
     ├── index.php
     ├── single.php
     ├── page.php
@@ -50,174 +64,291 @@ _tw memisahkan **source (build tools)** dari **output (tema WordPress)**:
     ├── 404.php
     ├── comments.php
     ├── theme.json
-    ├── inc/              ← PHP helpers, includes
-    ├── js/               ← GENERATED — jangan edit manual
+    ├── inc/                    ← PHP helpers, custom functions
+    ├── js/                     ← GENERATED — jangan pernah edit manual
     ├── languages/
-    └── template-parts/   ← buat subfolder di sini sesuai kebutuhan
+    └── template-parts/         ← EDIT LANGSUNG: buat subfolder sesuai kebutuhan
 ```
 
-> **Aturan penting:**
-> - Pengembangan tema dilakukan **SECARA LOKAL** (offline) di dalam folder `.workspaces/`.
-> - **TIDAK PERLU** menggunakan WPVibe untuk mengedit atau membuat file tema (PHP/CSS/JS). Semua proses *coding* dilakukan murni di sistem lokal Anda.
-> - File CSS/JS di `theme/` → jangan pernah edit manual, selalu **generate ulang via npm**.
+> **Aturan Paling Kritis:**
+> - File `theme/style.css` dan `theme/js/` adalah **output** dari proses build npm. **JANGAN PERNAH EDIT SECARA MANUAL** — akan ditimpa setiap kali `npm run dev` dijalankan.
+> - **JANGAN GUNAKAN TAILWIND CDN** (`<script src="https://cdn.tailwindcss.com">`). _tw menggunakan build pipeline PostCSS. CDN Tailwind akan menghasilkan CSS yang tidak ter-purge dan tidak konsisten.
 
 ---
 
-## Langkah 0: Cek Instalasi _tw di WordPress
+## Prosedur Inisialisasi Tema (Jika Belum Ada)
 
-**Wajib dilakukan sebelum mulai apapun.** Gunakan WPVibe untuk memverifikasi:
+Seluruh proses ini dilakukan **secara lokal**. Tidak ada langkah yang melibatkan WPVibe atau server remote.
 
-```
-Via WPVibe rest_api:
-GET /wp-json/wp/v2/themes?status=active
-```
+### Langkah 1: Generate Tema via underscoretw.com
 
-Atau: `list_files` di direktori `wp-content/themes/` dan cari tema berbasis _tw.
+1. Buka [https://underscoretw.com/](https://underscoretw.com/)
+2. Isi **Theme Name** dengan nama situs dari `SITE.md` (contoh: `Rumah Desain`)
+3. Isi **Theme Slug** dengan slug situs dari `SITE.md` (contoh: `rumah-desain`)
+4. Download zip hasil generate
+5. Ekstrak zip tersebut ke `.workspaces/theme-src/`
 
-**Jika _tw belum terinstall** → ikuti prosedur instalasi di bawah. Jangan lanjut ke pengembangan sebelum tema terinstall dan aktif.
-
----
-
-## Prosedur Instalasi _tw (jika belum ada)
-
-### Opsi A: Via Web Generator (Rekomendasi)
-
-1. Buka https://underscoretw.com/
-2. Isi nama tema (gunakan slug dari `SITE.md`, misalnya `berita-foodies`)
-3. Download zip hasil generate
-4. Upload ke WordPress: **wp-admin → Appearance → Themes → Add New → Upload Theme**
-5. Aktifkan tema tersebut
-
-### Opsi B: Via WP-CLI (jika server punya WP-CLI)
+### Langkah 2: Install Dependencies
 
 ```bash
-wp package install gregsullivan/wp-cli-tw
-wp tw generate --name="Nama Tema" --slug="nama-tema"
+# Jalankan dari root .workspaces/theme-src/
+cd .workspaces/theme-src
+npm install
 ```
 
-### Setelah Instalasi
-
-1. Verifikasi tema aktif via WPVibe
-2. Clone atau download source _tw ke lokal untuk build step:
-   ```bash
-   # Di dalam direktori .workspaces/
-   npx degit gregsullivan/_tw theme-src
-   cd theme-src
-   npm install
-   ```
-3. Sesuaikan `theme/style.css` (header tema) dengan nama proyek
-
----
-
-## Workflow Pengembangan (LOKAL)
-
-Pengembangan tema bersifat lokal. **Jangan gunakan WPVibe** untuk proses penulisan kode PHP atau CSS, kecuali jika Anda butuh melakukan kueri informasi spesifik dari WordPress (seperti struktur data kategori atau ID menu).
-
-### 1. Edit PHP Templates (Lokal)
-
-Buat dan edit seluruh file PHP (header, footer, template-parts, dll.) langsung di direktori lokal `.workspaces/theme-src/theme/`.
-
-### 2. Edit CSS (Tailwind) (Lokal)
-
-1. Edit `tailwind.css` di lokal (`.workspaces/theme-src/tailwind.css`)
-2. Konfigurasi warna dan font di `tailwind/` sesuai `DESIGN.md`
-3. Build:
-   ```bash
-   npm run dev     # build sekali
-   npm run watch   # watch + auto-rebuild saat development
-   ```
-
-### Deploy/Bundle ke Server
+### Langkah 3: Verifikasi Build Berjalan
 
 ```bash
-npm run bundle   # menghasilkan zip siap upload
+npm run dev
 ```
 
-Upload zip via wp-admin → Appearance → Themes → Upload, atau via WPVibe file management.
+Jika sukses, file `theme/style.css` akan ter-generate. Jika gagal, cek `package.json` dan pastikan Node.js >= 18.
+
+### Langkah 4: Rename Header Tema
+
+Buka `theme/style.css` dan ubah baris:
+```css
+Theme Name: _tw
+```
+Menjadi nama tema sesuai `SITE.md`. **Langkah ini wajib** sebelum langkah apapun lainnya.
 
 ---
 
 ## Konfigurasi Tailwind dari DESIGN.md
 
-Baca nilai dari `DESIGN.md` (front matter YAML), lalu terapkan ke `tailwind.css`:
+**Wajib dibaca lebih dulu:** Buka `DESIGN.md`, catat nilai warna, font, dan spacing. Kemudian terapkan ke `tailwind.css`:
 
 ```css
-/* tailwind.css — contoh konfigurasi dari DESIGN.md */
+/* .workspaces/theme-src/tailwind.css */
 @import "tailwindcss";
 
 @theme {
-  /* Colors dari DESIGN.md */
-  --color-primary: #D94F3D;
+  /* Warna — ambil PERSIS dari DESIGN.md, bukan tebakan */
+  --color-primary:   #D94F3D;   /* contoh: ganti dengan nilai di DESIGN.md */
   --color-secondary: #1A1A2E;
-  --color-tertiary: #F4A823;
-  --color-neutral: #F7F5F2;
+  --color-accent:    #F4A823;
+  --color-neutral:   #F7F5F2;
+  --color-text:      #1A1A1A;
 
-  /* Typography dari DESIGN.md */
+  /* Tipografi — ambil nama font dari DESIGN.md */
   --font-heading: "Playfair Display", serif;
-  --font-body: "Inter", sans-serif;
-
-  /* Spacing dari DESIGN.md */
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 32px;
+  --font-body:    "Inter", sans-serif;
 }
 ```
 
-> Nilai di atas hanya contoh. Selalu ambil dari `DESIGN.md` proyek yang sedang dikerjakan.
+> **INGAT:** Nilai di atas adalah contoh. Selalu ambil nilai sesungguhnya dari `DESIGN.md` proyek yang sedang dikerjakan. Jangan pernah gunakan warna default Tailwind atau nilai inventif AI.
 
 ---
 
-## Template Parts — Struktur yang Perlu Dibuat
+## functions.php — Deklarasi Wajib
 
-_tw menyediakan `template-parts/` kosong. Buat subfolder sesuai kebutuhan editorial:
+`functions.php` **wajib** mengandung deklarasi-deklarasi berikut. Tambahkan jika belum ada:
+
+```php
+<?php
+function nama_tema_setup() {
+    // Navigasi: daftarkan semua lokasi menu
+    register_nav_menus( [
+        'primary' => __( 'Menu Utama', 'nama-tema' ),
+        'footer'  => __( 'Menu Footer', 'nama-tema' ),
+    ] );
+
+    // Custom Logo: WAJIB ada untuk wp_nav_menu dan has_custom_logo()
+    add_theme_support( 'custom-logo', [
+        'height'      => 60,
+        'width'       => 200,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ] );
+
+    // Post Thumbnails: untuk featured image artikel
+    add_theme_support( 'post-thumbnails' );
+
+    // HTML5 support
+    add_theme_support( 'html5', [
+        'search-form', 'comment-form', 'comment-list', 'gallery', 'caption',
+    ] );
+
+    // Title tag
+    add_theme_support( 'title-tag' );
+}
+add_action( 'after_setup_theme', 'nama_tema_setup' );
+```
+
+---
+
+## Aturan Elemen Dinamis (Tidak Boleh Dilanggar)
+
+Ini adalah aturan paling sering dilanggar AI. **Tidak ada pengecualian.**
+
+### ✅ Navigasi — Selalu `wp_nav_menu()`
+
+```php
+<!-- header.php: BENAR -->
+<?php wp_nav_menu( [
+    'theme_location' => 'primary',
+    'menu_class'     => 'flex gap-6 items-center',
+    'container'      => false,
+] ); ?>
+
+<!-- DILARANG: hardcode HTML statis seperti ini -->
+<!-- <ul><li><a href="/tentang">Tentang</a></li></ul> -->
+```
+
+### ✅ Logo — Selalu `the_custom_logo()`
+
+```php
+<!-- header.php: BENAR -->
+<?php if ( has_custom_logo() ) : ?>
+    <?php the_custom_logo(); ?>
+<?php else : ?>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-heading font-bold text-xl">
+        <?php bloginfo( 'name' ); ?>
+    </a>
+<?php endif; ?>
+
+<!-- DILARANG: hardcode img tag -->
+<!-- <img src="/wp-content/uploads/logo.png" alt="Logo"> -->
+```
+
+### ✅ Query Artikel — Selalu WP_Query atau get_posts()
+
+```php
+<!-- section-category.php: BENAR -->
+<?php
+$args = [
+    'post_type'      => 'post',
+    'posts_per_page' => 6,
+    'category_name'  => $category_slug, // dinamis dari parameter
+];
+$query = new WP_Query( $args );
+if ( $query->have_posts() ) :
+    while ( $query->have_posts() ) : $query->the_post();
+        get_template_part( 'template-parts/content/content-card' );
+    endwhile;
+    wp_reset_postdata();
+endif;
+?>
+```
+
+### ✅ Kategori & Tag — Selalu fungsi WordPress
+
+```php
+<!-- Daftar kategori: BENAR -->
+<?php $categories = get_categories( [ 'hide_empty' => true ] ); ?>
+<?php foreach ( $categories as $cat ) : ?>
+    <a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>">
+        <?php echo esc_html( $cat->name ); ?>
+    </a>
+<?php endforeach; ?>
+```
+
+### ✅ Search Form — Selalu `get_search_form()`
+
+```php
+<?php get_search_form(); ?>
+```
+
+---
+
+## Struktur Template Parts Wajib
+
+_tw menyediakan `template-parts/` kosong. Buat subfolder berikut dari awal:
 
 ```
 theme/template-parts/
 ├── content/
-│   ├── content.php           ← loop artikel standar
-│   └── content-none.php      ← jika tidak ada hasil
+│   ├── content-card.php        ← card artikel untuk loop (homepage, archive, search)
+│   ├── content-single.php      ← konten artikel single post
+│   └── content-none.php        ← jika tidak ada hasil query
 ├── homepage/
-│   ├── hero-grid.php         ← blok hero headline
-│   ├── section-category.php  ← blok artikel per kategori (reusable)
-│   └── section-trending.php  ← blok trending
-└── post/
-    ├── post-meta.php         ← byline: penulis, tanggal, kategori
-    └── post-thumbnail.php    ← wrapper thumbnail
+│   ├── hero-grid.php           ← blok hero headline (artikel utama featured)
+│   ├── section-category.php    ← blok artikel per kategori (reusable, terima $args)
+│   └── section-trending.php    ← blok trending/populer
+├── post/
+│   ├── post-meta.php           ← byline: penulis, tanggal, kategori, reading time
+│   └── post-thumbnail.php      ← wrapper featured image
+└── global/
+    ├── site-branding.php       ← logo + nama situs
+    └── social-links.php        ← ikon sosial media (opsional)
 ```
 
-Panggil via:
+Cara memanggil template parts:
+
 ```php
+// Panggil tanpa variabel
 get_template_part( 'template-parts/homepage/hero-grid' );
 
-// Dengan variabel (WP 5.5+)
-get_template_part( 'template-parts/post/post-meta', null, [
-    'show_author' => true,
+// Panggil dengan variabel (WP 5.5+)
+get_template_part( 'template-parts/homepage/section-category', null, [
+    'category_slug' => 'teknologi',
+    'title'         => 'Teknologi',
+    'post_count'    => 4,
 ] );
 ```
 
 ---
 
-## npm Scripts Referensi
+## npm Scripts
 
-| Script | Fungsi |
+Jalankan semua perintah dari folder `.workspaces/theme-src/`:
+
+| Script | Kapan Digunakan |
 |---|---|
-| `npm run dev` | Build sekali (development, tidak di-minify) |
-| `npm run watch` | Build + watch perubahan otomatis |
-| `npm run bundle` | Build produksi + buat zip siap upload |
+| `npm run dev` | Build sekali saat ingin melihat hasil perubahan |
+| `npm run watch` | Build + watch otomatis saat aktif coding (gunakan ini selama development) |
+| `npm run bundle` | Build produksi + buat zip siap upload — **jalankan di akhir saja** |
 
-Jalankan semua perintah ini dari folder `.workspaces/theme-src/`.
+> **Guardrail Bundling:** Output zip dari `npm run bundle` **wajib** berada di root `.workspaces/`, **bukan** di dalam folder `theme-src/`. Pastikan `package.json` sudah dikonfigurasi dengan benar untuk ini.
 
 ---
 
-## Do's and Don'ts
+## Checklist Fase Tema (Wajib Semua ✅ Sebelum Bundle)
 
-**Wajib:**
-- Selalu cek instalasi _tw via WPVibe sebelum mulai fase tema
-- Semua nilai warna dan font di Tailwind harus diambil dari `DESIGN.md`, bukan hardcode
-- Escape semua output di PHP (`esc_html()`, `esc_url()`, `wp_kses_post()`)
+Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenuhi:
 
-**Dilarang:**
-- Jangan edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
-- Jangan gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS
-- Jangan edit tema aktif di live langsung — seluruh proses penulisan kode dan pembangunan tema wajib dilakukan secara lokal.
+### Prasyarat & Konfigurasi
+- [ ] `DESIGN.md` sudah dibaca dan tidak ada field `{{ }}` yang tersisa
+- [ ] Nama tema di `theme/style.css` sudah diubah dari `_tw` ke nama situs dari `SITE.md`
+- [ ] `functions.php` mendeklarasikan `add_theme_support('custom-logo')`, `register_nav_menus()`, dan `add_theme_support('post-thumbnails')`
+- [ ] Semua nilai warna & font di `tailwind.css` sudah diambil dari `DESIGN.md`
+- [ ] `npm run dev` berhasil dijalankan tanpa error
 
+### Template & Elemen Dinamis
+- [ ] **Tidak ada** link navigasi yang di-hardcode — semua memakai `wp_nav_menu()`
+- [ ] **Tidak ada** `<img src="...">` hardcode untuk logo — semua memakai `the_custom_logo()`
+- [ ] **Tidak ada** query artikel yang hardcode ID atau slug — semua memakai `WP_Query`
+- [ ] Template parts sudah terpisah rapi di subfolder yang benar
+- [ ] `front-page.php` atau `home.php` sudah dibuat dan memanggil template parts homepage
+
+### Kualitas & Kepatuhan Desain
+- [ ] Skill `antislop-ui` sudah dibaca dan checklist-nya dilalui
+- [ ] Tidak ada gradien default AI (biru-ungu, biru-cyan) yang tidak ada di `DESIGN.md`
+- [ ] Tidak ada Tailwind CDN yang disuntikkan di `header.php` atau `functions.php`
+- [ ] Semua output PHP sudah di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
+- [ ] Tampilan sudah diuji pada viewport mobile (375px) dan desktop (1280px)
+
+### Finalisasi
+- [ ] Screenshot 1200x900px homepage sudah dibuat dan disimpan sebagai `theme/screenshot.png`
+- [ ] `npm run bundle` sudah dijalankan dan file `.zip` ada di root `.workspaces/`
+- [ ] File `.zip` **tidak** ada di dalam folder `theme-src/`
+- [ ] `.workspaces/THEME_SPECS.md` sudah digenerate
+- [ ] `.workspaces/PROGRESS.md` sudah diupdate dengan status "Fase Tema: SELESAI"
+
+---
+
+## Do's and Don'ts — Ringkasan
+
+**WAJIB:**
+- Baca `DESIGN.md` sebelum menulis satu token Tailwind pun
+- Semua elemen dinamis (menu, logo, query, search) wajib pakai fungsi native WordPress sejak baris pertama
+- Escape semua output PHP (`esc_html()`, `esc_url()`, `wp_kses_post()`)
+- Jalankan `npm run dev` setelah setiap perubahan CSS untuk verifikasi
+
+**DILARANG:**
+- Edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
+- Gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS lokal
+- Hardcode teks navigasi, URL logo, atau ID artikel dalam PHP
+- Edit tema di live server via WPVibe — seluruh coding tema dilakukan **lokal**
+- Mulai coding tema sebelum Hard-Gate Konten disetujui user
+- Menaruh file zip output di dalam folder `theme-src/`
