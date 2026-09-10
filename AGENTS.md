@@ -12,6 +12,10 @@ WordPress (PHP 8.2+), classic theme + Tailwind CSS. Manajemen konten via WordPre
 
 ## Agents
 
+- **@architect** - baca `SITE.md` & `DESIGN.md`, susun PRD di `PRODUCT.md` (daftar template & wireframe mendalam terutama frontpage dan single artikel). Tidak menulis kode tema.
+- **@engineer** - bangun tema classic + Tailwind secara lokal di `.workspaces/theme-src/` mengacu pada `PRODUCT.md` dan `DESIGN.md`. Menyerahkan bundle ZIP tema di root `.workspaces/` setiap ada perubahan tema.
+- **@content** - kelola konten via WP REST API: buat 3–5 user author, taksonomi, halaman statis, serta memimpin penulisan artikel SEO Gutenberg secara paralel melalui subagent (menggunakan skill `wpsk-seo-writer`).
+- **@qa** - audit Lighthouse, broken link, responsivitas sebelum promosi ke produksi.
 - **@architect** - baca `SITE.md` & `DESIGN.md`, susun PRD di `PRODUCT.md` (daftar template & wireframe mendalam terutama frontpage dan single artikel). Mengacu pada `frontend-design` dan `wpsk-theme-convention`. Tidak menulis kode tema.
 - **@engineer** - bangun tema classic + Tailwind secara lokal di `.workspaces/theme-src/` mengacu pada `PRODUCT.md`, `DESIGN.md`, dan panduan teknis `wpsk-theme-convention`. Menyerahkan bundle ZIP tema di root `.workspaces/` setiap ada perubahan tema.
 - **@content** - kelola konten via WP REST API: buat 3–5 user author, taksonomi, halaman statis (`wp-patterns`), serta memimpin penulisan artikel SEO Gutenberg secara paralel melalui subagent (menggunakan skill `wpsk-seo-writer`).
@@ -36,6 +40,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 
 ### Fase 1: Setup & Environment (Manusia & Agen)
 
+Clone repo ini, buat file `.env` dari `.env.example`, isi `SITE.md` & `DESIGN.md`. _(Catatan: Panggil skill `wpsk-editorial-brainstorm` jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol)._
 Clone repo ini, buat file `.env` dari `.env.example`, isi `SITE.md` & `DESIGN.md`.
 *(Skill terkait: Gunakan **`wpsk-editorial-brainstorm`** jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol; gunakan **`wp-wpcli-and-ops`** untuk task operasional server/database awal jika diperlukan).*
 
@@ -69,6 +74,7 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 ### Fase 3: Pengembangan Tema (@engineer)
 
 > **FASE INI HANYA BOLEH DIMULAI SETELAH:**
+>
 > 1. Baris "HARD GATE: PRD disetujui" sudah tertulis di `.workspaces/PROGRESS.md`
 > 2. `DESIGN.md` dan `PRODUCT.md` sudah final dan lengkap
 
@@ -76,6 +82,10 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 
 **GUARDRAIL SKILLS (UI/UX):** Saat mulai merancang atau membangun UI tema, agen **WAJIB** membaca dan menerapkan instruksi dari empat skill berikut secara berurutan:
 
+1. `antislop-ui` — filter utama anti-slop visual
+2. `antislop-human` — aksesibilitas dan kontras warna
+3. `antislop-layoutmobile` — responsivitas dan layout mobile
+4. `frontend-design` — art direction dan tipografi editorial yang distinctive
 1. **`antislop-ui`** — filter utama anti-slop visual (komponen, kartu, bayangan, tombol).
 2. **`antislop-human`** — aksesibilitas, kontras warna WCAG, dan navigasi keyboard.
 3. **`antislop-layoutmobile`** — responsivitas, reflow grid, tap target 44px, dan anti-overflow.
@@ -86,6 +96,7 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 **GUARDRAIL DESAIN & PRD:** `DESIGN.md` dan `PRODUCT.md` adalah **Sumber Kebenaran Mutlak**. Agen **DILARANG KERAS** mengubah spesifikasi tata letak atau token desain tanpa izin eksplisit dari user.
 
 **GUARDRAIL TEMA (DINAMIS — TIDAK ADA PENGECUALIAN):**
+
 - **DILARANG** hardcode HTML statis untuk navigasi → wajib `wp_nav_menu()`
 - **DILARANG** hardcode `<img>` untuk logo → wajib `the_custom_logo()`
 - **DILARANG** hardcode ID/slug artikel → wajib `WP_Query`
@@ -94,6 +105,7 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 - `functions.php` **wajib** mendeklarasikan `add_theme_support('custom-logo')`, `add_theme_support('post-thumbnails')`, dan `register_nav_menus()`
 
 **GUARDRAIL BUILD & BUNDLING:**
+
 - Semua coding tema dilakukan **secara lokal** di `.workspaces/theme-src/`.
 - **JANGAN EDIT MANUAL** file `theme/style.css` atau `theme/js/` — ini adalah output build.
 - Jalankan `npm run dev` setelah setiap batch perubahan untuk verifikasi.
@@ -107,18 +119,24 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 ### Fase 4: Manajemen Penulis & Konten (@content)
 
 **GUARDRAIL WP REST API:**
+
 - Seluruh manajemen konten (pembuatan user, kategori, tag, halaman statis, dan artikel) **WAJIB** menggunakan **WordPress REST API** dengan autentikasi Application Password dari `.env`.
 - Dilarang menggunakan WPVibe untuk pembuatan/pengunggahan konten teks dan data database.
 - WPVibe MCP diizinkan **hanya untuk operasi yang tidak didukung REST API**, seperti mencari aset gambar via `search_images`.
 
 **GUARDRAIL AUTHOR (MULTI-USER):**
+
 - Sebelum menulis artikel apa pun, agen **WAJIB** membuat **3–5 user dengan role `author`** via REST API (`POST /wp-json/wp/v2/users`).
 - Format email untuk setiap author **WAJIB**: `<username>@<site.com>` (Contoh: untuk domain `qloov.com` dengan username `rodi`, emailnya adalah `rodi@qloov.com`).
 - **DILARANG KERAS** mempublikasikan artikel menggunakan akun `admin`. Seluruh artikel wajib diatribusikan ke salah satu dari author yang telah dibuat sebelumnya secara bergantian (rotasi merata).
 
 **GUARDRAIL PENULISAN PARALEL VIA SUBAGENTS:**
+
 - Proses penulisan artikel **WAJIB dilakukan secara paralel melalui subagents**.
 - Agen utama mendefinisikan/memanggil beberapa subagent `@content` sekaligus, masing-masing bertugas menuntaskan satu artikel lengkap:
+  - Merujuk pada panduan skill `wpsk-seo-writer` untuk standar editorial tinggi, anti-slop bahasa Indonesia, zero fluff, dan optimasi GEO/AEO.
+  - Memformat isi artikel menggunakan sintaks _Gutenberg Blocks_ murni (`wp-patterns`). Dilarang menggunakan classic block/HTML mentah.
+  - Menyiapkan _Featured Image_ (dapat menggunakan WPVibe `search_images` untuk mencari referensi visual), mengunggahnya ke Media Library via REST API, dan menetapkannya sebagai post thumbnail.
   - Merujuk pada panduan skill **`wpsk-seo-writer`** untuk standar editorial tinggi, anti-slop bahasa Indonesia, zero fluff, dan optimasi GEO/AEO.
   - Memformat isi artikel menggunakan sintaks *Gutenberg Blocks* murni merujuk pada skill **`wp-patterns`**. Dilarang menggunakan classic block/HTML mentah.
   - Menyiapkan *Featured Image* (dapat menggunakan WPVibe `search_images` untuk mencari referensi visual), mengunggahnya ke Media Library via REST API, dan menetapkannya sebagai post thumbnail.
@@ -128,6 +146,7 @@ Sebelum proses pembuatan tema dimulai, agen `@architect` **WAJIB** menyusun doku
 
 ### Fase 5: QA (@qa)
 
+Audit Lighthouse >=80 (performa & SEO), broken link check, uji responsivitas di mobile (375px), tablet (768px), desktop (1280px).
 Audit menyeluruh sebelum promosi situs:
 - **Performa Backend:** Menggunakan skill **`wp-performance`** untuk profiling query SQL berat, pembersihan autoload options, dan evaluasi cache database.
 - **Aksesibilitas & Kontras:** Menggunakan skill **`antislop-human`** untuk validasi kontras warna teks (WCAG AA/AAA min 4.5:1) dan navigasi keyboard (`focus-visible`).
@@ -155,6 +174,7 @@ Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, o
 - **`.workspaces/PROGRESS.md`** — dokumen pelacakan progres proyek (real-time).
 
 **Aturan Ketat:**
+
 - **DILARANG KERAS** menumpuk file campuran langsung di root `.workspaces/`. Kelompokkan ke subfolder yang tepat.
 - **DILARANG** membuat file baru di luar `.workspaces/` kecuali untuk mengupdate template inti (`AGENTS.md`, `README.md`, `.gitignore`, `.env.example`, atau file example) serta skill di `.agents/skills/`.
 
@@ -162,10 +182,13 @@ Semua file yang dibuat oleh agent (draft, hasil generate, catatan kerja, aset, o
 
 Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti `.agents/skills/`. Jangan improvisasi struktur baru tanpa mencatat alasannya di `PRODUCT.md` dan `DESIGN.md`. Bahasa konten default: Indonesia, gaya editorial.
 
+**Aturan Pembuatan Skill Baru:** Jika agen atau manusia membuat custom skill spesifik untuk ekosistem _Starter Kit_ ini, nama folder dan `name:` di YAML _wajib_ menggunakan awalan `wpsk-` (WordPress Starter Kit). Contoh: `wpsk-editorial-brainstorm`, `wpsk-theme-convention`, `wpsk-seo-writer`.
 **Aturan Pembuatan Skill Baru:** Jika agen atau manusia membuat custom skill spesifik untuk ekosistem *Starter Kit* ini, nama folder dan `name:` di YAML *wajib* menggunakan awalan `wpsk-` (WordPress Starter Kit). Contoh: `wpsk-editorial-brainstorm`, `wpsk-theme-convention`, `wpsk-seo-writer`.
 
+## Skill UI yang Aktif (Fase Tema)
 ## Matriks Penugasan Skill per Fase Kerja
 
+Daftar skill UI yang **wajib digunakan** di fase tema, berurutan sesuai prioritas:
 | Fase Proyek | Peran Agen | Skill Kunci yang Ditugaskan |
 | :--- | :--- | :--- |
 | **Fase 1: Setup & Env** | `@architect` / User | `wpsk-editorial-brainstorm`, `wp-wpcli-and-ops` |
@@ -175,6 +198,13 @@ Struktur file tema, penamaan template-parts, dan konvensi konten mengikuti `.age
 | **Fase 5: QA** | `@qa` | `wp-performance`, `antislop-human`, `antislop-layoutmobile` |
 | **Fase 6: Deployment & Ops** | Manusia & Agen | `wp-wpcli-and-ops` |
 | **Meta Tooling** | Agen & Manusia | `skill-creator` |
+
+| Prioritas | Skill                   | Kapan Digunakan                           |
+| --------- | ----------------------- | ----------------------------------------- |
+| 1         | `antislop-ui`           | Selalu — filter utama semua UI work       |
+| 2         | `antislop-human`        | Selalu — aksesibilitas, kontras, keyboard |
+| 3         | `antislop-layoutmobile` | Selalu — layout responsif mobile          |
+| 4         | `frontend-design`       | Saat menentukan arah estetika & tipografi |
 
 ## Boundaries (Jangan Lakukan)
 
@@ -203,13 +233,33 @@ Catat setiap pekerjaan yang selesai di repo ini. Entri terbaru di atas.
 
 ### `05. 2026-09-10`
 
+- **Pembuatan Skill `wpsk-seo-writer`:** Mengelaborasi keunggulan `indo-seo-writer` (anti-slop bahasa Indonesia, zero basa-basi, single-topic heading tanpa kata "dan", tanpa contrastive negation, tanpa em-dash, panjang fleksibel 600-800 atau >1300 kata) dengan arsitektur `seo-article` (Definition Engineering GEO formula, question-format H2 PAA, tabel perbandingan berpresisi tinggi, dan meta output block). Ditulis dalam bahasa Inggris di `.agents/skills/wpsk-seo-writer/`.
 - **Pembuatan Skill `wpsk-seo-writer`:** Mengelaborasi keunggulan `indo-seo-writer` dengan arsitektur `seo-article` dalam bahasa Inggris di `.agents/skills/wpsk-seo-writer/`.
 
 ### `04. 2026-09-10`
 
+- **Integrasi WP REST API & .env:** Mengalihkan seluruh manajemen konten (user, taksonomi, halaman, post) ke WordPress REST API murni menggunakan kredensial Application Password dari `.env`.
+- **WPVibe Scoped:** Membatasi peran WPVibe MCP hanya untuk kebutuhan spesifik yang tidak didukung REST API (misal: pencarian referensi gambar `search_images`).
+- **PRD di PRODUCT.md:** Menambahkan Fase 2 khusus arsitektur PRD oleh `@architect` yang menghasilkan `PRODUCT.md` (daftar template & wireframe detail frontpage + single) sebelum coding tema dimulai.
+- **Multi-Author Mandatory:** Mewajibkan pembuatan 3–5 akun user `author` via REST API dengan email `<username>@<site.com>`, dan melarang penerbitan artikel menggunakan akun admin.
+- **Subagent Parallel Content:** Mewajibkan proses pembuatan draf dan publikasi artikel dieksekusi secara paralel menggunakan subagents.
+- **On-Demand Theme ZIP Handover:** File ZIP tema diserahkan kepada user setiap kali selesai pembuatan atau perubahan tema.
 - **Integrasi WP REST API & .env:** Mengalihkan manajemen konten ke WP REST API via Application Password.
 - **PRD di PRODUCT.md & Multi-Author:** Wajib PRD sebelum koding tema, serta pembuatan 3-5 author `<username>@<site.com>`.
 
 ### `03. 2026-09-08`
 
+- **Sinkronisasi Dokumen:** Rewrite total `wpsk-theme-convention/SKILL.md` agar selaras 100% dengan `AGENTS.md`.
+- **Efisiensi Skill UI:** Menyisakan 4 skill UI terintegrasi: `antislop-ui`, `antislop-human`, `antislop-layoutmobile`, `frontend-design`.
+- **Enforcement Lintas Sesi:** Menambahkan seksi "Sesi Lintas Session" di `AGENTS.md` yang mewajibkan agen membaca `PROGRESS.md`.
+
+### `02. 2026-09-05`
+
+- **Generic Rebranding:** Menghapus seluruh referensi spesifik "Croco" untuk menjadikannya _starter kit_ netral.
+- **Strict Local Theme:** Menegaskan pengembangan tema secara luring di folder `.workspaces/theme-src/`.
+- **Workspace Architecture:** Merapikan struktur folder `.workspaces/`.
+
+### `01. 2026-09-03`
+
+- Inisialisasi awal Starter Kit.
 - Sinkronisasi dokumen tema dan integrasi skill UI.
