@@ -17,9 +17,13 @@ description: >
 
 Sebelum menulis satu baris kode pun, verifikasi dua kondisi ini:
 
+**1. Hard-Gate Konten Sudah Dilewati:**
+Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: Konten disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Kembali ke fase konten.
 **1. Hard-Gate PRD Sudah Dilewati:**
 Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: PRD disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Minta `@architect` untuk menyelesaikan dokumen PRD di `PRODUCT.md`.
 
+**2. DESIGN.md Sudah Terisi Penuh:**
+Buka `DESIGN.md`. Tidak boleh ada satu pun field yang masih berupa placeholder `{{ }}`. Jika masih ada, **BERHENTI** dan tanyakan ke user.
 **2. PRODUCT.md & DESIGN.md Sudah Final:**
 Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `PRODUCT.md` menentukan daftar template dan wireframe detail (frontpage & single article), sedangkan `DESIGN.md` menentukan token desain (warna, tipografi, komponen). Tidak boleh ada field placeholder `{{ }}` yang tersisa.
 
@@ -308,6 +312,7 @@ Jalankan semua perintah dari folder `.workspaces/theme-src/`:
 Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenuhi:
 
 ### Prasyarat & Konfigurasi
+- [ ] `DESIGN.md` sudah dibaca dan tidak ada field `{{ }}` yang tersisa
 - [ ] `PRODUCT.md` dan `DESIGN.md` sudah dibaca dan dipatuhi secara penuh
 - [ ] Nama tema di `theme/style.css` sudah diubah dari `_tw` ke nama situs dari `SITE.md`
 - [ ] `functions.php` mendeklarasikan `add_theme_support('custom-logo')`, `register_nav_menus()`, dan `add_theme_support('post-thumbnails')`
@@ -319,6 +324,7 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 - [ ] **Tidak ada** `<img src="...">` hardcode untuk logo — semua memakai `the_custom_logo()`
 - [ ] **Tidak ada** query artikel yang hardcode ID atau slug — semua memakai `WP_Query`
 - [ ] Template parts sudah terpisah rapi di subfolder yang benar
+- [ ] `front-page.php` atau `home.php` sudah dibuat dan memanggil template parts homepage
 - [ ] `front-page.php` dan `single.php` sudah dibuat mengacu pada wireframe detail di `PRODUCT.md`
 
 ### Kualitas & Kepatuhan Desain
@@ -328,6 +334,7 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 - [ ] Semua output PHP sudah di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
 - [ ] Tampilan sudah diuji pada viewport mobile (375px) dan desktop (1280px)
 
+### Finalisasi
 ### Finalisasi & Serah Terima
 - [ ] Screenshot 1200x900px homepage sudah dibuat dan disimpan sebagai `theme/screenshot.png`
 - [ ] `npm run bundle` sudah dijalankan dan file `.zip` ada di root `.workspaces/`
@@ -341,6 +348,7 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 ## Do's and Don'ts — Ringkasan
 
 **WAJIB:**
+- Baca `DESIGN.md` sebelum menulis satu token Tailwind pun
 - Baca `PRODUCT.md` dan `DESIGN.md` sebelum menulis satu token Tailwind pun
 - Semua elemen dinamis (menu, logo, query, search) wajib pakai fungsi native WordPress sejak baris pertama
 - Escape semua output PHP (`esc_html()`, `esc_url()`, `wp_kses_post()`)
@@ -352,5 +360,6 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 - Gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS lokal
 - Hardcode teks navigasi, URL logo, atau ID artikel dalam PHP
 - Edit tema di live server via WPVibe — seluruh coding tema dilakukan **lokal**
+- Mulai coding tema sebelum Hard-Gate Konten disetujui user
 - Mulai coding tema sebelum Hard-Gate PRD (`PRODUCT.md`) disetujui user
 - Menaruh file zip output di dalam folder `theme-src/`

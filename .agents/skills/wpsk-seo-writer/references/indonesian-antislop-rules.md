@@ -74,3 +74,4 @@ Headings must maintain razor-sharp thematic focus.
 | **Sentence Length** | **12 – 16 words** | Prevents run-on sentences, keeps Indonesian prose punchy and clear. |
 | **Paragraph Length** | **2 – 3 sentences** | Prevents wall-of-text intimidation on mobile screens. |
 | **Bullet Lists** | Max 4–6 bullets per list | Keeps lists scannable rather than overwhelming. |
+

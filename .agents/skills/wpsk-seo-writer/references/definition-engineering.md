@@ -59,3 +59,4 @@ Tabel berikut merangkum perbandingan langsung antara CMS Tradisional dan Headles
 | **Kanal Distribusi** | Terbatas pada tampilan web peramban. | Mengalir ke web, aplikasi seluler, dan jam pintar. |
 | **Keterbatasan Utama** | Sulit diintegrasikan ke platform eksternal. | Membutuhkan keahlian frontend untuk merancang antarmuka. |
 ```
+

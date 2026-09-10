@@ -164,3 +164,4 @@ style_applied: "[Popular Educational Essay / Structured Listicle / Tactical How-
 - Metadata & title psychology: [references/title-and-metadata.md](references/title-and-metadata.md)
 - Short format example (600–800 words): [examples/short-format-example.md](examples/short-format-example.md)
 - Long format example (>1,300 words): [examples/long-format-example.md](examples/long-format-example.md)
+
