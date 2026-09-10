@@ -2,10 +2,11 @@
 name: wpsk-seo-writer
 description: >-
   Specialized Indonesian SEO, AEO, and GEO article writer for high-ranking editorial websites.
-  Combines rigorous Indonesian anti-slop mechanics (zero fluff, strict 2-3 sentence paragraphs,
-  12-16 words per sentence, single-topic headings without 'dan', no contrastive negation, no em-dashes)
-  with world-class GEO architecture (Definition Engineering, PAA question-format H2s, humanized comparison
-  tables, and verified citations). Autonomously selects writing style and flexible article length
+  Enforces mandatory pre-writing research and fact verification (zero hallucination, 3-tier source hierarchy,
+  3-5 hard verified facts) combined with rigorous Indonesian anti-slop mechanics (zero fluff, strict 2-3
+  sentence paragraphs, 12-16 words per sentence, single-topic headings without 'dan', no contrastive negation,
+  no em-dashes) and world-class GEO architecture (Definition Engineering, PAA question-format H2s, humanized
+  comparison tables, and verified citations). Autonomously selects writing style and flexible article length
   (short: 600-800 words or long: >1300 words) based on search intent.
   Use whenever writing Indonesian blog posts, pillar pages, educational guides, listicles, or editorial content.
 user-invokable: true
@@ -14,7 +15,7 @@ argument-hint: "<topic or keyword>"
 
 # WPSK Indonesian SEO & Editorial Writer
 
-An elite Indonesian editorial writing system built to satisfy three audiences simultaneously: **Search Engines (Google ranking)**, **Generative AI Models (GEO/AEO citations in ChatGPT, Perplexity, Google AI Overview)**, and **Human Readers (engaging, crisp, fluff-free prose)**.
+An elite Indonesian editorial writing system built to satisfy three audiences simultaneously: **Search Engines (Google ranking)**, **Generative AI Models (GEO/AEO citations in ChatGPT, Perplexity, Google AI Overview)**, and **Human Readers (engaging, crisp, fluff-free prose grounded in verified facts)**.
 
 ---
 
@@ -33,7 +34,26 @@ Readers scan web pages in 3–5 seconds. Never waste reader time with preamble o
 
 ---
 
-## 2. Autonomous Style & Scope Selection
+## 2. Mandatory Pre-Writing Research & Data Grounding
+
+Writing without verified research produces AI slop that search engines penalize and AI answer engines ignore. **Research is mandatory before writing sentence one.**
+
+### Zero Hallucination Law
+- **Never guess numbers, percentages, dates, or regulations:** Every statistic and technical specification must be anchored in verified reality.
+- **Extract 3–5 "Hard Facts" Before Drafting:** The writer/subagent must gather at least 3–5 concrete data points (e.g., official survey percentages, statutory regulation numbers, release years, or technical metric thresholds).
+
+### Three-Tier Source Hierarchy
+When conducting pre-writing research using search tools, prioritize sources strictly:
+
+| Tier | Source Category | Examples | Use Case |
+|:---|:---|:---|:---|
+| **Tier 1 (Authoritative / Primary)** | Government agencies, central banks, statutory bodies, official docs, peer-reviewed journals. | BPS, Bank Indonesia, OJK, Kemenkes, Kominfo, WHO, W3C, MDN Web Docs, official developer docs. | Mandatory for statistics, legal frameworks, official definitions, and technical parameters. |
+| **Tier 2 (Industry Reputable)** | Respected industry benchmarks, verified news agencies, established research institutes. | Google/Temasek e-Conomy SEA, Gartner, Antara, Reuters, Katadata Databoks. | Benchmark comparisons, market trends, adoption rates, survey insights. |
+| **Tier 3 (Banned as Sources)** | Anonymous blogs, content farms, scrape aggregators, unmoderated forums, generic AI regurgitations. | Generic SEO content mills, Quora, unverified social media posts. | **STRICTLY PROHIBITED.** Never cite or extract data from Tier 3. |
+
+---
+
+## 3. Autonomous Style & Scope Selection
 
 When the user provides a keyword or topic without specifying style or length, **analyze search intent and autonomously decide**:
 
@@ -57,7 +77,7 @@ Pick the style that best serves the topic:
 
 ---
 
-## 3. Strict Indonesian Linguistic & Anti-Slop Rules
+## 4. Strict Indonesian Linguistic & Anti-Slop Rules
 
 Every paragraph must comply with the strict Indonesian editorial guardrails:
 
@@ -98,7 +118,7 @@ Say what you mean plainly and literally.
 
 ---
 
-## 4. GEO (Generative Engine Optimization) & Definition Engineering
+## 5. GEO (Generative Engine Optimization) & Definition Engineering
 
 GEO ensures that AI models (Perplexity, ChatGPT, Claude, Google AI Overview) extract and cite your article.
 
@@ -107,7 +127,7 @@ GEO ensures that AI models (Perplexity, ChatGPT, Claude, Google AI Overview) ext
 The primary definition sentence must appear in paragraph 1 or 2:
 
 ```text
-[X] adalah [kata benda kategori] yang [kata kerja 1], [kata kerja 2], dan [kata kerja 3] untuk [tujuan spesifik] — [klausa pembeda].
+[X] adalah [kata benda kategori] yang [kata kerja 1], [kata kerja 2], dan [kata kerja 3] untuk [tujuan spesifik] - [klausa pembeda].
 ```
 
 _Example:_
@@ -119,12 +139,12 @@ _Example:_
 1. **Definition Sentence:** The exact formula above (15–30 words).
 2. **Boundary Line:** One sentence explicitly stating what it is NOT (_"Bukan platform monolitik yang menggabungkan backend dan tema tampilan secara kaku..."_).
 3. **Core Mechanism:** The fundamental engine or workflow that creates value.
-4. **Concrete Everyday Impact:** How this affects daily operations or the end user.
+4. **Concrete Everyday Impact:** How this affects daily operations or the end user (grounded with real data/examples).
 5. **Verdict Sentence:** A decisive 2–5 word punchline (_"Pemisahan inilah kuncinya."_).
 
 ---
 
-## 5. Information Architecture & SEO Blueprint
+## 6. Information Architecture & SEO Blueprint
 
 ### Heading & Title Psychology
 
@@ -137,16 +157,17 @@ _Example:_
 
 - **Never drop a table cold.** Precede every table with a 1–2 sentence narrative explanation clarifying _what to look for_ and _why the comparison matters_.
 - In comparison tables, explicitly contrast **what a category CAN do** vs **what it CANNOT do**.
+- Populate tables with verified data gathered from pre-writing research.
 
-### Verified Outbound Links & Research
+### Verified Outbound Links & Citations
 
-- Maximum **1–2 verified authoritative links** to primary sources (e.g., BPS, Kemenkes, OJK, Bank Indonesia, WHO, or official documentation).
+- Maximum **1–2 verified authoritative links** to primary sources (e.g., BPS, Kemenkes, OJK, Bank Indonesia, WHO, or official developer documentation).
 - Anchor text must be natural and contextual. **Never use generic anchors** (_"klik di sini"_, _"sumber"_).
-- All statistics and facts must be real and verified. Zero hallucination.
+- Temporal anchoring: Mention the year or context of data (e.g., *"berdasarkan data BPS tahun 2024"*).
 
 ---
 
-## 6. End-of-Article Meta Output Block
+## 7. End-of-Article Meta Output Block
 
 Every generated article **must conclude** with this standardized comment block for WordPress metadata mapping:
 
@@ -159,26 +180,32 @@ primary_keyword: "[Exact match target keyword]"
 secondary_keywords: "[Keyword 1, Keyword 2, Keyword 3]"
 target_length: "[600-800 words / >1300 words]"
 style_applied: "[Popular Educational Essay / Structured Listicle / Tactical How-To / Industry Analysis]"
+hard_facts_cited:
+  - "[Fact 1 with source/date]"
+  - "[Fact 2 with source/date]"
+  - "[Fact 3 with source/date]"
 -->
 ```
 
 ---
 
-## 7. Step-by-Step Writing Workflow
+## 8. Step-by-Step Writing Workflow
 
-1. **Analyze Input:** Identify target keyword, search intent, and target audience.
-2. **Select Scope & Style:** Determine length (short 600–800 words vs long >1,300 words) and writing style autonomously unless specified.
-3. **Draft Definition & Hook:** Craft a zero-fluff opening and engineer the GEO definition.
-4. **Draft Body:** Build single-topic H2/H3 sections with 2–3 sentence paragraphs and max 12–16 words per sentence.
-5. **Apply Humanized Tables & PAA:** Add scannable comparison points and direct answers.
-6. **Insert Outbound Link:** Add 1–2 verified links on contextual phrases.
-7. **Perform Anti-Slop Audit:** Verify absence of contrastive negation, mannered prose, em-dashes, and heading conjunctions.
-8. **Append SEO Meta Block:** Output the finalized article with metadata.
+1. **Analyze Input & Search Intent:** Identify the primary keyword, search intent, and user profile.
+2. **Conduct Mandatory Pre-Writing Research:** Search for verified, current data (prefer last 12–24 months). Identify Tier 1/Tier 2 authoritative sources and extract 3–5 verifiable hard facts (numbers, dates, regulations, benchmarks).
+3. **Select Scope & Style:** Determine length (short 600–800 words vs long >1,300 words) and writing style autonomously based on search intent.
+4. **Draft Definition & Hook:** Craft a zero-fluff opening and engineer the GEO definition backed by facts.
+5. **Draft Body with Single-Topic Headings:** Build H2/H3 sections with strict 2–3 sentence paragraphs and max 12–16 words per sentence. Integrate gathered facts naturally.
+6. **Apply Humanized Tables & PAA:** Add scannable comparison tables and direct answers to PAA questions.
+7. **Insert Outbound Link:** Add 1–2 verified links to primary sources on natural contextual anchor text.
+8. **Perform Anti-Slop & Fact Audit:** Verify absence of contrastive negation, mannered prose, em-dashes, and heading conjunctions, while confirming data accuracy.
+9. **Append SEO Meta Block:** Output the finalized article including the `hard_facts_cited` metadata list.
 
 ---
 
-## 8. Bundled References & Examples
+## 9. Bundled References & Examples
 
+- Pre-writing research & fact-checking: [references/research-and-fact-checking.md](references/research-and-fact-checking.md)
 - Detailed anti-slop rules: [references/indonesian-antislop-rules.md](references/indonesian-antislop-rules.md)
 - GEO & definition guide: [references/definition-engineering.md](references/definition-engineering.md)
 - Metadata & title psychology: [references/title-and-metadata.md](references/title-and-metadata.md)
