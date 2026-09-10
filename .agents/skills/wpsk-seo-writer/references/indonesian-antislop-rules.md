@@ -9,16 +9,18 @@ This guide details the strict linguistic rules required to produce human-crafted
 Web visitors seek immediate clarity. Eliminate throat-clearing openings completely:
 
 ### Banned Cliché Openings
-- ❌ *"Di zaman modern yang serba dinamis seperti saat ini..."*
-- ❌ *"Seiring berjalannya waktu dan pesatnya kemajuan teknologi..."*
-- ❌ *"Siapa yang tidak mengenal [topik]? Tentu kita semua pernah mendengarnya..."*
-- ❌ *"Pada kesempatan kali ini, kami akan mengajak Anda mengulas..."*
+
+- ❌ _"Di zaman modern yang serba dinamis seperti saat ini..."_
+- ❌ _"Seiring berjalannya waktu dan pesatnya kemajuan teknologi..."_
+- ❌ _"Siapa yang tidak mengenal [topik]? Tentu kita semua pernah mendengarnya..."_
+- ❌ _"Pada kesempatan kali ini, kami akan mengajak Anda mengulas..."_
 
 ### Approved Direct Openings
+
 - **Direct Reality Hook:** Describe an immediate, palpable problem or observation.
-  - *Example:* *"Sebagian besar pekerja kantoran menghabiskan tiga jam pertama setiap pagi hanya untuk menyortir surel."*
+  - _Example:_ _"Sebagian besar pekerja kantoran menghabiskan tiga jam pertama setiap pagi hanya untuk menyortir surel."_
 - **Immediate Answer / Definition:** Answer the search query in sentence one.
-  - *Example:* *"Kredit Pemilikan Rumah (KPR) subsidi merupakan skema pembiayaan perumahan berbunga rendah yang diperuntukkan bagi masyarakat berpenghasilan rendah."*
+  - _Example:_ _"Kredit Pemilikan Rumah (KPR) subsidi merupakan skema pembiayaan perumahan berbunga rendah yang diperuntukkan bagi masyarakat berpenghasilan rendah."_
 
 ---
 
@@ -27,13 +29,15 @@ Web visitors seek immediate clarity. Eliminate throat-clearing openings complete
 AI generators constantly construct false antitheses to simulate depth. This pattern bloats text and fatigues human readers.
 
 ### Prohibited Patterns
-- ❌ *"Bukan hanya [A], tetapi juga [B]..."*
-- ❌ *"Ini bukan sekadar [A], melainkan sebuah [B]..."*
-- ❌ *"Hal tersebut bukan berarti [A], tetapi justru membuktikan bahwa [B]..."*
+
+- ❌ _"Bukan hanya [A], tetapi juga [B]..."_
+- ❌ _"Ini bukan sekadar [A], melainkan sebuah [B]..."_
+- ❌ _"Hal tersebut bukan berarti [A], tetapi justru membuktikan bahwa [B]..."_
 
 ### Transformation to Direct Statements
-- ❌ *Slop:* *"Aplikasi ini bukan hanya mencatat pengeluaran harian, tetapi juga membantu Anda merencanakan investasi masa depan."*
-- ✅ *Direct:* *"Aplikasi ini mencatat pengeluaran harian sekaligus merencanakan portofolio investasi Anda secara terpadu."*
+
+- ❌ _Slop:_ _"Aplikasi ini bukan hanya mencatat pengeluaran harian, tetapi juga membantu Anda merencanakan investasi masa depan."_
+- ✅ _Direct:_ _"Aplikasi ini mencatat pengeluaran harian sekaligus merencanakan portofolio investasi Anda secara terpadu."_
 
 ---
 
@@ -41,37 +45,37 @@ AI generators constantly construct false antitheses to simulate depth. This patt
 
 When a literal, accurate Indonesian word exists, use it. Do not invent flowery metaphors, poetic drama, or artificial philosophical reflections.
 
-- ❌ *Slop:* *"Langkah ini merupakan lentera harapan yang menyinari labirin keraguan finansial Anda."*
-- ✅ *Direct:* *"Langkah ini memberikan panduan anggaran yang jelas bagi kondisi keuangan Anda."*
+- ❌ _Slop:_ _"Langkah ini merupakan lentera harapan yang menyinari labirin keraguan finansial Anda."_
+- ✅ _Direct:_ _"Langkah ini memberikan panduan anggaran yang jelas bagi kondisi keuangan Anda."_
 
 ---
 
 ## 4. Absolute Ban on Em-Dash (`—`) and En-Dash (`–`)
 
 Overusing em-dashes is the number one telltale signature of generic LLM text.
+
 - **Rule:** Never use `—` or `–` as sentence punctuation in body paragraphs or headings.
-- **Hyphen (`-`):** Allowed exclusively for Indonesian reduplicated words (*kata ulang* like *faktor-faktor*, *tiba-tiba*) and number/date ranges (*2024-2026*, *5-10 halaman*).
-- **Pauses:** Break clauses using standard periods, commas, or natural conjunctions (*karena*, *sehingga*, *saat*).
+- **Hyphen (`-`):** Allowed exclusively for Indonesian reduplicated words (_kata ulang_ like _faktor-faktor_, _tiba-tiba_) and number/date ranges (_2024-2026_, _5-10 halaman_).
+- **Pauses:** Break clauses using standard periods, commas, or natural conjunctions (_karena_, _sehingga_, _saat_).
 
 ---
 
 ## 5. Single-Topic Headings & The Ban on "Dan"
 
-Headings must maintain razor-sharp thematic focus. 
+Headings must maintain razor-sharp thematic focus.
 
 - **Rule:** Headings must represent **one concept only**.
-- **The "Dan" Test:** If a heading uses the word *"dan"* to stitch together two separate topics, actions, or problems, it is strictly forbidden.
-  - ❌ *Banned:* `## Manfaat Olahraga Pagi dan Cara Memulai Rutinitas Baru`
-  - ✅ *Correct:* `## Manfaat utama olahraga pagi bagi energi harian`
-  - ✅ *Correct:* `## Panduan memulai rutinitas olahraga pagi`
+- **The "Dan" Test:** If a heading uses the word _"dan"_ to stitch together two separate topics, actions, or problems, it is strictly forbidden.
+  - ❌ _Banned:_ `## Manfaat Olahraga Pagi dan Cara Memulai Rutinitas Baru`
+  - ✅ _Correct:_ `## Manfaat utama olahraga pagi bagi energi harian`
+  - ✅ _Correct:_ `## Panduan memulai rutinitas olahraga pagi`
 
 ---
 
 ## 6. Sentence & Paragraph Constraints
 
-| Metric | Upper Limit | Purpose |
-| :--- | :--- | :--- |
-| **Sentence Length** | **12 – 16 words** | Prevents run-on sentences, keeps Indonesian prose punchy and clear. |
-| **Paragraph Length** | **2 – 3 sentences** | Prevents wall-of-text intimidation on mobile screens. |
-| **Bullet Lists** | Max 4–6 bullets per list | Keeps lists scannable rather than overwhelming. |
-
+| Metric               | Upper Limit              | Purpose                                                             |
+| :------------------- | :----------------------- | :------------------------------------------------------------------ |
+| **Sentence Length**  | **12 – 16 words**        | Prevents run-on sentences, keeps Indonesian prose punchy and clear. |
+| **Paragraph Length** | **2 – 3 sentences**      | Prevents wall-of-text intimidation on mobile screens.               |
+| **Bullet Lists**     | Max 4–6 bullets per list | Keeps lists scannable rather than overwhelming.                     |

@@ -6,7 +6,7 @@ description: >
   Semua keputusan struktur mengacu ke dokumen ini.
 ---
 
-# Theme Convention — Berbasis _tw
+# Theme Convention — Berbasis \_tw
 
 > **BACA INI SEBELUM MENYENTUH SATU BARIS PUN KODE TEMA.**
 > Skill ini adalah satu-satunya referensi teknis untuk fase pengembangan tema. Prioritasnya di bawah `AGENTS.md` — jika ada konflik, `AGENTS.md` menang. Jika ada konflik antara skill ini dengan instruksi ad hoc dari percakapan, skill ini menang.
@@ -17,13 +17,9 @@ description: >
 
 Sebelum menulis satu baris kode pun, verifikasi dua kondisi ini:
 
-**1. Hard-Gate Konten Sudah Dilewati:**
-Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: Konten disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Kembali ke fase konten.
 **1. Hard-Gate PRD Sudah Dilewati:**
 Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: PRD disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Minta `@architect` untuk menyelesaikan dokumen PRD di `PRODUCT.md`.
 
-**2. DESIGN.md Sudah Terisi Penuh:**
-Buka `DESIGN.md`. Tidak boleh ada satu pun field yang masih berupa placeholder `{{ }}`. Jika masih ada, **BERHENTI** dan tanyakan ke user.
 **2. PRODUCT.md & DESIGN.md Sudah Final:**
 Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `PRODUCT.md` menentukan daftar template dan wireframe detail (frontpage & single article), sedangkan `DESIGN.md` menentukan token desain (warna, tipografi, komponen). Tidak boleh ada field placeholder `{{ }}` yang tersisa.
 
@@ -31,16 +27,16 @@ Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `P
 
 ## Stack
 
-- **Base Theme:** [_tw](https://underscoretw.com/) — WordPress classic starter theme + Tailwind CSS
+- **Base Theme:** [\_tw](https://underscoretw.com/) — WordPress classic starter theme + Tailwind CSS
 - **Build Tool:** PostCSS (Tailwind v4) + esbuild (JS), dijalankan **LOKAL** via npm
 - **PHP:** 8.2+, Classic Theme (bukan Block Theme / FSE)
 - **Node.js & npm:** wajib ada di mesin lokal operator
 
 ---
 
-## Arsitektur _tw: Source vs Output
+## Arsitektur \_tw: Source vs Output
 
-_tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang di-generate)**. Memahami perbedaan ini adalah aturan pertama:
+\_tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang di-generate)**. Memahami perbedaan ini adalah aturan pertama:
 
 ```
 .workspaces/theme-src/          ← ROOT SOURCE (clone _tw, ada di lokal saja)
@@ -75,8 +71,9 @@ _tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang 
 ```
 
 > **Aturan Paling Kritis:**
+>
 > - File `theme/style.css` dan `theme/js/` adalah **output** dari proses build npm. **JANGAN PERNAH EDIT SECARA MANUAL** — akan ditimpa setiap kali `npm run dev` dijalankan.
-> - **JANGAN GUNAKAN TAILWIND CDN** (`<script src="https://cdn.tailwindcss.com">`). _tw menggunakan build pipeline PostCSS. CDN Tailwind akan menghasilkan CSS yang tidak ter-purge dan tidak konsisten.
+> - **JANGAN GUNAKAN TAILWIND CDN** (`<script src="https://cdn.tailwindcss.com">`). \_tw menggunakan build pipeline PostCSS. CDN Tailwind akan menghasilkan CSS yang tidak ter-purge dan tidak konsisten.
 
 ---
 
@@ -111,9 +108,11 @@ Jika sukses, file `theme/style.css` akan ter-generate. Jika gagal, cek `package.
 ### Langkah 4: Rename Header Tema
 
 Buka `theme/style.css` dan ubah baris:
+
 ```css
 Theme Name: _tw
 ```
+
 Menjadi nama tema sesuai `SITE.md`. **Langkah ini wajib** sebelum langkah apapun lainnya.
 
 ---
@@ -128,15 +127,15 @@ Menjadi nama tema sesuai `SITE.md`. **Langkah ini wajib** sebelum langkah apapun
 
 @theme {
   /* Warna — ambil PERSIS dari DESIGN.md, bukan tebakan */
-  --color-primary:   #D94F3D;   /* contoh: ganti dengan nilai di DESIGN.md */
-  --color-secondary: #1A1A2E;
-  --color-accent:    #F4A823;
-  --color-neutral:   #F7F5F2;
-  --color-text:      #1A1A1A;
+  --color-primary: #d94f3d; /* contoh: ganti dengan nilai di DESIGN.md */
+  --color-secondary: #1a1a2e;
+  --color-accent: #f4a823;
+  --color-neutral: #f7f5f2;
+  --color-text: #1a1a1a;
 
   /* Tipografi — ambil nama font dari DESIGN.md */
   --font-heading: "Playfair Display", serif;
-  --font-body:    "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
 }
 ```
 
@@ -257,7 +256,7 @@ endif;
 
 ## Struktur Template Parts Wajib
 
-_tw menyediakan `template-parts/` kosong. Buat subfolder berikut dari awal:
+\_tw menyediakan `template-parts/` kosong. Buat subfolder berikut dari awal:
 
 ```
 theme/template-parts/
@@ -297,11 +296,11 @@ get_template_part( 'template-parts/homepage/section-category', null, [
 
 Jalankan semua perintah dari folder `.workspaces/theme-src/`:
 
-| Script | Kapan Digunakan |
-|---|---|
-| `npm run dev` | Build sekali saat ingin melihat hasil perubahan |
-| `npm run watch` | Build + watch otomatis saat aktif coding (gunakan ini selama development) |
-| `npm run bundle` | Build produksi + buat zip siap upload — **jalankan di akhir saja** |
+| Script           | Kapan Digunakan                                                           |
+| ---------------- | ------------------------------------------------------------------------- |
+| `npm run dev`    | Build sekali saat ingin melihat hasil perubahan                           |
+| `npm run watch`  | Build + watch otomatis saat aktif coding (gunakan ini selama development) |
+| `npm run bundle` | Build produksi + buat zip siap upload — **jalankan di akhir saja**        |
 
 > **Guardrail Bundling:** Output zip dari `npm run bundle` **wajib** berada di root `.workspaces/`, **bukan** di dalam folder `theme-src/`. Pastikan `package.json` sudah dikonfigurasi dengan benar untuk ini.
 
@@ -312,7 +311,7 @@ Jalankan semua perintah dari folder `.workspaces/theme-src/`:
 Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenuhi:
 
 ### Prasyarat & Konfigurasi
-- [ ] `DESIGN.md` sudah dibaca dan tidak ada field `{{ }}` yang tersisa
+
 - [ ] `PRODUCT.md` dan `DESIGN.md` sudah dibaca dan dipatuhi secara penuh
 - [ ] Nama tema di `theme/style.css` sudah diubah dari `_tw` ke nama situs dari `SITE.md`
 - [ ] `functions.php` mendeklarasikan `add_theme_support('custom-logo')`, `register_nav_menus()`, dan `add_theme_support('post-thumbnails')`
@@ -320,22 +319,23 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 - [ ] `npm run dev` berhasil dijalankan tanpa error
 
 ### Template & Elemen Dinamis
+
 - [ ] **Tidak ada** link navigasi yang di-hardcode — semua memakai `wp_nav_menu()`
 - [ ] **Tidak ada** `<img src="...">` hardcode untuk logo — semua memakai `the_custom_logo()`
 - [ ] **Tidak ada** query artikel yang hardcode ID atau slug — semua memakai `WP_Query`
 - [ ] Template parts sudah terpisah rapi di subfolder yang benar
-- [ ] `front-page.php` atau `home.php` sudah dibuat dan memanggil template parts homepage
 - [ ] `front-page.php` dan `single.php` sudah dibuat mengacu pada wireframe detail di `PRODUCT.md`
 
 ### Kualitas & Kepatuhan Desain
+
 - [ ] Skill `antislop-ui` sudah dibaca dan checklist-nya dilalui
 - [ ] Tidak ada gradien default AI (biru-ungu, biru-cyan) yang tidak ada di `DESIGN.md`
 - [ ] Tidak ada Tailwind CDN yang disuntikkan di `header.php` atau `functions.php`
 - [ ] Semua output PHP sudah di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
 - [ ] Tampilan sudah diuji pada viewport mobile (375px) dan desktop (1280px)
 
-### Finalisasi
 ### Finalisasi & Serah Terima
+
 - [ ] Screenshot 1200x900px homepage sudah dibuat dan disimpan sebagai `theme/screenshot.png`
 - [ ] `npm run bundle` sudah dijalankan dan file `.zip` ada di root `.workspaces/`
 - [ ] File `.zip` **tidak** ada di dalam folder `theme-src/`
@@ -348,7 +348,7 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 ## Do's and Don'ts — Ringkasan
 
 **WAJIB:**
-- Baca `DESIGN.md` sebelum menulis satu token Tailwind pun
+
 - Baca `PRODUCT.md` dan `DESIGN.md` sebelum menulis satu token Tailwind pun
 - Semua elemen dinamis (menu, logo, query, search) wajib pakai fungsi native WordPress sejak baris pertama
 - Escape semua output PHP (`esc_html()`, `esc_url()`, `wp_kses_post()`)
@@ -356,10 +356,10 @@ Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenu
 - Serahkan file ZIP tema kepada user setiap ada pembuatan atau perubahan tema
 
 **DILARANG:**
+
 - Edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
-- Gunakan Tailwind CDN Play — _tw menggunakan build pipeline PostCSS lokal
+- Gunakan Tailwind CDN Play — \_tw menggunakan build pipeline PostCSS lokal
 - Hardcode teks navigasi, URL logo, atau ID artikel dalam PHP
 - Edit tema di live server via WPVibe — seluruh coding tema dilakukan **lokal**
-- Mulai coding tema sebelum Hard-Gate Konten disetujui user
 - Mulai coding tema sebelum Hard-Gate PRD (`PRODUCT.md`) disetujui user
 - Menaruh file zip output di dalam folder `theme-src/`

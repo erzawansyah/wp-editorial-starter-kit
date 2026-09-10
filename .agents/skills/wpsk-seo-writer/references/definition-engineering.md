@@ -13,13 +13,15 @@ Derived from top-cited glossary resources, the primary definition sentence must 
 ```
 
 ### Breakdown
+
 1. **Term:** The exact target keyword.
-2. **Category Noun:** Clear classification (e.g., *arsitektur perangkat lunak*, *skema pembiayaan*, *metode manajemen waktu*).
-3. **Three-Verb Chain:** Three sequential actions (e.g., *mengidentifikasi*, *menyaring*, dan *mengeksekusi*).
-4. **Specific Purpose:** Clear target outcome (e.g., *untuk memangkas waktu operasional harian*).
+2. **Category Noun:** Clear classification (e.g., _arsitektur perangkat lunak_, _skema pembiayaan_, _metode manajemen waktu_).
+3. **Three-Verb Chain:** Three sequential actions (e.g., _mengidentifikasi_, _menyaring_, dan _mengeksekusi_).
+4. **Specific Purpose:** Clear target outcome (e.g., _untuk memangkas waktu operasional harian_).
 5. **Differentiating Clause:** Distinguishing trait from nearest neighbor.
 
 ### Examples
+
 - **Personal Agent:**
   > "Personal agent adalah asisten digital cerdas yang mempelajari preferensi pribadi, mengoordinasikan jadwal kerja, dan mengeksekusi tugas digital harian untuk meningkatkan produktivitas pengguna secara mandiri."
 - **Dana Darurat:**
@@ -33,30 +35,31 @@ A definition sentence earns the AI citation. The entire definition paragraph con
 
 1. **Sentence 1: The Definition Formula** (15–30 words).
 2. **Sentence 2: The Boundary Line** (Clarifies what it is NOT).
-   - *Example:* *"Sistem ini bukan sekadar bot penjawab pesan teks yang pasif, melainkan mesin eksekusi yang bekerja aktif."*
+   - _Example:_ _"Sistem ini bukan sekadar bot penjawab pesan teks yang pasif, melainkan mesin eksekusi yang bekerja aktif."_
 3. **Sentence 3: The Core Mechanism** (Explains how value is generated).
-   - *Example:* *"Pusat kendalinya bertumpu pada siklus otomasi yang membaca konteks pengguna secara berkala."*
+   - _Example:_ _"Pusat kendalinya bertumpu pada siklus otomasi yang membaca konteks pengguna secara berkala."_
 4. **Sentence 4: Concrete Everyday Impact** (Real-world manifestation).
-   - *Example:* *"Dampaknya, Anda tidak lagi perlu mengatur kalender manual setiap minggu."*
+   - _Example:_ _"Dampaknya, Anda tidak lagi perlu mengatur kalender manual setiap minggu."_
 5. **Sentence 5: Decisive Verdict** (2–5 words).
-   - *Example:* *"Itulah inti nilainya."*
+   - _Example:_ _"Itulah inti nilainya."_
 
 ---
 
 ## 3. Humanized Tables & The Boundary Principle
 
 Never drop raw data tables without context. Every table must include:
+
 1. **Narrative Primer (1–2 sentences):** Explains what data is presented and what decision it informs.
 2. **Boundary Precision:** State both what the subject **CAN** do and what it **CANNOT** do.
 
 ### Sample Structure:
+
 ```markdown
 Tabel berikut merangkum perbandingan langsung antara CMS Tradisional dan Headless CMS untuk kebutuhan tim redaksi modern:
 
-| Parameter | CMS Tradisional | Headless CMS |
-| :--- | :--- | :--- |
-| **Penyimpanan Konten** | Terikat langsung pada database tema. | Tersimpan mandiri sebagai repositori data murni. |
-| **Kanal Distribusi** | Terbatas pada tampilan web peramban. | Mengalir ke web, aplikasi seluler, dan jam pintar. |
+| Parameter              | CMS Tradisional                             | Headless CMS                                             |
+| :--------------------- | :------------------------------------------ | :------------------------------------------------------- |
+| **Penyimpanan Konten** | Terikat langsung pada database tema.        | Tersimpan mandiri sebagai repositori data murni.         |
+| **Kanal Distribusi**   | Terbatas pada tampilan web peramban.        | Mengalir ke web, aplikasi seluler, dan jam pintar.       |
 | **Keterbatasan Utama** | Sulit diintegrasikan ke platform eksternal. | Membutuhkan keahlian frontend untuk merancang antarmuka. |
 ```
-
