@@ -27,10 +27,15 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 │       ├── wpsk-editorial-brainstorm/ # Brainstorming konsep, niche, dan branding
 │       ├── wpsk-theme-convention/     # Konvensi tema classic + Tailwind (_tw)
 │       ├── wpsk-seo-writer/           # Penulis SEO editorial Indonesia, anti-slop, GEO/AEO
+│       ├── antislop/                  # Filter anti-slop core
 │       ├── antislop-ui/               # Filter visual: warna, layout, komponen
 │       ├── antislop-human/            # Aksesibilitas: kontras, navigasi keyboard
 │       ├── antislop-layoutmobile/     # Tata letak responsif & mobile-first
+│       ├── antislop-code/             # Higiene komentar kode
+│       ├── antislop-copywriting/      # Kualitas tulisan & microcopy anti-AI
 │       ├── frontend-design/           # Art direction & tipografi editorial
+│       ├── seo-article/               # Standar penulisan artikel SEO, AEO, GEO
+│       └── wp-*/                      # Skill ekosistem WordPress
 │       ├── wp-patterns/               # Format sintaksis blok Gutenberg murni
 │       ├── wp-block-development/      # Referensi pengembangan custom block
 │       ├── wp-performance/            # Audit performa dan optimasi backend
