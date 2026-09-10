@@ -1,4 +1,5 @@
 DESIGN.md
+PRODUCT.md
 .playwright-mcp/
 SITE.md
 .workspaces/*
@@ -10,3 +11,4 @@ node_modules/
 Thumbs.db
 
 .agents/skills/skill-creator
+.impeccable/
