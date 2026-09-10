@@ -10,5 +10,5 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-.agents/skills/skill-creator
+.agents/skills/skill-creator/
 .impeccable/
