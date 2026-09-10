@@ -24,13 +24,23 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 │   ├── mcp_config.json   # Konfigurasi koneksi WPVibe MCP
 │   └── skills/           # Skill AI agent
 │       ├── wpsk-editorial-brainstorm/ # Skill interaktif untuk memandu pembuatan konsep website
-│       ├── wpsk-theme-convention/     # Konvensi struktur tema classic + Tailwind
-│       ├── antislop*/            # Skill kualitas kode, UI, copy, dan aksesibilitas
-│       └── wp-*/                 # Skill WordPress (REST API, blocks, performa, dsb.)
+│       ├── wpsk-theme-convention/     # Konvensi struktur tema classic + Tailwind (referensi wajib @engineer)
+│       ├── antislop/                  # Skill anti-slop core (filter utama)
+│       ├── antislop-ui/               # Filter visual: warna, layout, komponen
+│       ├── antislop-human/            # Aksesibilitas: kontras, keyboard, focus
+│       ├── antislop-layoutmobile/     # Layout responsif & mobile
+│       ├── antislop-code/             # Higiene komentar kode
+│       ├── antislop-copywriting/      # Kualitas teks & copy
+│       ├── frontend-design/           # Art direction & tipografi editorial
+│       ├── seo-article/               # Standar penulisan artikel SEO
+│       └── wp-*/                      # Skill WordPress (REST API, blocks, performa, dsb.)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
     ├── assets/           # Direktori wajib aset (Logo, Gambar)
+    ├── theme-src/        # Source code tema (PHP, CSS, JS — lokal saja)
+    ├── scripts/          # Skrip otomasi sementara
+    ├── temp/             # File temporer (log, dump, draf)
     ├── THEME_SPECS.md    # Dokumen handover teknis (digenerate oleh AI)
-    └── PROGRESS.md       # Catatan live progres berjalan
+    └── PROGRESS.md       # Catatan live progres berjalan (sumber kebenaran lintas sesi)
 ```
 
 ## Prasyarat
