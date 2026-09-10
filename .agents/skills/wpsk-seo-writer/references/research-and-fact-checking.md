@@ -57,3 +57,4 @@ Assign gathered facts directly into:
    - ✅ *Correct:* "Berdasarkan [laporan survei APJII](https://...), penetrasi internet..."
    - ✅ *Correct:* "Merujuk pada [regulasi OJK mengenai fintech](https://...), platform wajib..."
 3. **Temporal Anchoring:** Always state the year or version of the data so readers and AI engines understand context (e.g., *"pada laporan tahun 2024"*, *"versi 6.5"*).
+

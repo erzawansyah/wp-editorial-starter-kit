@@ -39,17 +39,19 @@ Readers scan web pages in 3–5 seconds. Never waste reader time with preamble o
 Writing without verified research produces AI slop that search engines penalize and AI answer engines ignore. **Research is mandatory before writing sentence one.**
 
 ### Zero Hallucination Law
+
 - **Never guess numbers, percentages, dates, or regulations:** Every statistic and technical specification must be anchored in verified reality.
 - **Extract 3–5 "Hard Facts" Before Drafting:** The writer/subagent must gather at least 3–5 concrete data points (e.g., official survey percentages, statutory regulation numbers, release years, or technical metric thresholds).
 
 ### Three-Tier Source Hierarchy
+
 When conducting pre-writing research using search tools, prioritize sources strictly:
 
-| Tier | Source Category | Examples | Use Case |
-|:---|:---|:---|:---|
-| **Tier 1 (Authoritative / Primary)** | Government agencies, central banks, statutory bodies, official docs, peer-reviewed journals. | BPS, Bank Indonesia, OJK, Kemenkes, Kominfo, WHO, W3C, MDN Web Docs, official developer docs. | Mandatory for statistics, legal frameworks, official definitions, and technical parameters. |
-| **Tier 2 (Industry Reputable)** | Respected industry benchmarks, verified news agencies, established research institutes. | Google/Temasek e-Conomy SEA, Gartner, Antara, Reuters, Katadata Databoks. | Benchmark comparisons, market trends, adoption rates, survey insights. |
-| **Tier 3 (Banned as Sources)** | Anonymous blogs, content farms, scrape aggregators, unmoderated forums, generic AI regurgitations. | Generic SEO content mills, Quora, unverified social media posts. | **STRICTLY PROHIBITED.** Never cite or extract data from Tier 3. |
+| Tier                                 | Source Category                                                                                    | Examples                                                                                      | Use Case                                                                                    |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| **Tier 1 (Authoritative / Primary)** | Government agencies, central banks, statutory bodies, official docs, peer-reviewed journals.       | BPS, Bank Indonesia, OJK, Kemenkes, Kominfo, WHO, W3C, MDN Web Docs, official developer docs. | Mandatory for statistics, legal frameworks, official definitions, and technical parameters. |
+| **Tier 2 (Industry Reputable)**      | Respected industry benchmarks, verified news agencies, established research institutes.            | Google/Temasek e-Conomy SEA, Gartner, Antara, Reuters, Katadata Databoks.                     | Benchmark comparisons, market trends, adoption rates, survey insights.                      |
+| **Tier 3 (Banned as Sources)**       | Anonymous blogs, content farms, scrape aggregators, unmoderated forums, generic AI regurgitations. | Generic SEO content mills, Quora, unverified social media posts.                              | **STRICTLY PROHIBITED.** Never cite or extract data from Tier 3.                            |
 
 ---
 
@@ -163,7 +165,7 @@ _Example:_
 
 - Maximum **1–2 verified authoritative links** to primary sources (e.g., BPS, Kemenkes, OJK, Bank Indonesia, WHO, or official developer documentation).
 - Anchor text must be natural and contextual. **Never use generic anchors** (_"klik di sini"_, _"sumber"_).
-- Temporal anchoring: Mention the year or context of data (e.g., *"berdasarkan data BPS tahun 2024"*).
+- Temporal anchoring: Mention the year or context of data (e.g., _"berdasarkan data BPS tahun 2024"_).
 
 ---
 
