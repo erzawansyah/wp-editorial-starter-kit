@@ -19,14 +19,11 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Clone repo starter kit
 - [ ] Buat direktori `.workspaces/assets/`
 - [ ] Buat file `.env` dari `.env.example` berisi `WP_USERNAME` dan `WP_APP_PASSWORD`
-- [ ] Isi `SITE.md` tanpa placeholder `{{ }}` yang tersisa
-- [ ] Isi `DESIGN.md` tanpa placeholder `{{ }}` yang tersisa
-- [ ] Isi `SITE.md` tanpa placeholder `{{ }}` yang tersisa *(opsional dibantu skill `wpsk-editorial-brainstorm`)*
-- [ ] Isi `DESIGN.md` tanpa placeholder `{{ }}` yang tersisa *(opsional dibantu skill `wpsk-editorial-brainstorm`)*
+- [ ] Isi `SITE.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
+- [ ] Isi `DESIGN.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
 - [ ] Selesaikan semua item di `WORDPRESS-SETUP.md`
 - [ ] Koneksi WP REST API terverifikasi (`GET /wp-json/wp/v2/users/me`)
-- [ ] Permalink diatur ke `/%postname%/`
-- [ ] Permalink diatur ke `/%postname%/` *(bisa via wp-admin atau CLI `wp-wpcli-and-ops`)*
+- [ ] Permalink diatur ke `/%postname%/` _(bisa via wp-admin atau CLI `wp-wpcli-and-ops`)_
 - [ ] Salin file ini ke `.workspaces/PROGRESS.md` dan isi metadata di atas
 
 **✅ FASE 1 SELESAI:** `{{ Tanggal }}`
@@ -35,12 +32,8 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 ## Fase 2: Perencanaan Arsitektur & PRD (@architect)
 
-- [ ] Analisis niche dan persyaratan desain dari `SITE.md` & `DESIGN.md`
-- [ ] Analisis niche dan persyaratan desain dari `SITE.md` & `DESIGN.md` *(merujuk `frontend-design`)*
+- [ ] Analisis niche dan persyaratan desain dari `SITE.md` & `DESIGN.md` _(merujuk `frontend-design`)_
 - [ ] Buat dokumen PRD di `PRODUCT.md` (pastikan masuk `.gitignore`)
-- [ ] Definisikan daftar seluruh template (`front-page.php`, `single.php`, `page.php`, `archive.php`, `search.php`, `404.php`, template-parts)
-- [ ] Susun struktur wireframe detail untuk **Frontpage** (Hero grid, Section kategori, Trending, Sidebar)
-- [ ] Susun struktur wireframe detail untuk **Single Article** (Post header, Author bio, Breadcrumb, Gutenberg layout, Related posts, Comment)
 - [ ] Definisikan daftar seluruh template (`front-page.php`, `single.php`, `page.php`, dll. merujuk `wpsk-theme-convention`)
 - [ ] Susun struktur wireframe detail untuk **Frontpage** (Hero grid, Section kategori, Trending, Sidebar merujuk `frontend-design`)
 - [ ] Susun struktur wireframe detail untuk **Single Article** (Post header, Author bio, Breadcrumb, Gutenberg layout merujuk `frontend-design` & `wpsk-theme-convention`)
@@ -65,36 +58,27 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 > **FASE INI TIDAK BOLEH DIMULAI** sebelum baris "HARD GATE PRD DILEWATI" di atas terisi.
 
-### Prasyarat Teknis
 ### Prasyarat Teknis & Bacaan Skill
 
-- [ ] Skill `wpsk-theme-convention/SKILL.md` sudah dibaca penuh
-- [ ] Skill `antislop-ui/SKILL.md` sudah dibaca
-- [ ] Skill `antislop-human/SKILL.md` sudah dibaca
-- [ ] Skill `antislop-layoutmobile/SKILL.md` sudah dibaca
-- [ ] Skill `frontend-design/SKILL.md` sudah dibaca
-- [ ] Skill `wpsk-theme-convention/SKILL.md` sudah dibaca penuh *(standar arsitektur tema dinamis)*
-- [ ] Skill `antislop-ui/SKILL.md` sudah dibaca *(filter utama anti-slop visual & styling)*
-- [ ] Skill `antislop-human/SKILL.md` sudah dibaca *(aksesibilitas, kontras WCAG, & keyboard focus)*
-- [ ] Skill `antislop-layoutmobile/SKILL.md` sudah dibaca *(responsivitas mobile 375px & tap target)*
-- [ ] Skill `frontend-design/SKILL.md` sudah dibaca *(tipografi editorial & art direction)*
-- [ ] *(Opsional)* Skill `wp-block-development/SKILL.md` dibaca jika situs membutuhkan blok Gutenberg kustom
+- [ ] Skill `wpsk-theme-convention/SKILL.md` sudah dibaca penuh _(standar arsitektur tema dinamis)_
+- [ ] Skill `antislop-ui/SKILL.md` sudah dibaca _(filter utama anti-slop visual & styling)_
+- [ ] Skill `antislop-human/SKILL.md` sudah dibaca _(aksesibilitas, kontras WCAG, & keyboard focus)_
+- [ ] Skill `antislop-layoutmobile/SKILL.md` sudah dibaca _(responsivitas mobile 375px & tap target)_
+- [ ] Skill `frontend-design/SKILL.md` sudah dibaca _(tipografi editorial & art direction)_
+- [ ] _(Opsional)_ Skill `wp-block-development/SKILL.md` dibaca jika situs membutuhkan blok Gutenberg kustom
 - [ ] Dokumen `PRODUCT.md` dan `DESIGN.md` sudah dipelajari
 - [ ] Theme source di-scaffold di `.workspaces/theme-src/` dari underscoretw.com
 - [ ] `npm install` berhasil dijalankan
 - [ ] `npm run dev` berhasil — `theme/style.css` ter-generate
 
-### Konfigurasi & Fungsi Tema
 ### Konfigurasi & Fungsi Tema (Merujuk `wpsk-theme-convention`)
 
 - [ ] Nama tema di `theme/style.css` diubah dari `_tw` ke nama situs dari `SITE.md`
 - [ ] `functions.php` mendeklarasikan `add_theme_support('custom-logo')`
 - [ ] `functions.php` mendeklarasikan `register_nav_menus()` dengan lokasi yang sesuai
 - [ ] `functions.php` mendeklarasikan `add_theme_support('post-thumbnails')`
-- [ ] Token warna dan tipografi di `tailwind.css` diambil dari `DESIGN.md`
-- [ ] Token warna dan tipografi di `tailwind.css` diambil dari `DESIGN.md` *(merujuk `frontend-design`)*
+- [ ] Token warna dan tipografi di `tailwind.css` diambil dari `DESIGN.md` _(merujuk `frontend-design`)_
 
-### Template Parts & File Template (Mengacu ke `PRODUCT.md`)
 ### Template Parts & File Template (Mengacu ke `PRODUCT.md` & `wpsk-theme-convention`)
 
 - [ ] `template-parts/content/content-card.php`
@@ -114,7 +98,6 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] `search.php`
 - [ ] `404.php`
 
-### Verifikasi Elemen Dinamis & Anti-Slop
 ### Verifikasi Elemen Dinamis & Anti-Slop (Merujuk `antislop-*` & `wpsk-theme-convention`)
 
 - [ ] **Tidak ada** hardcode HTML navigasi — semua `wp_nav_menu()`
@@ -122,10 +105,8 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] **Tidak ada** hardcode ID/slug artikel — semua `WP_Query`
 - [ ] **Tidak ada** Tailwind CDN di `header.php` atau `functions.php`
 - [ ] Semua output PHP di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
-- [ ] Kontras warna teks memenuhi WCAG (min 4.5:1 untuk body text)
-- [ ] Layout mobile (375px) bebas horizontal scroll dan tap target >= 44px
-- [ ] Kontras warna teks memenuhi WCAG min 4.5:1 untuk body text *(merujuk `antislop-human`)*
-- [ ] Layout mobile (375px) bebas horizontal scroll dan tap target >= 44px *(merujuk `antislop-layoutmobile`)*
+- [ ] Kontras warna teks memenuhi WCAG min 4.5:1 untuk body text _(merujuk `antislop-human`)_
+- [ ] Layout mobile (375px) bebas horizontal scroll dan tap target >= 44px _(merujuk `antislop-layoutmobile`)_
 
 ### Finalisasi & Serah Terima Tema
 
@@ -133,8 +114,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] `npm run bundle` berhasil dijalankan
 - [ ] File `.zip` berada di root `.workspaces/` (bukan di dalam `theme-src/`)
 - [ ] File `.zip` diserahkan kepada user untuk diunggah/diaktifkan
-- [ ] Dokumen `.workspaces/THEME_SPECS.md` digenerate
-- [ ] Dokumen `.workspaces/THEME_SPECS.md` digenerate *(merujuk `wpsk-theme-convention`)*
+- [ ] Dokumen `.workspaces/THEME_SPECS.md` digenerate _(merujuk `wpsk-theme-convention`)_
 
 **✅ FASE 3 SELESAI:** `{{ Tanggal }}`
 
@@ -153,8 +133,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Kategori dibuat via REST API (`POST /wp-json/wp/v2/categories`)
 - [ ] Tag utama dibuat via REST API (`POST /wp-json/wp/v2/tags`)
 - [ ] Menu navigasi disusun dan dikaitkan
-- [ ] Halaman statis format Gutenberg dibuat via REST API (Tentang Kami, Tim Redaksi, Kontak, Privasi, Syarat & Ketentuan)
-- [ ] Halaman statis format Gutenberg dibuat via REST API *(merujuk `wp-patterns`)* (Tentang Kami, Tim Redaksi, Kontak, Privasi, Syarat & Ketentuan)
+- [ ] Halaman statis format Gutenberg dibuat via REST API _(merujuk `wp-patterns`)_ (Tentang Kami, Tim Redaksi, Kontak, Privasi, Syarat & Ketentuan)
 
 ### Aset Visual
 
@@ -165,10 +144,6 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 ### Penulisan Artikel Paralel via Subagents
 
-- [ ] Pemanggilan subagents secara paralel untuk menulis draf artikel SEO
-- [ ] Setiap artikel memenuhi standar skill `wpsk-seo-writer`
-- [ ] Setiap artikel menggunakan sintaks Gutenberg Blocks murni (`wp-patterns`)
-- [ ] Featured Image dicari (dapat menggunakan WPVibe `search_images`) dan di-set sebagai post thumbnail
 - [ ] Pemanggilan subagents secara paralel untuk penulisan artikel
 - [ ] Setiap subagent mengeksekusi penulisan artikel merujuk standar skill **`wpsk-seo-writer`** (anti-slop bahasa Indonesia, zero fluff, Definition Engineering, PAA question H2, tabel terverifikasi)
 - [ ] Setiap artikel diformat menggunakan Gutenberg Blocks murni merujuk skill **`wp-patterns`**
@@ -182,15 +157,12 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 ## Fase 5: QA (@qa)
 
-- [ ] Lighthouse Performa >= 80
-- [ ] Profiling query lambat & pembersihan database *(merujuk `wp-performance`)*
-- [ ] Lighthouse Performa >= 80 *(dioptimasi dengan `wp-performance`)*
+- [ ] Profiling query lambat & pembersihan database _(merujuk `wp-performance`)_
+- [ ] Lighthouse Performa >= 80 _(dioptimasi dengan `wp-performance`)_
 - [ ] Lighthouse SEO >= 80
-- [ ] Lighthouse Aksesibilitas >= 80
-- [ ] Lighthouse Aksesibilitas >= 80 & audit kontras warna *(merujuk `antislop-human`)*
+- [ ] Lighthouse Aksesibilitas >= 80 & audit kontras warna _(merujuk `antislop-human`)_
 - [ ] Tidak ada broken link di navigasi, konten, dan footer
-- [ ] Uji responsivitas mobile (375px) — tap target >= 44px, no overflow
-- [ ] Uji responsivitas mobile (375px) — tap target >= 44px, bebas overflow *(merujuk `antislop-layoutmobile`)*
+- [ ] Uji responsivitas mobile (375px) — tap target >= 44px, bebas overflow _(merujuk `antislop-layoutmobile`)_
 - [ ] Uji responsivitas tablet (768px)
 - [ ] Uji responsivitas desktop (1280px)
 - [ ] XML Sitemap dapat diakses dan valid
@@ -202,9 +174,8 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 ## Fase 6: Deployment & Serah Terima (Manusia)
 
 - [ ] File tema `.zip` terbaru dari `.workspaces/` aktif di WordPress
-- [ ] Backup pre-deploy tersimpan
-- [ ] Backup pre-deploy tersimpan *(opsional via `wp-wpcli-and-ops`)*
-- [ ] Flush cache dan rewrite rules jika diperlukan *(opsional via `wp-wpcli-and-ops`)*
+- [ ] Backup pre-deploy tersimpan _(opsional via `wp-wpcli-and-ops`)_
+- [ ] Flush cache dan rewrite rules jika diperlukan _(opsional via `wp-wpcli-and-ops`)_
 - [ ] Validasi visual langsung di browser bersama konten live
 - [ ] Post-launch check: homepage, single article, halaman statis, search, 404
 
