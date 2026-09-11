@@ -213,3 +213,29 @@ hard_facts_cited:
 - Metadata & title psychology: [references/title-and-metadata.md](references/title-and-metadata.md)
 - Short format example (600–800 words): [examples/short-format-example.md](examples/short-format-example.md)
 - Long format example (>1,300 words): [examples/long-format-example.md](examples/long-format-example.md)
+
+---
+
+## 10. Multi-Author Persona & Name Diversity Guardrails
+
+When creating 3–5 WordPress author accounts or assigning authorship to articles:
+
+### Banned Repetitive Name Cliches
+AI models suffer from extreme token repetition bias. The following name templates are **STRICTLY PROHIBITED**:
+- **Banned first names:** "Dimas", "Budi", "Siti", "Agus", "Rian", "Dewi" (when used as generic defaults).
+- **Banned last names / elements:** Any name containing "Pramesti", "Prasetyo", "Kusuma", "Wibowo" as default fallbacks.
+
+### Mandatory Diverse Indonesian Names Architecture
+Authors must represent diverse, believable Indonesian identities reflecting different regional, cultural, and professional backgrounds:
+- **West Java / Sundanese:** Gilang Ramadhan, Cecep Hidayat, Nabila Fitria, Ryan Mahendra, Alika Salsabila.
+- **Sumatra / Minang / Batak / Melayu:** Faisal Tanjung, Rendy Siregar, Nadia Safitri, Rizky Nasution, Tengku Ardiansyah.
+- **Central / East Java (Modern):** Danang Wicaksono, Anindya Larasati, Bayu Aji, Kirana Daniswara, Raditya Panji.
+- **Eastern Indonesia / Sulawesi / Bali:** Marcelino Rumayar, Ni Made Ayu, Fajar Makatita, Kevin Pattinama, Gracia Manoppo.
+- **Professional / Modern Editorial:** Adrian Pratama, Sarah Maharani, David Tanuwidjaja, Aurelia Clarissa, Farhan Gunawan.
+
+### Bio & Profile Realism
+Each author must have:
+1. **Realistic 2-3 sentence Bio:** Explaining their specific coverage beat, background, and analytical lens (e.g., *"Jurnalis data dengan spesialisasi ekonomi digital dan regulasi fintech..."*).
+2. **Distinct Email:** `<username>@<domain>` (e.g., `faisal@domain.com`).
+3. **Equal Post Distribution:** Articles must be rotated evenly across all 3–5 authors. Never attribute all articles to one author, and never attribute to `admin`.
+

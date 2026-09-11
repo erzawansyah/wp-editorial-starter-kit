@@ -15,13 +15,16 @@ description: >
 
 ## Prasyarat Wajib Sebelum Memulai
 
-Sebelum menulis satu baris kode pun, verifikasi dua kondisi ini:
+Sebelum menulis satu baris kode pun, verifikasi tiga kondisi ini di `.workspaces/PROGRESS.md`:
 
 **1. Hard-Gate PRD Sudah Dilewati:**
-Cek `.workspaces/PROGRESS.md`. Baris "HARD GATE: PRD disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Minta `@architect` untuk menyelesaikan dokumen PRD di `PRODUCT.md`.
+Baris "HARD GATE: PRD disetujui oleh user" **wajib sudah dicentang**. Jika belum, **BERHENTI**. Minta `@architect` untuk menyelesaikan dokumen PRD di `PRODUCT.md`.
 
-**2. PRODUCT.md & DESIGN.md Sudah Final:**
-Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `PRODUCT.md` menentukan daftar template dan wireframe detail (frontpage & single article), sedangkan `DESIGN.md` menentukan token desain (warna, tipografi, komponen). Tidak boleh ada field placeholder `{{ }}` yang tersisa.
+**2. Konten, Penulis, & Menu Navigasi Sudah Siap (Content-First):**
+Fase Fondasi Konten & Menu **wajib sudah selesai**. Kategori, tag, 3–5 user author, menu navigasi Header & Footer, dan artikel real via REST API sudah terbit di server target. `@engineer` membangun tema di atas **data dan taksonomi riil**, bukan asumsi dummy.
+
+**3. PRODUCT.md & DESIGN.md Sudah Final:**
+`PRODUCT.md` menentukan daftar template dan wireframe detail, sedangkan `DESIGN.md` menentukan token desain (warna, tipografi, komponen). Tidak boleh ada field placeholder `{{ }}` yang tersisa.
 
 ---
 
@@ -29,6 +32,7 @@ Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `P
 
 - **Base Theme:** [\_tw](https://underscoretw.com/) — WordPress classic starter theme + Tailwind CSS
 - **Build Tool:** PostCSS (Tailwind v4) + esbuild (JS), dijalankan **LOKAL** via npm
+- **Desain & Anti-Slop:** Berpedoman mutlak pada skill `wpsk-theme-craft` (Craft Floor & 9 Fungsi Impeccable)
 - **PHP:** 8.2+, Classic Theme (bukan Block Theme / FSE)
 - **Node.js & npm:** wajib ada di mesin lokal operator
 
@@ -36,9 +40,9 @@ Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `P
 
 ## Arsitektur \_tw: Source vs Output
 
-\_tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang di-generate)**. Memahami perbedaan ini adalah aturan pertama:
+\_tw memisahkan **source code (yang diedit)** dari **output tema WordPress (yang di-generate)**:
 
-```
+```text
 .workspaces/theme-src/          ← ROOT SOURCE (clone _tw, ada di lokal saja)
 │
 ├── tailwind.css                ← EDIT DI SINI: custom Tailwind (warna, font dari DESIGN.md)
@@ -56,8 +60,9 @@ Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `P
     ├── header.php
     ├── footer.php
     ├── front-page.php          ← template homepage (buat jika belum ada)
+    ├── single.php              ← template artikel single post
+    ├── author.php              ← WAJIB: template arsip profil author
     ├── index.php
-    ├── single.php
     ├── page.php
     ├── archive.php
     ├── search.php
@@ -79,55 +84,38 @@ Buka `PRODUCT.md` dan `DESIGN.md`. Keduanya adalah spesifikasi teknis mutlak: `P
 
 ## Prosedur Inisialisasi Tema (Jika Belum Ada)
 
-Seluruh proses ini dilakukan **secara lokal**. Tidak ada langkah yang melibatkan WPVibe atau server remote.
+Seluruh proses ini dilakukan **secara lokal**.
 
 ### Langkah 1: Generate Tema via underscoretw.com
-
 1. Buka [https://underscoretw.com/](https://underscoretw.com/)
 2. Isi **Theme Name** dengan nama situs dari `SITE.md` (contoh: `Rumah Desain`)
 3. Isi **Theme Slug** dengan slug situs dari `SITE.md` (contoh: `rumah-desain`)
 4. Download zip hasil generate
 5. Ekstrak zip tersebut ke `.workspaces/theme-src/`
 
-### Langkah 2: Install Dependencies
-
+### Langkah 2: Install Dependencies & Build
 ```bash
-# Jalankan dari root .workspaces/theme-src/
 cd .workspaces/theme-src
 npm install
-```
-
-### Langkah 3: Verifikasi Build Berjalan
-
-```bash
 npm run dev
 ```
 
-Jika sukses, file `theme/style.css` akan ter-generate. Jika gagal, cek `package.json` dan pastikan Node.js >= 18.
-
-### Langkah 4: Rename Header Tema
-
-Buka `theme/style.css` dan ubah baris:
-
-```css
-Theme Name: _tw
-```
-
-Menjadi nama tema sesuai `SITE.md`. **Langkah ini wajib** sebelum langkah apapun lainnya.
+### Langkah 3: Rename Header Tema
+Buka `theme/style.css` dan pastikan nama tema sesuai `SITE.md`.
 
 ---
 
 ## Konfigurasi Tailwind dari DESIGN.md
 
-**Wajib dibaca lebih dulu:** Buka `DESIGN.md`, catat nilai warna, font, dan spacing. Kemudian terapkan ke `tailwind.css`:
+Buka `DESIGN.md`, catat nilai warna, font, dan spacing. Terapkan ke `tailwind.css`:
 
 ```css
 /* .workspaces/theme-src/tailwind.css */
 @import "tailwindcss";
 
 @theme {
-  /* Warna — ambil PERSIS dari DESIGN.md, bukan tebakan */
-  --color-primary: #d94f3d; /* contoh: ganti dengan nilai di DESIGN.md */
+  /* Warna — ambil PERSIS dari DESIGN.md */
+  --color-primary: #d94f3d;
   --color-secondary: #1a1a2e;
   --color-accent: #f4a823;
   --color-neutral: #f7f5f2;
@@ -139,32 +127,30 @@ Menjadi nama tema sesuai `SITE.md`. **Langkah ini wajib** sebelum langkah apapun
 }
 ```
 
-> **INGAT:** Nilai di atas adalah contoh. Selalu ambil nilai sesungguhnya dari `DESIGN.md` proyek yang sedang dikerjakan. Jangan pernah gunakan warna default Tailwind atau nilai inventif AI.
-
 ---
 
 ## functions.php — Deklarasi Wajib
 
-`functions.php` **wajib** mengandung deklarasi-deklarasi berikut. Tambahkan jika belum ada:
+`functions.php` **wajib** mengandung deklarasi-deklarasi berikut:
 
 ```php
 <?php
-function nama_tema_setup() {
-    // Navigasi: daftarkan semua lokasi menu
+function starter_theme_setup() {
+    // Navigasi: daftarkan lokasi menu
     register_nav_menus( [
-        'primary' => __( 'Menu Utama', 'nama-tema' ),
-        'footer'  => __( 'Menu Footer', 'nama-tema' ),
+        'primary' => __( 'Menu Utama', 'starter-theme' ),
+        'footer'  => __( 'Menu Footer', 'starter-theme' ),
     ] );
 
-    // Custom Logo: WAJIB ada untuk wp_nav_menu dan has_custom_logo()
+    // Custom Logo: batasi ukuran terukur agar tidak meluap
     add_theme_support( 'custom-logo', [
         'height'      => 60,
-        'width'       => 200,
+        'width'       => 240,
         'flex-height' => true,
         'flex-width'  => true,
     ] );
 
-    // Post Thumbnails: untuk featured image artikel
+    // Post Thumbnails
     add_theme_support( 'post-thumbnails' );
 
     // HTML5 support
@@ -175,191 +161,113 @@ function nama_tema_setup() {
     // Title tag
     add_theme_support( 'title-tag' );
 }
-add_action( 'after_setup_theme', 'nama_tema_setup' );
+add_action( 'after_setup_theme', 'starter_theme_setup' );
 ```
 
 ---
 
-## Aturan Elemen Dinamis (Tidak Boleh Dilanggar)
+## Aturan Baku Elemen Dinamis & Tata Letak (Wajib Dipatuhi)
 
-Ini adalah aturan paling sering dilanggar AI. **Tidak ada pengecualian.**
-
-### ✅ Navigasi — Selalu `wp_nav_menu()`
+### 1. Header & Container Logo (Anti-Meluap)
+Header **wajib disiapkan untuk mendukung Site Title teks ATAU Logo gambar** tanpa mengubah tinggi atau merusak container header:
+* Container logo **wajib** memiliki batasan tinggi (`max-h-12 md:max-h-14`) dan properti `object-contain flex-shrink-0`.
+* Logo tidak boleh meluap (*overflow*) dari navbar pada viewport apapun.
 
 ```php
-<!-- header.php: BENAR -->
+<!-- header.php: BENAR & AMAN DARI OVERFLOW -->
+<div class="site-branding flex items-center max-h-12 md:max-h-14 overflow-hidden">
+    <?php if ( has_custom_logo() ) : ?>
+        <div class="site-logo flex items-center [&_img]:max-h-12 md:[&_img]:max-h-14 [&_img]:w-auto [&_img]:object-contain">
+            <?php the_custom_logo(); ?>
+        </div>
+    <?php else : ?>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-heading font-bold text-xl md:text-2xl text-text hover:text-primary transition-colors">
+            <?php bloginfo( 'name' ); ?>
+        </a>
+    <?php endif; ?>
+</div>
+```
+
+### 2. Navigasi Header & Footer — Selalu `wp_nav_menu()`
+```php
 <?php wp_nav_menu( [
     'theme_location' => 'primary',
-    'menu_class'     => 'flex gap-6 items-center',
+    'menu_class'     => 'flex items-center gap-6 text-sm font-medium',
     'container'      => false,
+    'fallback_cb'    => false,
 ] ); ?>
-
-<!-- DILARANG: hardcode HTML statis seperti ini -->
-<!-- <ul><li><a href="/tentang">Tentang</a></li></ul> -->
 ```
 
-### ✅ Logo — Selalu `the_custom_logo()`
+### 3. Frontpage: Variasi Section per Kategori & Pagination Wajib
+Halaman depan (`front-page.php`) **dilarang monoton**. Wajib menerapkan variasi struktur kolom/tata letak per kategori:
+* **Hero Headline Grid:** 1 Featured Post besar di kiri + 3 stacked posts di kanan.
+* **Section Kategori A:** 3-column card grid dengan thumbnail rasio 16:9.
+* **Section Kategori B:** Split 2-column (1 lead article dengan excerpt + 3 compact horizontal list items).
+* **Section Kategori C:** 4-column horizontal card strip atau list magazine.
+* **Trending / Populer:** Numbered list 1–5 dengan angka display besar.
+* **Pagination Frontpage:** Bagian bawah Frontpage **wajib** memiliki tombol/navigasi pagination (misal: *"Jelajahi Semua Artikel"*) yang ketika diklik **mengarah ke Archive Page** tertentu (seperti `/artikel/` atau halaman blog archive).
 
-```php
-<!-- header.php: BENAR -->
-<?php if ( has_custom_logo() ) : ?>
-    <?php the_custom_logo(); ?>
-<?php else : ?>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-heading font-bold text-xl">
-        <?php bloginfo( 'name' ); ?>
-    </a>
-<?php endif; ?>
+### 4. Single Post: Author Box, Comment Box Ber-styling, Custom Sidebar, & Tombol Bagikan
+Halaman artikel (`single.php`) **wajib** memuat:
+* **Tombol Bagikan (Social Share) Wajib:** Disediakan via komponen `template-parts/post/social-share.php` (dapat diletakkan di bawah judul dan/atau di akhir artikel). Wajib memuat **minimal 6 kanal**:
+  1. **WhatsApp:** `https://api.whatsapp.com/send?text=...`
+  2. **Telegram:** `https://t.me/share/url?url=...&text=...`
+  3. **Facebook:** `https://www.facebook.com/sharer/sharer.php?u=...`
+  4. **X (Twitter):** `https://twitter.com/intent/tweet?url=...&text=...`
+  5. **Threads:** `https://www.threads.net/intent/post?text=...`
+  6. **Copy Link:** Tombol salin tautan dengan JavaScript `navigator.clipboard.writeText()` dan visual feedback instan (*"Tersalin!"*).
+* **Author Box:** Avatar penulis (`get_avatar()`), nama penulis dengan link ke arsipnya (`get_author_posts_url()`), dan biografi (`get_the_author_meta('description')`).
+* **Comment Box yang Ter-styling Penuh:** Form komentar (`comment_form()`) dan list komentar wajib diberi styling Tailwind penuh (input border, padding, button submit bergaya tema, list komentar berulir rapi). Dilarang membiarkan form unstyled bawaan WP.
+* **Custom Sidebar Komponen:** Dilarang mengandalkan dynamic widget default WordPress yang unstyled. Buat komponen sidebar kustom (`template-parts/sidebar/sidebar-single.php`) berisi:
+  1. Author bio ringkas.
+  2. Popular / Trending posts (via `WP_Query`).
+  3. Kategori pills / Newsletter CTA.
 
-<!-- DILARANG: hardcode img tag -->
-<!-- <img src="/wp-content/uploads/logo.png" alt="Logo"> -->
-```
-
-### ✅ Query Artikel — Selalu WP_Query atau get_posts()
-
-```php
-<!-- section-category.php: BENAR -->
-<?php
-$args = [
-    'post_type'      => 'post',
-    'posts_per_page' => 6,
-    'category_name'  => $category_slug, // dinamis dari parameter
-];
-$query = new WP_Query( $args );
-if ( $query->have_posts() ) :
-    while ( $query->have_posts() ) : $query->the_post();
-        get_template_part( 'template-parts/content/content-card' );
-    endwhile;
-    wp_reset_postdata();
-endif;
-?>
-```
-
-### ✅ Kategori & Tag — Selalu fungsi WordPress
-
-```php
-<!-- Daftar kategori: BENAR -->
-<?php $categories = get_categories( [ 'hide_empty' => true ] ); ?>
-<?php foreach ( $categories as $cat ) : ?>
-    <a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>">
-        <?php echo esc_html( $cat->name ); ?>
-    </a>
-<?php endforeach; ?>
-```
-
-### ✅ Search Form — Selalu `get_search_form()`
-
-```php
-<?php get_search_form(); ?>
-```
+### 5. Template Author Archive (`author.php`) — Wajib Ada
+Situs editorial berpusat pada kredibilitas penulis. File `author.php` **wajib dibuat**:
+* **Author Profile Header:** Foto avatar besar, nama lengkap author, bio lengkap, badge/role author, dan total artikel yang dipublikasikan (`count_user_posts()`).
+* **Author Posts Loop:** Grid/List seluruh artikel yang ditulis oleh author tersebut, dilengkapi dengan pagination native WordPress.
 
 ---
 
 ## Struktur Template Parts Wajib
 
-\_tw menyediakan `template-parts/` kosong. Buat subfolder berikut dari awal:
-
-```
+```text
 theme/template-parts/
 ├── content/
 │   ├── content-card.php        ← card artikel untuk loop (homepage, archive, search)
-│   ├── content-single.php      ← konten artikel single post
-│   └── content-none.php        ← jika tidak ada hasil query
+│   ├── content-single.php      ← konten artikel single post (Gutenberg styled)
+│   └── content-none.php        ← fallback jika query kosong
 ├── homepage/
-│   ├── hero-grid.php           ← blok hero headline (artikel utama featured)
-│   ├── section-category.php    ← blok artikel per kategori (reusable, terima $args)
-│   └── section-trending.php    ← blok trending/populer
+│   ├── hero-grid.php           ← blok hero headline (1 lead + 3 stacked)
+│   ├── section-cards.php       ← blok kategori grid 3 kolom
+│   ├── section-split.php       ← blok kategori split lead + horizontal list
+│   └── section-trending.php    ← blok trending bernomor 1-5
 ├── post/
-│   ├── post-meta.php           ← byline: penulis, tanggal, kategori, reading time
-│   └── post-thumbnail.php      ← wrapper featured image
+│   ├── author-box.php          ← box profil author di single post
+│   ├── social-share.php        ← tombol bagikan (WhatsApp, Telegram, FB, X, Threads, Copy Link)
+│   ├── post-meta.php           ← byline: penulis, tanggal, reading time
+│   └── post-thumbnail.php      ← wrapper featured image responsif
+├── sidebar/
+│   └── sidebar-single.php      ← custom sidebar single post
 └── global/
-    ├── site-branding.php       ← logo + nama situs
-    └── social-links.php        ← ikon sosial media (opsional)
+    ├── site-branding.php       ← logo + site title anti-meluap
+    └── pagination.php          ← navigasi halaman arsip / frontpage
 ```
-
-Cara memanggil template parts:
-
-```php
-// Panggil tanpa variabel
-get_template_part( 'template-parts/homepage/hero-grid' );
-
-// Panggil dengan variabel (WP 5.5+)
-get_template_part( 'template-parts/homepage/section-category', null, [
-    'category_slug' => 'teknologi',
-    'title'         => 'Teknologi',
-    'post_count'    => 4,
-] );
-```
-
----
-
-## npm Scripts
-
-Jalankan semua perintah dari folder `.workspaces/theme-src/`:
-
-| Script           | Kapan Digunakan                                                           |
-| ---------------- | ------------------------------------------------------------------------- |
-| `npm run dev`    | Build sekali saat ingin melihat hasil perubahan                           |
-| `npm run watch`  | Build + watch otomatis saat aktif coding (gunakan ini selama development) |
-| `npm run bundle` | Build produksi + buat zip siap upload — **jalankan di akhir saja**        |
-
-> **Guardrail Bundling:** Output zip dari `npm run bundle` **wajib** berada di root `.workspaces/`, **bukan** di dalam folder `theme-src/`. Pastikan `package.json` sudah dikonfigurasi dengan benar untuk ini.
 
 ---
 
 ## Checklist Fase Tema (Wajib Semua ✅ Sebelum Bundle)
 
-Sebelum menjalankan `npm run bundle`, semua item berikut **harus** sudah terpenuhi:
-
-### Prasyarat & Konfigurasi
-
-- [ ] `PRODUCT.md` dan `DESIGN.md` sudah dibaca dan dipatuhi secara penuh
-- [ ] Nama tema di `theme/style.css` sudah diubah dari `_tw` ke nama situs dari `SITE.md`
-- [ ] `functions.php` mendeklarasikan `add_theme_support('custom-logo')`, `register_nav_menus()`, dan `add_theme_support('post-thumbnails')`
-- [ ] Semua nilai warna & font di `tailwind.css` sudah diambil dari `DESIGN.md`
-- [ ] `npm run dev` berhasil dijalankan tanpa error
-
-### Template & Elemen Dinamis
-
-- [ ] **Tidak ada** link navigasi yang di-hardcode — semua memakai `wp_nav_menu()`
-- [ ] **Tidak ada** `<img src="...">` hardcode untuk logo — semua memakai `the_custom_logo()`
-- [ ] **Tidak ada** query artikel yang hardcode ID atau slug — semua memakai `WP_Query`
-- [ ] Template parts sudah terpisah rapi di subfolder yang benar
-- [ ] `front-page.php` dan `single.php` sudah dibuat mengacu pada wireframe detail di `PRODUCT.md`
-
-### Kualitas & Kepatuhan Desain
-
-- [ ] Skill `antislop-ui` sudah dibaca dan checklist-nya dilalui
-- [ ] Tidak ada gradien default AI (biru-ungu, biru-cyan) yang tidak ada di `DESIGN.md`
-- [ ] Tidak ada Tailwind CDN yang disuntikkan di `header.php` atau `functions.php`
-- [ ] Semua output PHP sudah di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
-- [ ] Tampilan sudah diuji pada viewport mobile (375px) dan desktop (1280px)
-
-### Finalisasi & Serah Terima
-
-- [ ] Screenshot 1200x900px homepage sudah dibuat dan disimpan sebagai `theme/screenshot.png`
-- [ ] `npm run bundle` sudah dijalankan dan file `.zip` ada di root `.workspaces/`
-- [ ] File `.zip` **tidak** ada di dalam folder `theme-src/`
-- [ ] File `.zip` diserahkan kepada user untuk diunggah/diperbarui di WordPress
-- [ ] `.workspaces/THEME_SPECS.md` sudah digenerate
-- [ ] `.workspaces/PROGRESS.md` sudah diupdate dengan status "Fase Tema: SELESAI"
-
----
-
-## Do's and Don'ts — Ringkasan
-
-**WAJIB:**
-
-- Baca `PRODUCT.md` dan `DESIGN.md` sebelum menulis satu token Tailwind pun
-- Semua elemen dinamis (menu, logo, query, search) wajib pakai fungsi native WordPress sejak baris pertama
-- Escape semua output PHP (`esc_html()`, `esc_url()`, `wp_kses_post()`)
-- Jalankan `npm run dev` setelah setiap perubahan CSS untuk verifikasi
-- Serahkan file ZIP tema kepada user setiap ada pembuatan atau perubahan tema
-
-**DILARANG:**
-
-- Edit `theme/style.css` atau `theme/js/` secara manual — akan ditimpa saat npm build
-- Gunakan Tailwind CDN Play — \_tw menggunakan build pipeline PostCSS lokal
-- Hardcode teks navigasi, URL logo, atau ID artikel dalam PHP
-- Edit tema di live server via WPVibe — seluruh coding tema dilakukan **lokal**
-- Mulai coding tema sebelum Hard-Gate PRD (`PRODUCT.md`) disetujui user
-- Menaruh file zip output di dalam folder `theme-src/`
+- [ ] `PRODUCT.md` dan `DESIGN.md` dipatuhi secara penuh
+- [ ] Skill `wpsk-theme-craft` (Craft Floor) sudah dipelajari dan dipenuhi
+- [ ] Header aman: Container logo dibatasi (`max-h-12 md:max-h-14`), tidak meluap jika ada logo gambar
+- [ ] Frontpage memiliki variasi section kategori yang kaya + pagination menuju archive
+- [ ] Single post memuat Author Box, Comment Box ter-styling Tailwind, dan Custom Sidebar
+- [ ] Template `author.php` sudah dibuat dan berfungsi menampilkan profil penulis + arsip artikelnya
+- [ ] Tidak ada hardcode HTML untuk navigasi (selalu `wp_nav_menu()`)
+- [ ] Tidak ada Tailwind CDN — build PostCSS lokal via `npm run dev`
+- [ ] Output PHP di-escape (`esc_html()`, `esc_url()`, `wp_kses_post()`)
+- [ ] `theme/screenshot.png` (1200x900px) sudah dibuat
+- [ ] Bundle zip berada di root `.workspaces/` (bukan di dalam `theme-src/`)
+- [ ] `.workspaces/THEME_SPECS.md` digenerate
