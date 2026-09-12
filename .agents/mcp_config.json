@@ -9,7 +9,12 @@
         "mcp-remote",
         "https://mcp.wpvibe.ai/mcp"
       ],
-      "description": "WPVibe WordPress MCP Server - https://wpvibe.ai"
+      "description": "WPVibe WordPress MCP Server - https://wpvibe.ai. Dahulukan skill wordpress",
+      "disabled": true
+    },
+    "qloov_wordpress": {
+      "serverUrl": "https://qloov.com/wp-json/easy-mcp-ai/v1/mcp",
+      "description": "WordPress MCP Server untuk situs Qloov Hobbies (https://qloov.com)"
     }
   }
 }
