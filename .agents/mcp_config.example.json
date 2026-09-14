@@ -1,7 +1,10 @@
 {
   "mcpServers": {
     "easy_ai_mcp": {
-      "serverUrl": "https://<your-domain>/wp-json/easy-mcp-ai/v1/mcp"
+      "serverUrl": "https://<your-domain>/wp-json/easy-mcp-ai/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer <your_easy_mcp_ai_token>"
+      }
     }
   }
 }
