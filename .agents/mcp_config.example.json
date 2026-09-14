@@ -1,16 +1,7 @@
 {
   "mcpServers": {
-    "wpvibe": {
-      "command": "cmd",
-      "args": [
-        "/c",
-        "npx",
-        "-y",
-        "mcp-remote",
-        "https://mcp.wpvibe.ai/mcp"
-      ],
-      "description": "WPVibe WordPress MCP Server - https://wpvibe.ai. Dahulukan skill wordpress",
-      "disabled": true
+    "easy_ai_mcp": {
+      "serverUrl": "https://<your-domain>/wp-json/easy-mcp-ai/v1/mcp"
     }
   }
 }
