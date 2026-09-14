@@ -36,11 +36,21 @@ WP_APP_PASSWORD=xxxx xxxx xxxx xxxx xxxx
 
 _(Catatan: File `.env` sudah masuk dalam `.gitignore` sehingga kredensial aman)._
 
-### C. Plugin WPVibe (Opsional / Pelengkap)
+### C. Plugin Easy MCP AI & Konfigurasi MCP
 
-| Plugin     | Keterangan                                                                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **WPVibe** | Opsional. Digunakan AI untuk operasi di luar REST API standar, seperti pencarian referensi gambar (`search_images`). Install dari wpvibe.ai jika dibutuhkan. |
+Plugin **Easy MCP AI** dipasang di WordPress untuk menyediakan endpoint integrasi MCP:
+
+1. Install dan aktifkan plugin **Easy MCP AI** di WordPress target.
+2. Salin template konfigurasi MCP di repo ini:
+   ```bash
+   cp .agents/mcp_config.example.json .agents/mcp_config.json
+   ```
+3. Sesuaikan URL domain WordPress Anda pada `.agents/mcp_config.json` agar mengarah ke `https://domain-anda.com/wp-json/easy-mcp-ai/v1/mcp`.
+4. Pastikan koneksi MCP ke WordPress terhubung.
+
+### D. Pexafy MCP (Pencarian Stok Foto)
+
+AI menggunakan **Pexafy MCP** untuk mencari foto stok editorial beresolusi tinggi sebagai featured image. Pastikan Pexafy MCP sudah terpasang global di Antigravity. Jika belum, pasang server MCP Pexafy sebelum masuk ke tahap penulisan artikel.
 
 ---
 
@@ -98,6 +108,8 @@ npm install
 
 - [ ] WordPress berjalan normal di URL target (tercatat di `SITE.md`)
 - [ ] File `.env` terisi dengan `WP_USERNAME` dan `WP_APP_PASSWORD` role admin yang valid
+- [ ] File `.agents/mcp_config.json` disiapkan dari `.agents/mcp_config.example.json` dan koneksi Easy MCP AI terhubung
+- [ ] Server MCP Pexafy aktif di Antigravity
 - [ ] Folder `.workspaces/theme-src/` sudah terinstal `npm install`
 - [ ] Folder `.workspaces/assets/` sudah dibuat
 - [ ] `SITE.md` dan `DESIGN.md` sudah terisi (atau panggil `/wpsk-editorial-brainstorm` di chat AI jika butuh panduan ide)

@@ -19,6 +19,9 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Clone repo starter kit
 - [ ] Buat direktori wajib `.workspaces/assets/`
 - [ ] Buat file `.env` dari `.env.example` berisi `WP_USERNAME` dan `WP_APP_PASSWORD`
+- [ ] Salin `.agents/mcp_config.example.json` ke `.agents/mcp_config.json` dan sesuaikan domain WordPress
+- [ ] Koneksi Easy MCP AI terhubung dan terverifikasi
+- [ ] Server MCP Pexafy terverifikasi aktif di Antigravity
 - [ ] Isi `SITE.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
 - [ ] Isi `DESIGN.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
 - [ ] Selesaikan semua item di `WORDPRESS-SETUP.md`
@@ -88,7 +91,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Pemanggilan subagents secara paralel untuk penulisan artikel
 - [ ] Setiap subagent mengeksekusi penulisan artikel merujuk standar skill **`wpsk-seo-writer`** (anti-slop bahasa Indonesia, zero fluff, riset fakta terverifikasi, PAA question H2, tabel terverifikasi)
 - [ ] Setiap artikel diformat menggunakan Gutenberg Blocks murni merujuk skill **`wp-patterns`**
-- [ ] Featured Image dicari (dapat menggunakan WPVibe `search_images`) dan di-set sebagai post thumbnail via REST API
+- [ ] Featured Image dicari menggunakan **Pexafy MCP** (`search_photos`) dan di-set sebagai post thumbnail via REST API
 - [ ] Setiap artikel dipublikasikan via REST API diatribusikan ke author bergantian (**Dilarang keras memakai akun admin**)
 - [ ] Minimal 3 artikel per kategori utama berhasil terbit
 

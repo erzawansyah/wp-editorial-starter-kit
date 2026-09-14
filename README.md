@@ -1,10 +1,10 @@
 # WP Editorial Starter Kit
 
-Starter kit untuk produksi massal website niche blog/editorial berbasis WordPress, dioperasikan oleh AI agent (Antigravity) yang terhubung langsung ke WordPress via **WordPress REST API** (Application Password) serta didukung **WPVibe MCP** untuk operasi visual khusus seperti pencarian gambar.
+Starter kit untuk produksi massal website niche blog/editorial berbasis WordPress, dioperasikan oleh AI agent (Antigravity) yang terhubung langsung ke WordPress via **WordPress REST API** (Application Password), **Easy MCP AI**, serta didukung **Pexafy MCP** untuk pencarian foto/featured image.
 
 ## Cara Kerja
 
-Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ada permintaan pembuatan website baru. Setelah di-clone, operator mengisi kredensial `.env`, identitas `SITE.md`, dan sistem desain `DESIGN.md`. Selanjutnya, AI mengeksekusi perencanaan PRD (`PRODUCT.md`), penyusunan konten, kategori, author & menu terlebih dahulu (**Content-First**), pembangunan tema kustom lokal berbasis `_tw` + Tailwind CSS dengan standar visual **`wpsk-theme-craft`** (Impeccable Craft Floor), hingga verifikasi visual otomatis via Playwright.
+Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ada permintaan pembuatan website baru. Setelah di-clone, operator mengisi kredensial `.env`, konfigurasi `.agents/mcp_config.json`, identitas `SITE.md`, dan sistem desain `DESIGN.md`. Selanjutnya, AI mengeksekusi perencanaan PRD (`PRODUCT.md`), penyusunan konten, kategori, author & menu terlebih dahulu (**Content-First**), pembangunan tema kustom lokal berbasis `_tw` + Tailwind CSS dengan standar visual **`wpsk-theme-craft`** (Impeccable Craft Floor), hingga verifikasi visual otomatis via Playwright.
 
 ## Struktur Repo
 
@@ -16,13 +16,14 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 ├── PRODUCT.md            # PRD: daftar template & wireframe detail frontpage/single (git-ignored)
 ├── SITE.md               # Identitas website & URL target proyek (git-ignored)
 ├── SITE.example.md       # Template kosong SITE.md untuk proyek baru
-├── WORDPRESS-SETUP.md    # Checklist instalasi WordPress + Application Passwords
+├── WORDPRESS-SETUP.md    # Checklist instalasi WordPress + Application Passwords & Easy MCP AI
 ├── PROGRESS.example.md   # Template checklist pelacak progres proyek
 ├── README.md             # File dokumentasi ini
 ├── skills-lock.json      # Lock file untuk skill yang digunakan
 ├── .env.example          # Template kredensial WP REST API
 ├── .gitignore
 ├── .agents/
+│   ├── mcp_config.example.json # Template konfigurasi Easy MCP AI endpoint
 │   └── skills/           # 9 Skill AI agent aktif
 │       ├── wpsk-editorial-brainstorm/ # Brainstorming konsep, niche, dan branding
 │       ├── wpsk-theme-convention/     # Konvensi tema classic + Tailwind (_tw) & 8 aturan baku
@@ -48,7 +49,8 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 - **Node.js + npm** terinstall di mesin lokal (untuk build Tailwind CSS)
 - **WordPress** berjalan di server target (PHP 8.2+)
 - **Application Password** WordPress ber-role Administrator (dikonfigurasi di `.env`)
-- **WPVibe MCP** aktif di Antigravity (digunakan untuk pencarian gambar & operasi visual pelengkap)
+- **Easy MCP AI** aktif di WordPress & dikonfigurasi di `.agents/mcp_config.json`
+- **Pexafy MCP** terpasang di Antigravity (digunakan untuk pencarian stok foto editorial & featured image)
 
 ## Memulai Proyek Baru
 
@@ -65,6 +67,7 @@ cd nama-proyek
 cp SITE.example.md SITE.md
 cp PROGRESS.example.md .workspaces/PROGRESS.md
 cp .env.example .env
+cp .agents/mcp_config.example.json .agents/mcp_config.json
 mkdir .workspaces/assets
 ```
 
@@ -73,6 +76,18 @@ Isi file `.env` dengan kredensial Application Password WordPress Anda:
 ```env
 WP_USERNAME=admin_anda
 WP_APP_PASSWORD=xxxx xxxx xxxx xxxx xxxx
+```
+
+Sesuaikan URL endpoint WordPress Anda pada `.agents/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "easy_ai_mcp": {
+      "serverUrl": "https://domain-anda.com/wp-json/easy-mcp-ai/v1/mcp"
+    }
+  }
+}
 ```
 
 ### 3. Setup Konsep (Opsional: Gunakan Bantuan AI)
@@ -159,8 +174,8 @@ Update `.workspaces/PROGRESS.md` secara _real-time_ setiap fase selesai.
 | Komponen | Teknologi |
 | :--- | :--- |
 | CMS | WordPress (PHP 8.2+) |
-| Manajemen Konten | WordPress REST API murni (Application Password via `.env`) |
-| Pencarian Gambar | WPVibe MCP (`search_images`) / Media Library |
+| Manajemen Konten | WordPress REST API murni (Application Password via `.env`) & Easy MCP AI |
+| Pencarian Gambar | Pexafy MCP (`search_photos`) / Media Library |
 | Base Theme | [\_tw](https://underscoretw.com/) (Classic starter theme) |
 | CSS Framework | Tailwind CSS (via PostCSS build lokal, **bukan CDN**) |
 | Standar Visual | `wpsk-theme-craft` (Impeccable Craft Floor & 9 Perintah) |

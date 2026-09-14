@@ -8,7 +8,7 @@ Struktur baku setiap website yang dihasilkan: header menu kategori dengan contai
 
 ## Tech Stack
 
-WordPress (PHP 8.2+), classic theme + Tailwind CSS. Manajemen konten via WordPress REST API (Basic Auth Application Password dari `.env`). WPVibe MCP digunakan khusus untuk operasi di luar REST API (seperti pencarian gambar/featured image). AI client: Antigravity.
+WordPress (PHP 8.2+), classic theme + Tailwind CSS. Manajemen konten via WordPress REST API (Basic Auth Application Password dari `.env`) dan Easy MCP AI. Pexafy MCP digunakan untuk pencarian gambar/featured image editorial berkualitas tinggi. AI client: Antigravity.
 
 ## Agents
 
@@ -44,6 +44,8 @@ _(Skill terkait: Gunakan **`wpsk-editorial-brainstorm`** jika butuh bantuan AI u
 - Agen **WAJIB** membuat folder wajib `.workspaces/assets/` di awal inisialisasi sebagai tempat menyimpan gambar (logo), featured image, placeholder, dll yang akan diunggah ke website.
 - Segera inisialisasi file `.workspaces/PROGRESS.md` menggunakan template dari `PROGRESS.example.md`.
 - User **WAJIB** menyediakan file `.env` berisi `WP_USERNAME` dan `WP_APP_PASSWORD` (Application Password role Administrator).
+- User/Agen **WAJIB** menyiapkan file `.agents/mcp_config.json` dari `.agents/mcp_config.example.json` dengan domain target WordPress yang valid, dan memvalidasi koneksi ke **Easy MCP AI**.
+- Agen **WAJIB** memeriksa ketersediaan **Pexafy MCP** (`search_photos`) di environment. Jika belum terpasang, agen wajib merekomendasikan instalasi Pexafy MCP kepada user.
 - URL target diambil langsung dari field URL di `SITE.md`.
 - Agen **WAJIB** memvalidasi koneksi ke WordPress REST API (`GET /wp-json/wp/v2/users/me`) menggunakan kredensial `.env` sebelum melangkah ke fase berikutnya.
 - Agen **WAJIB** memverifikasi bahwa `DESIGN.md` terisi penuh — tidak ada field `{{ }}` yang tersisa.
@@ -73,10 +75,10 @@ _(Skill terkait: Merujuk pada panduan arsitektur visual di **`wpsk-theme-craft`*
 > **PRINSIP CONTENT-FIRST:**
 > Fase ini dieksekusi **sebelum** koding tema dimulai. `@engineer` membutuhkan konten, kategori, author, dan menu navigasi nyata di WordPress agar saat tema dibangun, tema langsung terhubung ke data riil tanpa tebakan.
 
-**GUARDRAIL WP REST API:**
+**GUARDRAIL WP REST API & INTEGRASI:**
 
-- Seluruh manajemen konten (pembuatan user author, kategori, tag, menu navigasi, halaman statis, dan artikel) **WAJIB** menggunakan **WordPress REST API** dengan autentikasi Application Password dari `.env`.
-- Dilarang menggunakan WPVibe untuk manajemen konten teks dan database.
+- Seluruh manajemen konten (pembuatan user author, kategori, tag, menu navigasi, halaman statis, dan artikel) **WAJIB** menggunakan **WordPress REST API** dengan autentikasi Application Password dari `.env` atau **Easy MCP AI**.
+- Pencarian referensi foto editorial untuk featured image **WAJIB** menggunakan **Pexafy MCP** (`search_photos`), kemudian diunduh dan diunggah ke Media Library WordPress via REST API sebagai post thumbnail.
 
 **GUARDRAIL AUTHOR (MULTI-USER & DIVERSITAS NAMA):**
 
@@ -97,7 +99,7 @@ _(Skill terkait: Merujuk pada panduan arsitektur visual di **`wpsk-theme-craft`*
 - Agen utama memanggil subagent `@content` secara paralel, masing-masing bertugas menuntaskan satu artikel lengkap:
   - Mengikuti standar skill **`wpsk-seo-writer`** (anti-slop bahasa Indonesia, zero fluff, fakta terverifikasi, dan optimasi GEO/AEO).
   - Format isi menggunakan blok Gutenberg murni mengacu pada **`wp-patterns`**.
-  - Siapkan featured image relevan, unggah ke Media Library via REST API, dan jadikan post thumbnail.
+  - Cari foto berkualitas tinggi via **Pexafy MCP** (`search_photos`), unggah ke Media Library via REST API, dan jadikan post thumbnail.
   - Publikasikan via REST API dengan rotasi `author` ID.
 
 ---
@@ -202,7 +204,6 @@ Semua file pengerjaan agen **wajib disimpan di dalam folder `.workspaces/`**:
 - Jangan operasikan situs selain yang tercantum di `SITE.md`.
 - Dilarang membuat artikel atas nama user admin (wajib rotasi author yang dibuat di Fase 3).
 - Dilarang menggunakan nama author repetitif/klise (seperti Dimas atau Pramesti).
-- Dilarang menggunakan WPVibe untuk manajemen konten teks & database (gunakan WP REST API).
 - Dilarang menulis artikel secara sekuensial jika dapat dijalankan secara paralel via subagent.
 - Dilarang memulai koding tema sebelum PRD disetujui dan konten/menu diinjeksi.
 - Jangan gunakan Tailwind CDN untuk tema (wajib PostCSS lokal).
@@ -212,6 +213,11 @@ Semua file pengerjaan agen **wajib disimpan di dalam folder `.workspaces/`**:
 PRD disetujui user, 3–5 author beragam terdaftar via REST API, taksonomi & menu Header/Footer terdaftar, artikel SEO Gutenberg paralel terbit dengan featured image dan author terdistribusi, tema dinamis selesai dibundle ke ZIP root `.workspaces/` (dengan container logo aman, frontpage variatif, single post lengkap dengan tombol share 6 kanal, author box, styled comments, custom sidebar, dan `author.php`), visual Desktop & Mobile terverifikasi via Playwright screenshot di Artifact, Lighthouse >=80, file `.workspaces/THEME_SPECS.md` digenerate.
 
 ## Changelog
+
+### `08. 2026-09-14`
+
+- **Migrasi Integrasi MCP (Easy MCP AI & Pexafy):** Mengganti WPVibe dengan Easy MCP AI (melalui file konfigurasi `.agents/mcp_config.json`) untuk koneksi endpoint WordPress MCP, serta mengintegrasikan Pexafy MCP untuk pencarian gambar/featured image berkualitas tinggi.
+- **Guardrail Inisialisasi MCP Fase 1:** Menambahkan kewajiban inisialisasi `.agents/mcp_config.json` dari template `.agents/mcp_config.example.json` serta pengecekan ketersediaan Pexafy MCP di awal proyek.
 
 ### `07. 2026-09-11`
 
