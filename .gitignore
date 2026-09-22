@@ -4,6 +4,7 @@ PRODUCT.md
 SITE.md
 .workspaces/*
 !.workspaces/.gitkeep
+scratch/
 
 node_modules/
 .env
