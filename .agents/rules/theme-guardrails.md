@@ -26,7 +26,7 @@ Standar baku teknis untuk arsitektur tema WordPress Classic + Tailwind CSS (`_tw
    - **DILARANG KERAS MENG-HARDCODE SLUG ATAU ID KATEGORI.**
    - Tema wajib menyediakan antarmuka konfigurasi (Theme Customizer via Customizer API atau Theme Options Page) untuk memilih kategori yang ditampilkan pada tiap section, beserta judul (*title*) dan subjudul (*subtitle*) kustom.
    - **Fallback Dinamis Otomatis:** Jika kategori belum dipilih di Customizer atau kategori terhapus/diubah oleh pengguna, tema wajib otomatis mengambil kategori yang tersedia secara berurutan (`get_categories(['hide_empty' => true])`) agar layout homepage tidak pernah kosong atau rusak.
-   - Bagian bawah frontpage wajib memiliki navigasi/tombol pagination *"Lihat Artikel Lainnya"* yang mengarah langsung ke Archive Page spesifik.
+   - **Feed Artikel Bawah & Paginasi Bersyarat Mutlak:** Bagian paling bawah halaman depan (frontpage) wajib memiliki feed artikel terbaru dengan kontrol pagination numerik (`paginate_links()`). Pada halaman 2 ke atas (`is_paged()` atau `$paged >= 2`), tema **WAJIB menyembunyikan seluruh section atas (hero dan seluruh blok kategori berapapun variasinya)** dan hanya merender header arsip ringkas beserta grid feed artikel dan pagination numerik, sehingga pengunjung tidak dipaksa melihat ulang seluruh hero dan section kategori saat menelusuri halaman selanjutnya.
 
 4. **Single Post Lengkap (`single.php`):**
    - **Social Share Buttons:** Wajib menyediakan minimal 6 kanal berbagi: WhatsApp, Telegram, Facebook, X/Twitter, Threads, dan Copy Link dengan feedback visual status tersalin.

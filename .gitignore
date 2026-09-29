@@ -15,3 +15,8 @@ Thumbs.db
 .impeccable/
 .agents/mcp_config.json
 .agents/.agents/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class

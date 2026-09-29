@@ -403,7 +403,7 @@ def main():
         print("="*50)
         print(json.dumps(res, indent=2))
         print("\n" + "!" * 65)
-        print(" ⚠️  PERINGATAN KEAMANAN PENTING:")
+        print(" [!] PERINGATAN KEAMANAN PENTING:")
         print(" Jika seluruh konfigurasi server sudah selesai,")
         print(" PASTIKAN fitur API ACCESS pada user CyberPanel segera DINONAKTIFKAN.")
         print(" (CyberPanel Admin > Users > Modify User > API Access = Disable)")
