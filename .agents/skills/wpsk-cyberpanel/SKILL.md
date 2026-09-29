@@ -89,7 +89,7 @@ Skill ini menyediakan utilitas CLI Python yang dapat langsung dieksekusi tanpa k
 
 ```powershell
 # Jalankan provisi penuh WordPress (Website + DB + Core WP + wp-config + Inisialisasi)
-python .agents/skills/wpem-cyberpanel/scripts/cyberpanel_provisioner.py `
+python .agents/skills/wpsk-cyberpanel/scripts/cyberpanel_provisioner.py `
   --domain example.com `
   --title "My Example Blog" `
   --admin-user example_admin `

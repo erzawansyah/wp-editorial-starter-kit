@@ -216,6 +216,28 @@ class CyberPanelClient:
         with self.opener.open(req, timeout=90) as resp:
             return json.loads(resp.read().decode('utf-8'))
 
+    def deploy_theme(self, domain, zip_path):
+        if not os.path.isfile(zip_path):
+            raise FileNotFoundError(f"Berkas tema {zip_path} tidak ditemukan.")
+        theme_folder = f"/home/{domain}/public_html/wp-content/themes"
+        print(f"  [>] Mengunggah arsip tema ke {theme_folder}...")
+        self.upload_archive(domain, theme_folder, zip_path)
+        zip_filename = os.path.basename(zip_path)
+        print(f"  [>] Mengekstrak tema {zip_filename}...")
+        extract_res = self.fm_controller(domain, 'extract', {
+            'fileToExtract': f"{theme_folder}/{zip_filename}",
+            'extractionLocation': theme_folder,
+            'extractionType': 'zip'
+        })
+        time.sleep(2)
+        print(f"  [>] Menghapus arsip zip di server...")
+        self.fm_controller(domain, 'deleteFolderOrFile', {
+            'path': theme_folder,
+            'fileAndFolders': [zip_filename],
+            'skipTrash': True
+        })
+        return extract_res
+
 def provision_full_wordpress(client: CyberPanelClient, domain: str, title: str, admin_user: str, admin_email: str, php_version="PHP 8.3", zip_path=None):
     print(f"[*] Memulai provisi otomatis untuk domain: {domain}")
 
@@ -359,23 +381,40 @@ require_once ABSPATH . 'wp-settings.php';
     }
 
 def main():
-    parser = argparse.ArgumentParser(description="Agnostic CyberPanel WordPress Provisioner")
+    parser = argparse.ArgumentParser(description="Agnostic CyberPanel WordPress Provisioner & Deployer")
     parser.add_argument("--domain", required=True, help="Nama domain (e.g. example.com)")
     parser.add_argument("--title", default="", help="Judul situs WordPress")
     parser.add_argument("--admin-user", default="", help="Username admin WordPress")
     parser.add_argument("--admin-email", default="", help="Email admin WordPress")
     parser.add_argument("--php", default="PHP 8.3", help="Versi PHP (default: 'PHP 8.3')")
     parser.add_argument("--zip", default="", help="Path berkas latest.zip lokal (opsional)")
+    parser.add_argument("--deploy-theme", default="", help="Path berkas tema .zip lokal untuk diunggah langsung ke wp-content/themes")
 
     args = parser.parse_args()
-
     domain = args.domain.strip()
+
+    client = CyberPanelClient()
+
+    if args.deploy_theme:
+        print(f"[*] Menjalankan deploy tema otomatis ke domain: {domain}")
+        res = client.deploy_theme(domain, args.deploy_theme)
+        print("\n" + "="*50)
+        print("HASIL UPLOAD TEMA CYBERPANEL")
+        print("="*50)
+        print(json.dumps(res, indent=2))
+        print("\n" + "!" * 65)
+        print(" ⚠️  PERINGATAN KEAMANAN PENTING:")
+        print(" Jika seluruh konfigurasi server sudah selesai,")
+        print(" PASTIKAN fitur API ACCESS pada user CyberPanel segera DINONAKTIFKAN.")
+        print(" (CyberPanel Admin > Users > Modify User > API Access = Disable)")
+        print("!" * 65 + "\n")
+        return
+
     clean_name = domain.split('.')[0].replace('-', '_')
     title = args.title.strip() or clean_name.capitalize()
     admin_user = args.admin_user.strip() or f"{clean_name}_admin"
     admin_email = args.admin_email.strip() or f"admin@{domain}"
 
-    client = CyberPanelClient()
     res = provision_full_wordpress(
         client=client,
         domain=domain,
