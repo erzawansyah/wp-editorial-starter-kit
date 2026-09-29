@@ -1,9 +1,10 @@
 ---
 name: wpsk-theme-convention
-description: >
-  Konvensi pengembangan tema berbasis _tw (underscore-tw) — WordPress classic
-  starter theme dengan Tailwind CSS. Gunakan saat fase tema dimulai (@engineer).
-  Semua keputusan struktur mengacu ke dokumen ini.
+description: >-
+  Spesifikasi teknis dan konvensi arsitektur tema WordPress berbasis _tw (underscore-tw) classic theme
+  dengan Tailwind CSS dan PostCSS build pipeline. Mencakup struktur file source (.workspaces/theme-src/),
+  deklarasi functions.php, custom template parts, Customizer/Option fallback dinamis, query WP_Query,
+  dan pembuatan bundle ZIP tema. Wajib digunakan oleh @engineer saat membangun, mengedit, atau membundle tema.
 ---
 
 # Theme Convention — Berbasis \_tw
@@ -198,14 +199,27 @@ Header **wajib disiapkan untuk mendukung Site Title teks ATAU Logo gambar** tanp
 ] ); ?>
 ```
 
-### 3. Frontpage: Variasi Section per Kategori & Pagination Wajib
-Halaman depan (`front-page.php`) **dilarang monoton**. Wajib menerapkan variasi struktur kolom/tata letak per kategori:
-* **Hero Headline Grid:** 1 Featured Post besar di kiri + 3 stacked posts di kanan.
-* **Section Kategori A:** 3-column card grid dengan thumbnail rasio 16:9.
-* **Section Kategori B:** Split 2-column (1 lead article dengan excerpt + 3 compact horizontal list items).
-* **Section Kategori C:** 4-column horizontal card strip atau list magazine.
-* **Trending / Populer:** Numbered list 1–5 dengan angka display besar.
-* **Pagination Frontpage:** Bagian bawah Frontpage **wajib** memiliki tombol/navigasi pagination (misal: *"Jelajahi Semua Artikel"*) yang ketika diklik **mengarah ke Archive Page** tertentu (seperti `/artikel/` atau halaman blog archive).
+### 3. Frontpage: Variasi Section per Kategori Dinamis & Terkonfigurasi
+Halaman depan (`front-page.php`) **dilarang monoton dan DILARANG KERAS meng-hardcode slug/ID kategori statis di template PHP!**
+Jika kategori dihapus atau slug diubah, tampilan depan tidak boleh rusak atau hilang tanpa jejak.
+
+**Aturan Konfigurasi Dinamis Frontpage:**
+1. **Dukungan Pengaturan Dinamis (Theme Customizer / Options):**
+   Tema **wajib menyediakan opsi pengaturan** (misal via native WordPress Customizer `customize_register` atau Theme Options sederhana di admin) untuk setiap section di halaman depan:
+   - Pemilihan kategori target (dropdown term kategori atau `term_id`).
+   - Kustomisasi **Section Title** (Judul Section, misal *"Sorotan Teknologi"*).
+   - Kustomisasi **Section Subtitle / Description** (Deskripsi singkat section).
+   - Jumlah postingan yang ditampilkan.
+2. **Fallback Dinamis yang Aman:**
+   Jika pengguna belum mengatur kategori khusus atau jika kategori terpilih dihapus:
+   - Template **wajib memiliki fallback cerdas**: ambil kategori secara otomatis menggunakan `get_categories()` atau fallback ke post terbaru (`post__not_in`), sehingga tampilan frontpage **tetap utuh, rapi, dan estetis**.
+3. **Variasi Tata Letak Editorial:**
+   * **Hero Headline Grid:** 1 Featured Post besar di kiri + 3 stacked posts di kanan.
+   * **Section Kategori A:** 3-column card grid dengan thumbnail rasio 16:9.
+   * **Section Kategori B:** Split 2-column (1 lead article dengan excerpt + 3 compact horizontal list items).
+   * **Section Kategori C:** 4-column horizontal card strip atau list magazine.
+   * **Trending / Populer:** Numbered list 1–5 dengan angka display besar.
+   * **Pagination Frontpage:** Bagian bawah Frontpage **wajib** memiliki tombol/navigasi pagination (misal: *"Jelajahi Semua Artikel"*) yang ketika diklik **mengarah ke Archive Page** tertentu (seperti `/artikel/` atau halaman blog archive).
 
 ### 4. Single Post: Author Box, Comment Box Ber-styling, Custom Sidebar, & Tombol Bagikan
 Halaman artikel (`single.php`) **wajib** memuat:
@@ -227,6 +241,24 @@ Halaman artikel (`single.php`) **wajib** memuat:
 Situs editorial berpusat pada kredibilitas penulis. File `author.php` **wajib dibuat**:
 * **Author Profile Header:** Foto avatar besar, nama lengkap author, bio lengkap, badge/role author, dan total artikel yang dipublikasikan (`count_user_posts()`).
 * **Author Posts Loop:** Grid/List seluruh artikel yang ditulis oleh author tersebut, dilengkapi dengan pagination native WordPress.
+
+### 6. Template Singular Page (`page.php`) — Editorial & Anti-Polos
+Template singular page (`page.php` yang merender post type `page` di WordPress) **DILARANG KERAS dibuat terlalu sederhana/polos** (seperti yang sering terjadi: hanya wrapper container putih kosong dengan judul halaman biasa di atasnya).
+
+Template `page.php` **wajib memiliki perlakuan desain editorial yang berkarakter dan matang**:
+1. **Hero Header Singular Page yang Elegan:**
+   - Header halaman terpisah dengan background aksen halus / subtle border / backdrop kontras tema.
+   - Breadcrumb navigasi di atas judul (`Beranda > [Judul Halaman]`).
+   - Judul halaman berukuran display besar (`text-3xl md:text-5xl font-heading font-bold text-text`).
+   - Jika tersedia, dukung subtitle / excerpt halaman sebagai lead paragraph berukuran lebih besar (`text-lg md:text-xl text-text/70 mt-3`).
+2. **Featured Media / Cinematic Banner Container:**
+   - Wadah featured image halaman singular dengan rasio lebar sinematik (misal 21:9 atau 16:7) yang terbungkus rapi dengan rounded corner / border proporsional.
+3. **Tipografi Konten Proposional (Gutenberg-Friendly):**
+   - Batasi lebar baca konten teks (`max-w-3xl` atau `max-w-4xl mx-auto`) agar ergonomis dibaca.
+   - Styling blok Tailwind typography (`prose prose-lg max-w-none`) untuk heading Gutenberg, list, blockquote, callout box, dan tabel.
+4. **Sentuhan Komponen Tambahan (Sesuai Konteks Page):**
+   - Mendukung metadata halaman (tanggal diperbarui/last updated, reading time jika relevan).
+   - Area penutup/footer halaman yang terstruktur (misal kotak CTA, navigasi halaman terkait, atau kontak).
 
 ---
 
