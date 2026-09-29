@@ -8,6 +8,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 
 **Proyek:** `{{ Nama Website }}`
 **URL Target:** `{{ URL WordPress }}`
+**Template Version:** `2`
 **Dimulai:** `{{ YYYY-MM-DD }}`
 **Target selesai:** `{{ YYYY-MM-DD }}`
 **Fase Aktif Saat Ini:** `{{ Setup / PRD / Konten / Tema / QA / Deployment }}`
@@ -24,6 +25,7 @@ Update checklist ini secara **real-time** setiap kali satu item selesai dikerjak
 - [ ] Server MCP Pexafy terverifikasi aktif di Antigravity
 - [ ] Isi `SITE.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
 - [ ] Isi `DESIGN.md` tanpa placeholder `{{ }}` yang tersisa _(opsional dibantu skill `wpsk-editorial-brainstorm`)_
+- [ ] Rangkaian 5 prompt aset brand sekuensial (Logo 16:5, Inverse, Favicon 1:1, Favicon Rounded, OG Image) digenerate untuk ChatGPT/DALL-E dan disimpan di `.workspaces/assets/`
 - [ ] Selesaikan semua item di `WORDPRESS-SETUP.md`
 - [ ] Koneksi WP REST API terverifikasi (`GET /wp-json/wp/v2/users/me`)
 - [ ] Permalink diatur ke `/%postname%/` _(bisa via wp-admin atau CLI `wp-wpcli-and-ops`)_

@@ -10,11 +10,18 @@ Struktur baku setiap website yang dihasilkan: header menu kategori dengan contai
 
 WordPress (PHP 8.2+), classic theme + Tailwind CSS. Manajemen konten via WordPress REST API (Basic Auth Application Password dari `.env`) dan Easy MCP AI. Pexafy MCP digunakan untuk pencarian gambar/featured image editorial berkualitas tinggi. AI client: Antigravity.
 
+## Modular Rules Reference
+
+Untuk kepatuhan teknis mendalam dan efisiensi context window, guardrails detail didelegasikan ke rules modular di `.agents/rules/`:
+- **[theme-guardrails.md](file:///.agents/rules/theme-guardrails.md)**: 8 aturan baku arsitektur tema WordPress, logo anti-meluap, dynamic frontpage section, `single.php`, `author.php`, `page.php`, dan build pipeline.
+- **[cyberpanel-safety.md](file:///.agents/rules/cyberpanel-safety.md)**: Keamanan API Access, larangan mutasi server global tanpa izin, dan konfirmasi deploy otomatis.
+- **[content-integrity.md](file:///.agents/rules/content-integrity.md)**: Diversitas author multi-etnis Indonesia, larangan akun admin, verifikasi fakta riset, dan format Gutenberg.
+
 ## Agents
 
 - **@architect** - baca `SITE.md` & `DESIGN.md`, susun PRD di `PRODUCT.md` (daftar template & wireframe mendalam: variasi layout section per kategori, container logo aman, single post dengan tombol share & author box, custom sidebar, pagination frontpage, dan author archive). Mengacu pada `wpsk-theme-craft` (perintah `shape`) dan `wpsk-theme-convention`. Tidak menulis kode tema.
 - **@content** - eksekusi **Content-First**: buat 3–5 user author dengan nama beragam (anti-Dimas/Pramesti), taksonomi (kategori & tag), halaman statis, serta daftarkan struktur Menu Header & Footer di WordPress via REST API sebelum tema dibangun. Memimpin penulisan artikel SEO Gutenberg secara paralel melalui subagent (menggunakan skill `wpsk-seo-writer` dan `wp-patterns`).
-- **@engineer** - bangun tema classic + Tailwind secara lokal di `.workspaces/theme-src/` mengacu pada data konten yang sudah ada, `PRODUCT.md`, `DESIGN.md`, `wpsk-theme-convention`, dan standar visual `wpsk-theme-craft`. Menyerahkan bundle ZIP tema di root `.workspaces/` setiap ada perubahan tema.
+- **@engineer** - bangun tema classic + Tailwind secara lokal di `.workspaces/theme-src/` mengacu pada data konten yang sudah ada, `PRODUCT.md`, `DESIGN.md`, `wpsk-theme-convention`, standar visual `wpsk-theme-craft`, dan `.agents/rules/theme-guardrails.md`. Menyerahkan bundle ZIP tema di root `.workspaces/` setiap ada perubahan tema.
 - **@qa** - audit Lighthouse, performa backend (`wp-performance`), audit a11y & mobile reflow (`wpsk-theme-craft` perintah `audit` & kalkulator kontras Python), serta mengambil **Full-Page Screenshot Desktop (1440px) dan Mobile (375px) via Playwright** untuk disematkan di Artifact sebelum promosi ke produksi.
 
 ## Sesi Lintas Session — Cara Melanjutkan Pekerjaan
@@ -23,8 +30,11 @@ WordPress (PHP 8.2+), classic theme + Tailwind CSS. Manajemen konten via WordPre
 
 1. **Baca SITE.md dan .env.** Jika ada field `{{ }}` di `SITE.md` atau kredensial di `.env` belum terisi, **BERHENTI** dan tanyakan ke user sebelum melakukan apapun.
 2. **Baca `.workspaces/PROGRESS.md`.** Dokumen ini adalah satu-satunya sumber kebenaran tentang posisi proyek saat ini. Identifikasi fase terakhir yang selesai dan lanjutkan dari sana. **Jangan pernah mengulang fase yang sudah selesai tanpa izin user.**
-3. **Verifikasi fase aktif.** Sebelum mengerjakan tugas apa pun, nyatakan secara eksplisit ke user: "Saya melanjutkan dari [nama fase] — saya akan [tindakan berikutnya]." Tunggu konfirmasi singkat jika ada perubahan dari ekspektasi.
-4. **Jangan asumsikan — verifikasi.** Jika `.workspaces/PROGRESS.md` tidak ada, buat terlebih dahulu sebelum melanjutkan.
+3. **Cek Versi Template (Hemat Token):** Bandingkan angka `template_version` di `version.json` dengan `**Template Version:**` di header `.workspaces/PROGRESS.md`.
+   - **Jika SAMA:** DILARANG membaca `UPDATE.md` (hemat token). Langsung lanjutkan ke langkah berikutnya.
+   - **Jika BERBEDA (atau belum ada):** Baca bagian versi terkait di `UPDATE.md`, ingatkan pengguna jika ada variabel baru di `.env.example` (misal CyberPanel/Cloudflare) yang perlu ditambahkan, lalu sesuaikan `**Template Version:**` di `.workspaces/PROGRESS.md`.
+4. **Verifikasi fase aktif.** Sebelum mengerjakan tugas apa pun, nyatakan secara eksplisit ke user: "Saya melanjutkan dari [nama fase] — saya akan [tindakan berikutnya]." Tunggu konfirmasi singkat jika ada perubahan dari ekspektasi.
+5. **Jangan asumsikan — verifikasi.** Jika `.workspaces/PROGRESS.md` tidak ada, buat terlebih dahulu sebelum melanjutkan.
 
 ## Standard Operating Procedure (SOP)
 
@@ -49,6 +59,7 @@ _(Skill terkait: Gunakan **`wpsk-editorial-brainstorm`** jika butuh bantuan AI u
 - URL target diambil langsung dari field URL di `SITE.md`.
 - Agen **WAJIB** memvalidasi koneksi ke WordPress REST API (`GET /wp-json/wp/v2/users/me`) menggunakan kredensial `.env` sebelum melangkah ke fase berikutnya.
 - Agen **WAJIB** memverifikasi bahwa `DESIGN.md` terisi penuh — tidak ada field `{{ }}` yang tersisa.
+- **Workflow Aset Brand Sekuensial (Prompt Generator):** Setelah `DESIGN.md` final, agen wajib meng-generate 5 rangkaian prompt brand berantai (*sequential follow-up prompts*) untuk ChatGPT/Image Generator (Logo rasio 16:5 tanpa tagline, Logo Inverse, Favicon 1:1, Favicon Rounded dengan backdrop circular, dan OG Image 1200x630) mengacu pada `wpsk-editorial-brainstorm`. Setiap prompt **wajib ditulis dalam satu paragraf penuh mengalir (tanpa bullet point / break)** dan digenerate dinamis secara instruksional (tanpa template engine kaku). Hasilnya disimpan pengguna di `.workspaces/assets/`.
 
 ---
 
@@ -64,7 +75,7 @@ _(Skill terkait: Merujuk pada panduan arsitektur visual di **`wpsk-theme-craft`*
   2. **Struktur Wireframe & Layout yang Kaya Variasi:**
      - **Frontpage:** Wajib merancang **variasi layout section per kategori** (bukan grid 3 kolom yang diulang-ulang). Wajib memuat kombinasi Hero Headline Grid (1 featured besar + 3 stacked), Card Grid, Split Lead Article + List, Trending Block bernomor 1–5, dan **Pagination Frontpage** yang mengarah ke archive page tertentu.
      - **Header:** Spesifikasi container logo adaptif (Site Title teks ATAU Logo gambar dengan batas container terukur anti-meluap).
-     - **Single Article:** Post header (judul, meta, kategori, author), featured media container, **Tombol Bagikan Social Share** (minimal: WhatsApp, Telegram, Facebook, X/Twitter, Threads, dan Copy Link dengan feedback visual), **Author Bio Box** lengkap, **Comment Box ter-styling Tailwind penuh**, **Custom Sidebar komponen** (bukan dynamic widget bawaan WP), breadcrumbs, konten Gutenberg layout, dan related posts.
+     - **Single Article:** Post header (judul, meta, kategori, author), featured media container, **Tombol Bagikan Social Share** (minimal 6 kanal: WhatsApp, Telegram, Facebook, X/Twitter, Threads, dan Copy Link dengan feedback visual), **Author Bio Box** lengkap, **Comment Box ter-styling Tailwind penuh**, **Custom Sidebar komponen** (bukan dynamic widget bawaan WP), breadcrumbs, konten Gutenberg layout, dan related posts.
      - **Author Archive (`author.php`):** Profil header penulis (avatar besar, nama, bio, jumlah artikel) + grid arsip artikel penulis tersebut.
 - **HARD GATE PRD:** Dokumen `PRODUCT.md` harus ditinjau dan disetujui oleh User sebelum lanjut ke fase berikutnya. **Catat persetujuan ini di `.workspaces/PROGRESS.md`.**
 
@@ -75,32 +86,14 @@ _(Skill terkait: Merujuk pada panduan arsitektur visual di **`wpsk-theme-craft`*
 > **PRINSIP CONTENT-FIRST:**
 > Fase ini dieksekusi **sebelum** koding tema dimulai. `@engineer` membutuhkan konten, kategori, author, dan menu navigasi nyata di WordPress agar saat tema dibangun, tema langsung terhubung ke data riil tanpa tebakan.
 
-**GUARDRAIL WP REST API & INTEGRASI:**
-
-- Seluruh manajemen konten (pembuatan user author, kategori, tag, menu navigasi, halaman statis, dan artikel) **WAJIB** menggunakan **WordPress REST API** dengan autentikasi Application Password dari `.env` atau **Easy MCP AI**.
-- Pencarian referensi foto editorial untuk featured image **WAJIB** menggunakan **Pexafy MCP** (`search_photos`), kemudian diunduh dan diunggah ke Media Library WordPress via REST API sebagai post thumbnail.
-
-**GUARDRAIL AUTHOR (MULTI-USER & DIVERSITAS NAMA):**
-
-- Sebelum menulis artikel, agen **WAJIB** membuat **3–5 user dengan role `author`** via REST API (`POST /wp-json/wp/v2/users`).
-- **DILARANG KERAS** menggunakan nama klise yang repetitif (seperti nama yang selalu mengandung unsur "Dimas" atau "Pramesti"). Wajib merujuk pada katalog diversitas nama Indonesia di `wpsk-seo-writer` (kombinasi nama realistis lintas etnis Jawa, Sunda, Minang, Batak, Melayu, Timur, dll.).
-- Format email untuk setiap author **WAJIB**: `<username>@<site.com>`.
-- Setiap author wajib memiliki bio 2–3 kalimat realistis yang relevan dengan niche situs.
-- **DILARANG KERAS** mempublikasikan artikel menggunakan akun `admin`. Seluruh artikel wajib dirotasi merata ke akun author yang telah dibuat.
-
-**GUARDRAIL MENU & TAKSONOMI:**
-
-- Buat seluruh Kategori & Tag yang direncanakan di `PRODUCT.md` via REST API.
-- Tetapkan struktur **Menu Header (Primary)** dan **Menu Footer** di WordPress agar `@engineer` dapat langsung memanggil `wp_nav_menu()` dengan lokasi yang terisi.
-
-**GUARDRAIL PENULISAN PARALEL VIA SUBAGENTS:**
-
-- Proses penulisan artikel **WAJIB dilakukan secara paralel melalui subagents**.
-- Agen utama memanggil subagent `@content` secara paralel, masing-masing bertugas menuntaskan satu artikel lengkap:
-  - Mengikuti standar skill **`wpsk-seo-writer`** (anti-slop bahasa Indonesia, zero fluff, fakta terverifikasi, dan optimasi GEO/AEO).
-  - Format isi menggunakan blok Gutenberg murni mengacu pada **`wp-patterns`**.
-  - Cari foto berkualitas tinggi via **Pexafy MCP** (`search_photos`), unggah ke Media Library via REST API, dan jadikan post thumbnail.
-  - Publikasikan via REST API dengan rotasi `author` ID.
+**ATURAN UTAMA KONTEN & REST API:**
+- Seluruh manajemen konten (pembuatan author, kategori, tag, menu navigasi, halaman statis, dan artikel) **WAJIB** menggunakan **WordPress REST API** dengan Basic Auth Application Password atau **Easy MCP AI**.
+- Pencarian featured image editorial **WAJIB** menggunakan **Pexafy MCP** (`search_photos`), diunduh dan diunggah via REST API sebagai post thumbnail.
+- Wajib mematuhi aturan baku di **`.agents/rules/content-integrity.md`**:
+  * Buat 3–5 user role `author` dengan diversitas nama multi-etnis Indonesia (anti-Dimas/Pramesti).
+  * Format email: `<username>@<site.com>`.
+  * DILARANG menerbitkan artikel atas nama user admin (wajib rotasi author merata).
+  * Eksekusi penulisan artikel SEO Gutenberg secara paralel via subagent (`wpsk-seo-writer` dan `wp-patterns`).
 
 ---
 
@@ -110,30 +103,18 @@ _(Skill terkait: Merujuk pada panduan arsitektur visual di **`wpsk-theme-craft`*
 > `@engineer` membangun tema dengan data nyata yang sudah ada di database WordPress.
 
 **INSTRUKSI PERTAMA @engineer:**
-Buka dan pelajari secara mendalam dua skill utama:
-1. **`wpsk-theme-convention`** — spesifikasi teknis arsitektur tema WordPress `_tw` + Tailwind.
-2. **`wpsk-theme-craft`** — aturan Craft Floor, anti-slop visual, tipografi editorial, dan perintah Impeccable (`polish`, `bolder`, `quieter`, `typeset`).
+Pelajari dan terapkan pedoman teknis dari:
+1. **`.agents/rules/theme-guardrails.md`** — 8 aturan baku teknis tema WordPress `_tw` + Tailwind.
+2. **`wpsk-theme-convention`** — spesifikasi teknis arsitektur tema WordPress `_tw` + Tailwind.
+3. **`wpsk-theme-craft`** — aturan Craft Floor, anti-slop visual, tipografi editorial, dan perintah Impeccable (`polish`, `bolder`, `quieter`, `typeset`).
+4. **`antislop-copywriting`** — eliminasi jargon AI pada copy/teks statis tema (CTA, placeholder, header, footer, microcopy).
 
-**GUARDRAIL DESAIN & PRD:** `DESIGN.md` dan `PRODUCT.md` adalah **Sumber Kebenaran Mutlak**. Agen dilarang mengubah layout atau warna tanpa izin user.
-
-**GUARDRAIL TEKNIS TEMA (7 ATURAN BAKU):**
-
-1. **Header & Container Logo (Anti-Meluap):** Container logo **wajib** dikunci dengan kelas `max-h-12 md:max-h-14 w-auto object-contain flex-shrink-0` dan `add_theme_support('custom-logo')`. Header harus tampil rapi baik saat menggunakan Site Title teks maupun Logo gambar, tanpa pernah meluap dari navbar.
-2. **Navigasi Dinamis:** Dilarang hardcode link menu → wajib `wp_nav_menu()`.
-3. **Frontpage Multi-Style & Pagination:** `front-page.php` wajib menampilkan variasi section per kategori sesuai `PRODUCT.md` dan memiliki pagination/tombol *"Lihat Artikel Lainnya"* yang mengarah ke Archive Page tertentu.
-4. **Single Post Lengkap:** `single.php` wajib memuat **Tombol Bagikan Social Share** (minimal 6 kanal: WhatsApp, Telegram, Facebook, X/Twitter, Threads, dan Copy Link dengan feedback visual), **Author Box** (`get_avatar()`, bio, link archive), **Comment Box ter-styling Tailwind penuh** (bukan form unstyled bawaan WP), dan **Custom Sidebar komponen** (bukan widget bawaan WP).
-5. **Author Archive Wajib:** File `author.php` **wajib dibuat** dengan header profil penulis + grid arsip artikelnya.
-6. **Query & Taksonomi Dinamis:** Selalu gunakan `WP_Query` dan `get_categories()`. Dilarang hardcode ID atau slug statis.
-7. **Tanpa Tailwind CDN:** Build wajib melalui pipeline PostCSS lokal (`npm run dev`).
-
-**GUARDRAIL BUILD & BUNDLING:**
-
-- Semua koding tema dilakukan **lokal** di `.workspaces/theme-src/`.
-- Jangan edit manual `theme/style.css` atau `theme/js/` (output build).
-- Output `.zip` dari `npm run bundle` **wajib berada di root `.workspaces/`** (bukan di dalam `theme-src/`).
-- Screenshot 1200x900px disimpan sebagai `theme/screenshot.png`.
-- Agen wajib meng-generate `.workspaces/THEME_SPECS.md` setelah bundling tema.
-- Serahkan file ZIP tema kepada user untuk diunggah ke WordPress live/staging.
+**GUARDRAILS UTAMA TEMA:**
+- `DESIGN.md` dan `PRODUCT.md` adalah **Sumber Kebenaran Mutlak**. Dilarang mengubah layout atau warna tanpa izin user.
+- Koding dilakukan lokal di `.workspaces/theme-src/`. Dilarang edit langsung output build `theme/style.css` dan `theme/js/`.
+- Dilarang Tailwind CDN; wajib PostCSS build.
+- Output `.zip` dari `npm run bundle` **wajib diletakkan di root `.workspaces/`**.
+- Generate `.workspaces/THEME_SPECS.md` setelah bundling tema.
 
 ---
 
@@ -159,8 +140,17 @@ Audit menyeluruh sebelum promosi situs:
 
 ### Fase 6: Deployment & Serah Terima (Manusia & Agen)
 
-Manusia mengaktifkan tema ZIP terbaru di dashboard WordPress `wp-admin → Appearance → Themes`. Karena konten, kategori, dan menu sudah diinjeksi sejak Fase 3, website langsung tampil hidup, utuh, dan proporsional seketika tema aktif.
-_(Skill terkait: Gunakan **`wp-wpcli-and-ops`** jika butuh flush cache server atau operasi database pasca-deploy)._
+1. **Deploy Otomatis via CyberPanel (Opsional):**
+   - Wajib patuhi protokol keselamatan di **`.agents/rules/cyberpanel-safety.md`**.
+   - Agen **wajib menanyakan konfirmasi kepada user terlebih dahulu** sebelum melakukan upload otomatis ke server:
+     *"Bundle tema .zip telah siap. Apakah Anda ingin tema diunggah dan diekstrak langsung ke server CyberPanel (`wp-content/themes/`)?"*
+   - Jika disetujui, agen menjalankan:
+     ```powershell
+     python .agents/skills/wpsk-cyberpanel/scripts/cyberpanel_provisioner.py --domain <domain> --deploy-theme .workspaces/<theme-name>.zip
+     ```
+   - **Peringatan Wajib Pasca-Operasi:** Ingatkan user untuk segera menonaktifkan API Access pada CyberPanel (*Users > Modify User > API Access = Disable*).
+2. **Deploy Manual:**
+   - User mengaktifkan tema ZIP terbaru di dashboard WordPress `wp-admin → Appearance → Themes`.
 
 ---
 
@@ -177,7 +167,7 @@ Semua file pengerjaan agen **wajib disimpan di dalam folder `.workspaces/`**:
 
 **Aturan Ketat:**
 - Dilarang menumpuk file campuran di root `.workspaces/`.
-- Dilarang membuat file baru di luar `.workspaces/` kecuali file sistem repo utama (`AGENTS.md`, `README.md`, `.gitignore`, `.env.example`) dan `.agents/skills/`.
+- Dilarang membuat file baru di luar `.workspaces/` kecuali file sistem repo utama (`AGENTS.md`, `README.md`, `.gitignore`, `.env.example`, `.agents/`).
 
 ## Conventions
 
@@ -191,14 +181,17 @@ Semua file pengerjaan agen **wajib disimpan di dalam folder `.workspaces/`**:
 | **Fase 1: Setup & Env** | `@architect` / User | `wpsk-editorial-brainstorm`, `wp-wpcli-and-ops` |
 | **Fase 2: Arsitektur & PRD** | `@architect` | `wpsk-theme-craft` (shape/critique), `wpsk-theme-convention` |
 | **Fase 3: Konten, Penulis, & Menu** | `@content` (Paralel Subagents) | `wpsk-seo-writer` (diversitas author & anti-slop), `wp-patterns` |
-| **Fase 4: Pengembangan Tema** | `@engineer` | `wpsk-theme-convention` (PHP _tw), `wpsk-theme-craft` (Craft Floor & polish), `wp-block-development` *(opsional)* |
+| **Fase 4: Pengembangan Tema** | `@engineer` | `wpsk-theme-convention` (PHP _tw), `wpsk-theme-craft` (Craft Floor & polish), `antislop-copywriting` (anti-slop teks/copy statis tema), `wp-block-development` *(opsional)* |
 | **Fase 5: QA & Verifikasi Visual** | `@qa` | `wpsk-theme-craft` (audit kontras Python & a11y), `wp-performance`, Playwright Screenshot |
-| **Fase 6: Deployment & Ops** | Manusia & Agen | `wp-wpcli-and-ops` |
+| **Fase 6: Deployment & Ops** | Manusia & Agen | `wp-wpcli-and-ops`, `wpsk-cyberpanel` |
 | **Meta Tooling** | Agen & Manusia | `skill-creator` |
 
 ## Boundaries (Jangan Lakukan)
 
 - Jangan ubah wp-login atau pengaturan inti wp-admin tanpa persetujuan eksplisit.
+- Jangan pernah memodifikasi konfigurasi server global, DNS Cloudflare, atau database CyberPanel tanpa meminta konfirmasi eksplisit dari user terlebih dahulu (lihat `.agents/rules/cyberpanel-safety.md`).
+- **Wajib Peringatan Keamanan CyberPanel:** Agen WAJIB selalu mengingatkan pengguna untuk menonaktifkan fitur *API Access* pada user CyberPanel setiap kali selesai melakukan task/operasi server.
+- Jangan unggah tema otomatis ke server tanpa menanyakan persetujuan user terlebih dahulu.
 - Jangan gunakan FSE block theme penuh atau page builder berat (Elementor/Divi).
 - Jangan hardcode kredensial WordPress di dalam file atau skrip; selalu baca dari `.env`.
 - Jangan operasikan situs selain yang tercantum di `SITE.md`.
@@ -210,9 +203,22 @@ Semua file pengerjaan agen **wajib disimpan di dalam folder `.workspaces/`**:
 
 ## Definition of Done
 
-PRD disetujui user, 3–5 author beragam terdaftar via REST API, taksonomi & menu Header/Footer terdaftar, artikel SEO Gutenberg paralel terbit dengan featured image dan author terdistribusi, tema dinamis selesai dibundle ke ZIP root `.workspaces/` (dengan container logo aman, frontpage variatif, single post lengkap dengan tombol share 6 kanal, author box, styled comments, custom sidebar, dan `author.php`), visual Desktop & Mobile terverifikasi via Playwright screenshot di Artifact, Lighthouse >=80, file `.workspaces/THEME_SPECS.md` digenerate.
+PRD disetujui user, 3–5 author beragam terdaftar via REST API, taksonomi & menu Header/Footer terdaftar, artikel SEO Gutenberg paralel terbit dengan featured image dan author terdistribusi, tema dinamis selesai dibundle ke ZIP root `.workspaces/` (dengan container logo aman, frontpage variatif & terkonfigurasi dinamis, single post lengkap dengan tombol share 6 kanal, author box, styled comments, custom sidebar, `page.php` berkarakter editorial anti-polos, dan `author.php`), visual Desktop & Mobile terverifikasi via Playwright screenshot di Artifact, Lighthouse >=80, file `.workspaces/THEME_SPECS.md` digenerate.
 
 ## Changelog
+
+### `10. 2026-09-29`
+
+- **Refactoring Arsitektur Antigravity Harness:** Menerapkan best practice modular rules (`.agents/rules/`) untuk memecah batasan spesifik (`cyberpanel-safety.md`, `theme-guardrails.md`, `content-integrity.md`) dan menjaga ukuran `AGENTS.md` jauh di bawah batas 24KB harness.
+- **Implementasi Lifecycle Hooks (`.agents/hooks.json`):** Menyediakan sistem hooks Antigravity untuk pengingat keamanan dan proteksi eksekusi server.
+
+### `09. 2026-09-29`
+
+- **Template Singular Page Anti-Polos (`page.php`):** Larangan keras membuat template singular page sekadar kotak putih polos biasa. Wajib hero page header elegan, wadah media sinematik, breadcrumb, dan tipografi Gutenberg luas.
+- **Konfigurasi Dinamis Section Frontpage:** Larangan hardcode slug/ID kategori pada front-page, kewajiban fitur Theme Customizer / Options untuk judul/subtitle/kategori serta fallback dinamis otomatis (`get_categories()`).
+- **Otomasi Deploy Tema CyberPanel:** Penambahan kapabilitas deploy otomatis arsip zip tema ke `wp-content/themes/` via CyberPanel dengan persetujuan eksplisit user.
+- **Guardrails Keamanan Server & API Access CyberPanel:** Peringatan wajib konfirmasi sebelum modifikasi konfigurasi server serta pengingat rutin nonaktifkan API Access pasca-operasi.
+- **Sistem Version Management Hemat Token:** Integrasi file `version.json` dan tracking versi di `PROGRESS.md` agar agen tidak membaca `UPDATE.md` jika versi sudah sesuai.
 
 ### `08. 2026-09-14`
 

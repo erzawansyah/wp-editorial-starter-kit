@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "antislop-copywriting": {
+      "source": "miqdadbadjuber/anti-slop",
+      "sourceType": "github",
+      "skillPath": "skills/antislop-copywriting/SKILL.md",
+      "computedHash": "3668009c8a37fbe86daa123d1f997f2532e82443"
+    },
     "wpsk-cyberpanel": {
       "source": "local",
       "sourceType": "local",

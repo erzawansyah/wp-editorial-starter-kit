@@ -18,22 +18,22 @@ Repo ini bukan website. Repo ini adalah **cetakan** yang di-clone setiap kali ad
 ├── SITE.example.md       # Template kosong SITE.md untuk proyek baru
 ├── WORDPRESS-SETUP.md    # Checklist instalasi WordPress + Application Passwords & Easy MCP AI
 ├── PROGRESS.example.md   # Template checklist pelacak progres proyek
+├── UPDATE.md             # Panduan pembaruan template & instruksi migrasi sesi lama
+├── version.json          # Versi template aktif (token-efficient version tracker)
 ├── README.md             # File dokumentasi ini
 ├── skills-lock.json      # Lock file untuk skill yang digunakan
 ├── .env.example          # Template kredensial WP REST API
 ├── .gitignore
 ├── .agents/
+│   ├── hooks.json              # Konfigurasi lifecycle hooks Antigravity (safety gates)
+│   ├── hooks/                  # Skrip handler lifecycle hook Antigravity
+│   │   └── cyberpanel_guard.py # PreToolUse safety check untuk operasi server
+│   ├── rules/                  # Modular rules Antigravity (selalu aktif, hemat context)
+│   │   ├── theme-guardrails.md # 8 aturan baku teknis tema, container logo, dynamic frontpage
+│   │   ├── cyberpanel-safety.md# Keamanan API Access & konfirmasi mutasi server
+│   │   └── content-integrity.md# Diversitas author Indonesia & standar fakta editorial
 │   ├── mcp_config.example.json # Template konfigurasi Easy MCP AI endpoint
-│   └── skills/           # 9 Skill AI agent aktif
-│       ├── wpsk-editorial-brainstorm/ # Brainstorming konsep, niche, dan branding
-│       ├── wpsk-theme-convention/     # Konvensi tema classic + Tailwind (_tw) & 8 aturan baku
-│       ├── wpsk-theme-craft/          # Impeccable Design Director, Craft Floor, a11y, & audit kontras
-│       ├── wpsk-seo-writer/           # Penulis SEO editorial Indonesia, anti-slop, diversitas author
-│       ├── wp-patterns/               # Format sintaksis blok Gutenberg murni
-│       ├── wp-block-development/      # Referensi pengembangan custom block
-│       ├── wp-performance/            # Audit performa dan optimasi backend
-│       ├── wp-wpcli-and-ops/          # Otomasi sistem dan database via WP-CLI
-│       └── skill-creator/             # Pembuatan dan optimasi custom skill
+│   └── skills/                 # Skill AI agent on-demand (progressive disclosure)
 └── .workspaces/          # Output kerja AI per proyek (git-ignored)
     ├── assets/           # Direktori wajib aset (Logo, Gambar, Favicon)
     ├── theme-src/        # Source code tema (PHP, CSS, JS — lokal)
