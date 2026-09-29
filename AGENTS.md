@@ -37,7 +37,7 @@ Urutan kerja wajib diikuti secara berurutan. Jangan loncat fase. **Patuhi Guardr
 ### Fase 1: Setup & Environment (Manusia & Agen)
 
 Clone repo ini, buat file `.env` dari `.env.example`, isi `SITE.md` & `DESIGN.md`.
-_(Skill terkait: Gunakan **`wpsk-editorial-brainstorm`** jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol; gunakan **`wp-wpcli-and-ops`** untuk task operasional server/database awal jika diperlukan)._
+_(Skill terkait: Gunakan **`wpsk-editorial-brainstorm`** jika butuh bantuan AI untuk merumuskan niche, branding, dan sistem desain dari nol; gunakan **`wpsk-cyberpanel`** untuk provisi vhost/database/CMS otomatis di CyberPanel; gunakan **`wp-wpcli-and-ops`** untuk task operasional server/database awal jika diperlukan)._
 
 **GUARDRAILS SETUP:**
 
