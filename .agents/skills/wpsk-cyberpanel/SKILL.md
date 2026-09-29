@@ -74,7 +74,28 @@ Kirimkan POST request ke skrip instalasi web WordPress untuk membentuk tabel dat
   - `blog_public`: `1`
   - `Submit`: `Install WordPress`
 
-### Langkah 8: Pengamanan Akun (Peringatan Wajib Nonaktifkan API Access)
+### Langkah 8: Konfigurasi Web Server & Easy MCP AI (.htaccess & LiteSpeed Cache)
+Agar komunikasi AI client via Model Context Protocol (MCP) tidak terputus:
+1. **Aturan `.htaccess` Authorization (Paling Atas):** Letakkan blok ini di baris teratas file `.htaccess` (sebelum `# BEGIN LSCACHE` atau rule dengan flag `[L]`):
+   ```apache
+   # BEGIN Easy MCP AI
+   <IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteCond %{HTTP:Authorization} .
+   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+   </IfModule>
+   # END Easy MCP AI
+   ```
+2. **Pengecualian Cache (LiteSpeed Cache Exclude):**
+   - Tambahkan ke *LiteSpeed Cache > Cache > Excludes > Do Not Cache URIs*:
+     ```text
+     /wp-json/easy-mcp-ai/
+     /.well-known/oauth-
+     /.well-known/openid-configuration
+     ```
+   - Matikan opsi **Cache REST API** (*LiteSpeed Cache > Cache > Cache REST API = OFF*).
+
+### Langkah 9: Pengamanan Akun (Peringatan Wajib Nonaktifkan API Access)
 Setelah seluruh proses provisi dan verifikasi selesai (atau jika website sudah tidak dikelola lagi):
 > [!WARNING]
 > **Peringatan Wajib Disampaikan ke Pengguna:**

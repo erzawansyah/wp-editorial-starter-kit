@@ -45,3 +45,31 @@ Aturan keselamatan mutlak dan protokol interaksi server (CyberPanel, OpenLiteSpe
      - Fallback: `CYBERPANEL_USERNAME` dan `CYBERPANEL_PASSWORD`
 2. **Dilarang Hardcode:**
    - Dilarang keras menuliskan password, secret key, atau API token ke dalam kode sumber, commit git, file sementara, atau riwayat log.
+
+---
+
+## 4. Standar Wajib Konfigurasi Web Server & Easy MCP AI
+
+Untuk menjamin kelancaran dan kestabilan komunikasi Model Context Protocol (MCP) antara AI client dan WordPress di lingkungan LiteSpeed/CyberPanel:
+
+1. **Aturan `.htaccess` Authorization Header (Paling Atas):**
+   - Agen/User **WAJIB** meletakkan blok rewrite authorization Easy MCP AI di **baris paling atas** file `.htaccess` (sebelum `# BEGIN LSCACHE` atau rewrite rules lainnya yang memiliki flag `[L]`):
+     ```apache
+     # BEGIN Easy MCP AI
+     <IfModule mod_rewrite.c>
+     RewriteEngine On
+     RewriteCond %{HTTP:Authorization} .
+     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+     </IfModule>
+     # END Easy MCP AI
+     ```
+   - *Tujuan:* Mencegah LiteSpeed/OpenLiteSpeed memotong (*strip*) header `Authorization: Bearer <token>` sebelum sampai ke runtime PHP/WordPress.
+
+2. **Pengecualian Cache (LiteSpeed Cache Excludes):**
+   - Wajib menambahkan endpoint berikut ke daftar **Do Not Cache URIs** (*LiteSpeed Cache > Cache > Excludes*):
+     ```text
+     /wp-json/easy-mcp-ai/
+     /.well-known/oauth-
+     /.well-known/openid-configuration
+     ```
+   - Opsi **Cache REST API** di LiteSpeed Cache **WAJIB DIMATIKAN (OFF / Disabled)** agar token, session, dan pemanggilan tool MCP tidak pernah tersimpan di cache server.
